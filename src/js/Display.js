@@ -2,6 +2,8 @@ var TextBox = require('./ui/TextBox.class');
 var Box = require('./ui/Box.class');
 
 module.exports = {
+	BLANK_TILE: new ut.Tile(' ', 255, 255, 255),
+	CURSOR_TILE: new ut.Tile('*', 255, 255, 255),
 	init: function(game){
 		this.game = game;
 		this.term = new ut.Viewport(document.getElementById("game"), 80, 25);
@@ -48,8 +50,14 @@ module.exports = {
 		this.term.putString("Inventory", xBase, yBase, 255, 0, 0);
 		for (var i = 0; i < this.game.player.items.length; i++){
 			var item = this.game.player.items[i];
-			this.term.put(item.def.tile, xBase, yBase+1+i);
-			this.term.putString(item.def.name, xBase + 2, yBase+1+i, 255, 255, 255);
+			if (item == this.game.input.selectedItem){
+				this.term.put(this.CURSOR_TILE, xBase, yBase+1+i);
+			} else {
+				this.term.put(this.BLANK_TILE, xBase, yBase+1+i);
+			}
+			this.term.put(item.def.tile, xBase+2, yBase+1+i);
+			this.term.put(item.def.tile, xBase+2, yBase+1+i);
+			this.term.putString(item.def.name, xBase + 4, yBase+1+i, 255, 255, 255);
 		}
 		this.term.render();
 	},

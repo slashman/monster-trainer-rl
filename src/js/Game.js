@@ -3,6 +3,10 @@ var World = require('./World');
 var Player = require('./Player');
 var Input = require('./Input');
 
+// Remove after tests
+var Item = require('./Item.class');
+var Items = require('./Items.enum');
+
 var Game = {
 	start: function(){
 		this.display = Display;
@@ -16,6 +20,12 @@ var Game = {
 		this.player.updateFOV();
 		Display.refresh();
 		Display.textBox.setText("Welcome to JSBoilerRL. This is a very long text just to confirm how the textbox works with long long texts.");
+		Player.addItem(new Item(Items.BOOK_OF_MIRDAS));
+		Player.addItem(new Item(Items.IRON_SWORD));
+		Player.addItem(new Item(Items.BOOK_OF_MIRDAS));
+		Player.addItem(new Item(Items.IRON_SWORD));
+		Player.addItem(new Item(Items.SPELL_OF_LOLZORS));
+		Player.addItem(new Item(Items.BOOK_OF_AURORA));
 	}
 }
 
