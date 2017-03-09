@@ -5,6 +5,7 @@ module.exports = {
 	tile: new ut.Tile('@', 255, 255, 255),
 	visible: [],
 	memory: {},
+	items: [],
 	init: function(game){
 		this.game = game;
 		for (var j = -this.MAX_SIGHT_RANGE; j <= this.MAX_SIGHT_RANGE; j++){
@@ -96,6 +97,25 @@ module.exports = {
 				return; 
 			}
 			xx += dx; yy += dy;
+		}
+	},
+	addItem: function(item){
+		this.items.push(item);
+		this.items.sort(this.itemSorter);
+	},
+	itemSorter: function(a, b){
+		if (a.def.type.name === b.def.type.name){
+			return a.def.name - b.def.name;
+		} else {
+			return a.def.type.name - b.def.type.name;
+		}
+	},
+	tryPickup(){
+		var item = this.game.world.level.getItem(this.x, this.y);
+		if (item){
+			this.game.display.message("You pickup the "+item.def.name)
+			this.game.world.level.removeItem(this.x, this.y);
+			this.addItem(item);
 		}
 	}
 }

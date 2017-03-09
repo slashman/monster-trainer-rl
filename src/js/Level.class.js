@@ -8,6 +8,7 @@ Level.prototype = {
 		this.beings = [];
 		this.beingsList = [];
 		this.exits = [];
+		this.items = [];
 
 		this.game = game;
 		this.id = id;
@@ -50,7 +51,22 @@ Level.prototype = {
 		if (!this.exits[x])
 			this.exits[x] = [];
 		this.exits[x][y] = levelId;
-	}
+	},
+	addItem: function(item, x, y){
+		if (!this.items[x])
+			this.items[x] = [];
+		this.items[x][y] = item;
+	},
+	getItem: function(x, y){
+		if (!this.items[x])
+			return false;
+		return this.items[x][y];
+	},
+	removeItem: function(x, y){
+		if (!this.items[x])
+			this.items[x] = [];
+		this.items[x][y] = false;
+	},
 }
 
 module.exports = Level;

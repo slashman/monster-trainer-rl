@@ -1,6 +1,8 @@
 var Tiles = require('./Tiles.enum');
 var Races = require('./Races.enum');
+var Items = require('./Items.enum');
 var Being = require('./Being.class');
+var Item = require('./Item.class');
 var Random = require('./Random');
 
 module.exports = {
@@ -25,6 +27,8 @@ module.exports = {
 			level.addBeing(being, Random.n(0,39), Random.n(0,39));
 			being.intent = 'CHASE';
 		}
+		level.addItem(new Item(Items.IRON_SWORD), Random.n(0,39), Random.n(0,39));
+		level.addItem(new Item(Items.BOOK_OF_MIRDAS), Random.n(0,39), Random.n(0,39));
 		if (fromId){
 			var xs = Random.n(0,39);
 			var ys = Random.n(0,39);
