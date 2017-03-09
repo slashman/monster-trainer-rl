@@ -21,7 +21,7 @@ function TextBox (term, height, width, position) {
 	}
 	this.spaces = "";
 	for (var i = 0; i < width; i++){
-		this.spaces += "";
+		this.spaces += " ";
 	}
 }
 
