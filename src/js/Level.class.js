@@ -8,11 +8,12 @@ var Level = function(game, id, fromId){
 }
 
 Level.prototype = {
-	map: [],
-	beings: [],
-	beingsList: [],
-	exits: [],
 	init: function(game, id, fromId){
+		this.map = [];
+		this.beings = [];
+		this.beingsList = [];
+		this.exits = [];
+
 		this.game = game;
 		this.id = id;
 		this.player = game.player;
@@ -81,7 +82,6 @@ Level.prototype = {
 			this.addExit(xs, ys, fromId, Tiles.STAIRS_DOWN);
 			this.player.x = xs;
 			this.player.y = ys;
-			// Looks like when using this stair, we stay in the same level...
 		}
 		this.addExit(Random.n(0,39),Random.n(0,39),'test'+Random.n(0,1000), Tiles.STAIRS_UP);
 	}

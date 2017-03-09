@@ -4,13 +4,12 @@ function Being(game, level, race){
 	this.game = game;
 	this.level = level;
 	this.tile = race.tile;
+	this.x = null;
+	this.y = null;
+	this.intent = 'CHASE';
 }
 
 Being.prototype = {
-	x: null,
-	y: null,
-	intent: 'CHASE',
-	level: null,
 	act: function(){
 		switch (this.intent){
 			case 'RANDOM':
