@@ -1,4 +1,5 @@
 var Level = require('./Level.class');
+var LevelGenerator = require('./LevelGenerator');
 
 var Random = require('./Random');
 
@@ -20,9 +21,12 @@ module.exports = {
 			if (this.level){
 				this.level.exitX = this.player.x;
 				this.level.exitY = this.player.y;
-				this.level = new Level(this.game, levelId, this.level.id);
+				var previousLevelId = this.level.id;
+				this.level = new Level(this.game, levelId);
+				LevelGenerator.generateTestLevel(this.level, previousLevelId);
 			} else {
 				this.level = new Level(this.game, levelId);
+				LevelGenerator.generateTestLevel(this.level);
 			}
 			this.levels[levelId] = this.level;
 		}
