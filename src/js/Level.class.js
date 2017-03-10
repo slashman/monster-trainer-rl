@@ -10,10 +10,16 @@ Level.prototype = {
 		this.exits = [];
 		this.exitsMap = [];
 		this.items = [];
+		this.spawnPositions = [];
 
 		this.game = game;
 		this.id = id;
 		this.player = game.player;
+	},
+	getBeing: function(x, y){
+		if (!this.beings[x])
+			return false;
+		return this.beings[x][y];
 	},
 	beingsTurn: function(){
 		for (var i = 0; i < this.beingsList.length; i++){

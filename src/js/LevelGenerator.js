@@ -28,14 +28,27 @@ module.exports = {
 				this.buildRoute(level, specs);
 				break;
 		}
-		if (specs.addEnemies){
-			for (var i = 0; i < 5; i++){
-				var being = new Being(level.game, level, Races.RAT);
-				level.addBeing(being, Random.n(0,specs.width-1), Random.n(0,specs.height-1));
-				being.intent = 'RANDOM';
-				being = new Being(level.game, level, Races.TROLL);
-				level.addBeing(being, Random.n(0,specs.width-1), Random.n(0,specs.height-1));
-				being.intent = 'CHASE';
+		if (specs.wildMonsters){
+			var initialPopulation = specs.initialPopulation + Random.n(0,5);
+			for (var i = 0; i < initialPopulation; i++){
+				var spawnPosition = level.spawnPositions.length > 0 ? Random.from(level.spawnPositions) : false;
+				if (spawnPosition){
+					var x = spawnPosition.x;
+					var y = spawnPosition.y;
+				}
+				if (!spawnPosition || level.getBeing(x, y)){
+					// Place somewhere else
+					x = Random.n(0,specs.width-1);
+					y = Random.n(0,specs.height-1);
+				}
+				var race = Random.fromWeighted(specs.wildMonsters).race;
+				var being = new Being(level.game, level, race);
+				level.addBeing(being, x, y);
+				if (race.aggresive){
+					being.intent = 'CHASE';
+				} else {
+					being.intent = 'STILL';
+				}
 			}
 		}
 		level.addItem(new Item(Items.IRON_SWORD), Random.n(0,specs.width-1), Random.n(0,specs.height-1));
@@ -90,14 +103,17 @@ module.exports = {
 		}
 		var patches = Random.n(3,10);
 		for (var i = 0; i < patches; i++){
-			var w = Random.n(6,8);
-			var h = Random.n(6,8);
+			var w = Random.n(8,10);
+			var h = Random.n(8,10);
 			var x = Random.n(0,specs.width - w - 1);
 			var y = Random.n(0,specs.height - h - 1);
 			for (var xx = x; xx < x + w; xx++){
 				for (var yy = y; yy < y + h; yy++){
-					if (Random.chance(100)){
+					if (Random.chance(80)){
 						this.level.map[xx][yy] = Tiles.TALL_GRASS;
+					}
+					if (xx > x + 3 && xx < x + w - 3 && yy > y + 3 && yy < y + h - 3 && Random.chance(30)){
+						this.level.spawnPositions.push({x: xx, y: yy});
 					}
 				}
 			}

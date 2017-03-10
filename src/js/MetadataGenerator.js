@@ -1,3 +1,5 @@
+var Races = require('./Races.enum');
+
 module.exports = {
 	generateMetadata: function(){
 		return {
@@ -6,7 +8,6 @@ module.exports = {
 				name: 'Pallet Town',
 				width: 32,
 				height: 32,
-				addEnemies: false,
 				exits: [
 					{
 						dir: 'UP',
@@ -41,7 +42,19 @@ module.exports = {
 				name: 'Route 1',
 				width: 32,
 				height: 64,
-				addEnemies: true,
+				initialPopulation: 5,
+				wildMonsters: [
+					{
+						race: Races.PIDGEY,
+						level: 1,
+						weight: 50
+					},
+					{
+						race: Races.RATTATA,
+						level: 1,
+						weight: 2
+					}
+				],
 				exits: [
 					{
 						dir: 'DOWN',

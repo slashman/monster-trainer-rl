@@ -1,8 +1,9 @@
 module.exports = {
-	RAT: {
-		tile: new ut.Tile('r', 128, 128, 0)
+	RATTATA: {
+		tile: new ut.Tile('r', 128, 0, 128),
+		aggresive: true
 	},
-	TROLL: {
-		tile: new ut.Tile('T', 128, 128, 0)
+	PIDGEY: {
+		tile: new ut.Tile('p', 255, 128, 0)
 	},
 }

@@ -18,6 +18,9 @@ Being.prototype = {
 			case 'CHASE':
 				this.actChase();
 				break;
+			case 'STILL':
+				this.actStill();
+				break;
 		}
 	},
 	actRandom: function(){
@@ -27,6 +30,13 @@ Being.prototype = {
 			return;
 		}
 		this.moveTo(dx, dy);
+	},
+	actStill: function(){
+		if (this.seen){
+			this.actRandom();
+		} else {
+			// Do nothing
+		}
 	},
 	actChase: function(){
 		var nearestEnemy = this.getNearestEnemy();
