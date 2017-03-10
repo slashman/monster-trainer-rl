@@ -3,6 +3,7 @@ module.exports = {
 		return {
 			"PALLET_TOWN":{
 				type: 'TOWN',
+				name: 'Pallet Town',
 				width: 32,
 				height: 32,
 				addEnemies: false,
@@ -37,6 +38,7 @@ module.exports = {
 			"ROUTE_1":{
 				type: 'ROUTE',
 				orientation: 'VERTICAL',
+				name: 'Route 1',
 				width: 32,
 				height: 64,
 				addEnemies: true,

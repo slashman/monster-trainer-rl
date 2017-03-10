@@ -41,6 +41,7 @@ module.exports = {
 	refresh: function(){
 		this.eng.update(this.game.player.x, this.game.player.y);
 		this.textBox.draw();
+		this.term.putString(this.game.world.level.name, 2, 5, 255, 255, 255);
 		this.term.render();
 	},
 	showInventory: function(){

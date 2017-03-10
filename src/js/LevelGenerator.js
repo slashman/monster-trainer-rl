@@ -8,6 +8,7 @@ var Random = require('./Random');
 module.exports = {
 	generateTestLevel: function(level, specs){
 		this.level = level;
+		this.level.name = specs.name;
 		for (var x = 0; x < specs.width; x++){
 			level.map[x] = [];
 			for (var y = 0; y < specs.height; y++){
