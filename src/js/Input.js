@@ -7,6 +7,15 @@ module.exports = {
 		this.selectedMonsterSlot = 0;
 	},
 	movedir: { x: 0, y: 0 },
+	selectAvailableMonsterSlot: function(){
+		this.selectedMonsterSlot = false;
+		for (var i = 0; i < this.game.player.monsterSlots.length; i++){
+			if (this.game.player.monsterSlots[i]){
+				this.selectedMonsterSlot = i;
+				return;
+			}
+		}
+	},
 	onKeyDown: function(k){
 		if (!this.inputEnabled)
 			return;

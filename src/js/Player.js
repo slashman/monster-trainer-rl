@@ -17,6 +17,7 @@ module.exports = {
 			being: being,
 			onPocket: true
 		}
+		being.slotNumber = slotNumber;
 	},
 	init: function(game){
 		this.game = game;
@@ -32,6 +33,10 @@ module.exports = {
 		this.x += dir.x;
 		this.y += dir.y;
 		this.land();
+	},
+	die: function(){
+		this.game.display.message("You die!");
+		this.game.input.mode = 'NONE';
 	},
 	land: function(){
 		if (this.game.world.level.exits[this.x] && this.game.world.level.exits[this.x][this.y]){

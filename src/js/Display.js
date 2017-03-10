@@ -45,6 +45,7 @@ module.exports = {
 		this.term.render();
 	},
 	updateStatus: function(){
+		this.term.putString("HP "+this.game.player.hp.getText(), 2, 3, 255, 255, 255);
 		this.term.putString(this.game.world.level.name, 2, 5, 255, 255, 255);
 		// Pokemon list
 		this.term.putString("Pokemon", 2, 7, 255, 255, 255);
@@ -52,18 +53,22 @@ module.exports = {
 		var baseY = 8;
 		for (var i = 0; i < this.game.player.monsterSlots.length; i++){
 			var slot = this.game.player.monsterSlots[i];
+			if (!slot){
+				continue;
+			}
 			if (i == this.game.input.selectedMonsterSlot){
 				this.term.putString(">"+(i+1)+"   "+slot.being.race.name, baseX-1, baseY + i*3, 255, 0, 0);
 			} else {
 				this.term.putString((i+1)+"   "+slot.being.race.name, baseX, baseY + i*3, 255, 255, 255);
 			}
 			this.term.put(slot.being.race.tile, baseX + 2, baseY + i*3);
-			this.term.putString(slot.onPocket ? "  In Pokeball" : "  Released", baseX, baseY + i*3 + 1, 255, 255, 255);
+			this.term.putString("  HP "+slot.being.hp.getText(), baseX, baseY + i*3 + 1, 255, 255, 255);
+			this.term.putString(slot.onPocket ? "  In Pokeball" : "  Released", baseX, baseY + i*3 + 2, 255, 255, 255);
 		}
 		// Pokemon actions
 		baseX = 50;
 		baseY = 8;
-		if (this.game.input.selectedMonsterSlot !== undefined){
+		if (this.game.input.selectedMonsterSlot !== undefined && this.game.input.selectedMonsterSlot !== false){
 			var slot = this.game.player.monsterSlots[this.game.input.selectedMonsterSlot];
 			var actions = [];
 			if (slot.onPocket){
