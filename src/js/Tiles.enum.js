@@ -28,5 +28,17 @@ module.exports = {
 		darkTile: new ut.Tile('~', 128, 128, 128),
 		solid: true,
 		opaque: false
+	},
+	WALL: {
+		tile: new ut.Tile('#', 128, 128, 128),
+		darkTile: new ut.Tile('#', 128, 128, 128),
+		solid: true,
+		opaque: true
+	},
+	FLOOR: {
+		tile: new ut.Tile('.', 0, 0, 128),
+		darkTile: new ut.Tile('.', 128, 128, 128),
+		solid: false,
+		opaque: false
 	}
 }
