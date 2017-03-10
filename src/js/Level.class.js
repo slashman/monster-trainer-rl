@@ -37,6 +37,10 @@ Level.prototype = {
 		being.y = y;
 		this.beings[x][y] = being;
 	},
+	removeBeing: function(being){
+		this.beings[being.x][being.y] = false;
+		this.beingsList.splice(this.beingsList.indexOf(being), 1);
+	},
 	canWalkTo: function(x, y){
 		try {
 			if (this.map[x][y].solid){

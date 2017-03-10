@@ -41,8 +41,51 @@ module.exports = {
 	refresh: function(){
 		this.eng.update(this.game.player.x, this.game.player.y);
 		this.textBox.draw();
-		this.term.putString(this.game.world.level.name, 2, 5, 255, 255, 255);
+		this.updateStatus();
 		this.term.render();
+	},
+	updateStatus: function(){
+		this.term.putString(this.game.world.level.name, 2, 5, 255, 255, 255);
+		// Pokemon list
+		this.term.putString("Pokemon", 2, 7, 255, 255, 255);
+		var baseX = 3;
+		var baseY = 8;
+		for (var i = 0; i < this.game.player.monsterSlots.length; i++){
+			var slot = this.game.player.monsterSlots[i];
+			if (i == this.game.input.selectedMonsterSlot){
+				this.term.putString(">"+(i+1)+"   "+slot.being.race.name, baseX-1, baseY + i*3, 255, 0, 0);
+			} else {
+				this.term.putString((i+1)+"   "+slot.being.race.name, baseX, baseY + i*3, 255, 255, 255);
+			}
+			this.term.put(slot.being.race.tile, baseX + 2, baseY + i*3);
+			this.term.putString(slot.onPocket ? "  In Pokeball" : "  Released", baseX, baseY + i*3 + 1, 255, 255, 255);
+		}
+		// Pokemon actions
+		baseX = 50;
+		baseY = 8;
+		if (this.game.input.selectedMonsterSlot !== undefined){
+			var slot = this.game.player.monsterSlots[this.game.input.selectedMonsterSlot];
+			var actions = [];
+			if (slot.onPocket){
+				actions.push({
+					key: 'R',
+					name: 'Release'
+				});
+			} else {
+				// Get the pokemon actions
+				actions.push({
+					key: 'P',
+					name: 'Pull back'
+				});
+			}
+			this.term.putString(slot.being.race.name, baseX + 2, baseY, 255, 255, 255);
+			this.term.put(slot.being.race.tile, baseX, baseY);
+			for (var i = 0; i < actions.length; i++){
+				this.term.putString("("+actions[i].key + ") " +actions[i].name, baseX, baseY + i + 1, 255, 255, 255);
+			}
+		} else {
+
+		}
 	},
 	showInventory: function(){
 		this.inventoryBox.draw();

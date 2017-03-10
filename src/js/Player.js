@@ -6,6 +6,18 @@ module.exports = {
 	visible: [],
 	memory: {},
 	items: [],
+	monsterSlots: [],
+	addMonster: function(being, slotNumber){
+		if (slotNumber && this.monsterSlots[slotNumber]){
+			this.game.display.message("Cannot put monster in that slot");
+			return;
+		}
+		being.isFriendly = true;
+		this.monsterSlots[slotNumber] = {
+			being: being,
+			onPocket: true
+		}
+	},
 	init: function(game){
 		this.game = game;
 		for (var j = -this.MAX_SIGHT_RANGE; j <= this.MAX_SIGHT_RANGE; j++){
@@ -78,7 +90,7 @@ module.exports = {
 			this.shootRay(a);
 	},
 	shootRay: function (a) {
-		var rayStrength = 3;
+		var rayStrength = 2;
 		var step = 0.3333;
 		var maxdist = this.getSightRange() < this.MAX_SIGHT_RANGE ? this.getSightRange() : this.MAX_SIGHT_RANGE;
 		maxdist /= step;
@@ -142,5 +154,23 @@ module.exports = {
 	},
 	tryUse: function(item, dx, dy){
 		item.def.type.useFunction(this.game, item, dx, dy);
+	},
+	releaseMonster: function(dir){
+		var slot = this.monsterSlots[this.game.input.selectedMonsterSlot];
+		if (this.game.world.level.canWalkTo(this.x + dir.x, this.y + dir.y) &&
+			this.game.world.level.canWalkTo(this.x + dir.x * 2, this.y + dir.y * 2)){
+			slot.onPocket = false;
+			slot.being.level = this.game.world.level;
+			this.game.world.level.addBeing(slot.being, this.x + dir.x * 2, this.y + dir.y * 2);
+			this.endTurn();
+		} else {
+			this.game.display.message("No space!");
+		}
+	},
+	pullBack: function(){
+		var slot = this.monsterSlots[this.game.input.selectedMonsterSlot];
+		slot.onPocket = true;
+		this.game.world.level.removeBeing(slot.being);
+		this.endTurn();
 	}
 }

@@ -1,12 +1,15 @@
 var Random = require('./Random');
+var Distance = require('./Distance');
 
 function Being(game, level, race){
 	this.game = game;
+	this.race = race;
 	this.level = level;
 	this.tile = race.tile;
 	this.x = null;
 	this.y = null;
 	this.intent = 'CHASE';
+	this.isFriendly = false;
 }
 
 Being.prototype = {
@@ -51,7 +54,27 @@ Being.prototype = {
 		this.moveTo(dx, dy);
 	},
 	getNearestEnemy: function(){
-		return this.game.player;
+		var nearestDistance = 999;
+		var nearestEnemy = false;
+		for (var i = 0; i < this.level.beingsList.length; i++){
+			var being = this.level.beingsList[i];
+			if (being.isFriendly != this.isFriendly){
+				var distance = Distance.flatDistance(being.x, being.y, this.x, this.y);
+				if (distance < this.getSightRange() && distance < nearestDistance){
+					nearestDistance = distance;
+					nearestEnemy = being;
+				}
+			}
+		}
+		if (!this.isFriendly){
+			// Consider the player too
+			var distance = Distance.flatDistance(this.game.player.x, this.game.player.y, this.x, this.y);
+			if (distance < this.getSightRange() && distance < nearestDistance){
+				nearestDistance = distance;
+				nearestEnemy = this.game.player;
+			}
+		}
+		return nearestEnemy;
 	},
 	moveTo: function(dx,dy){
 		this.level.beings[this.x][this.y] = false;

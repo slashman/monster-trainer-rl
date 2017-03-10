@@ -4,6 +4,7 @@ module.exports = {
 		this.game = game;
 		ut.initInput(this.onKeyDown.bind(this));
 		this.mode = 'MOVEMENT';
+		this.selectedMonsterSlot = 0;
 	},
 	movedir: { x: 0, y: 0 },
 	onKeyDown: function(k){
@@ -25,6 +26,34 @@ module.exports = {
 				this.game.display.showInventory();
 				return;
 			}
+			// Monster slots
+			if (k >= ut.KEY_1 && k <= ut.KEY_6){
+				var slot = k-ut.KEY_1;
+				if (this.game.player.monsterSlots[slot]){
+					this.selectedMonsterSlot = slot;
+					this.game.display.refresh();
+				}
+				return;
+			}
+			if (k === ut.KEY_R){
+				//Release
+				var slot = this.game.player.monsterSlots[this.selectedMonsterSlot];
+				if (slot && slot.onPocket){
+					this.game.display.message("Select a direction.");
+					this.mode = 'SELECT_DIRECTION';
+					this.directionAction = 'RELEASE_MONSTER';
+				}
+				return;
+			}
+			if (k === ut.KEY_P){
+				// Pull back
+				var slot = this.game.player.monsterSlots[this.selectedMonsterSlot];
+				if (slot && !slot.onPocket){
+					this.game.player.pullBack();
+				}
+				return;
+			}
+			// Movement
 			this.movedir.x = 0;
 			this.movedir.y = 0;
 			if (k === ut.KEY_LEFT || k === ut.KEY_H) this.movedir.x = -1;
@@ -68,8 +97,12 @@ module.exports = {
 			}
 		} else if (this.mode === 'SELECT_DIRECTION'){
 			if (k === ut.KEY_ESCAPE){
-				this.mode = 'INVENTORY';
-				this.game.display.showInventory();
+				if (this.directionAction === 'USE_ITEM'){
+					this.mode = 'INVENTORY';
+					this.game.display.showInventory();
+				} else if (this.directionAction === 'RELEASE_MONSTER'){
+					this.mode = 'MOVEMENT';
+				}
 				this.game.display.message("Cancelled.");
 				return;
 			}
@@ -80,7 +113,11 @@ module.exports = {
 			else if (k === ut.KEY_UP || k === ut.KEY_K) this.movedir.y = -1;
 			else if (k === ut.KEY_DOWN || k === ut.KEY_J) this.movedir.y = 1;
 			else return;
-			this.game.player.tryUse(this.selectedItem, this.movedir.x, this.movedir.y);
+			if (this.directionAction === 'USE_ITEM'){
+				this.game.player.tryUse(this.selectedItem, this.movedir.x, this.movedir.y);
+			} else if (this.directionAction === 'RELEASE_MONSTER'){
+				this.game.player.releaseMonster(this.movedir);
+			}
 			this.mode = 'MOVEMENT';
 		}
 	}
