@@ -78,9 +78,11 @@ module.exports = {
 			this.shootRay(a);
 	},
 	shootRay: function (a) {
+		var rayStrength = 3;
 		var step = 0.3333;
 		var maxdist = this.getSightRange() < this.MAX_SIGHT_RANGE ? this.getSightRange() : this.MAX_SIGHT_RANGE;
 		maxdist /= step;
+		rayStrength /= step;
 		var dx = Math.cos(a) * step;
 		var dy = -Math.sin(a) * step;
 		var xx = this.x, yy = this.y;
@@ -90,8 +92,14 @@ module.exports = {
 			this.visible[testx-this.x][testy-this.y] = true;
 			this.remember(testx, testy);
 			try { 
-				if (this.game.world.level.map[testx][testy].opaque)
+				if (this.game.world.level.map[testx][testy].opaque){
 					return;
+				} else if (this.game.world.level.map[testx][testy].semiopaque){
+					rayStrength --;
+					if (rayStrength < 0){
+						return;
+					}
+				}
 			} catch(err) {
 				// Catch OOB
 				return; 
