@@ -3,6 +3,8 @@ var Races = require('./Races.enum');
 var Items = require('./Items.enum');
 var Being = require('./Being.class');
 var Item = require('./Item.class');
+var CA = require('./ca/CA');
+var Rule = require('./ca/Rule.class');
 var Random = require('./Random');
 
 module.exports = {
@@ -62,6 +64,46 @@ module.exports = {
 			level.player.x = specs.startPosition.x;
 			level.player.y = specs.startPosition.y;
 		}
+	},
+	CA_GRASS_RULES: [
+		new Rule(Tiles.GRASS, Rule.MORE_THAN, 2, Tiles.TALL_GRASS, Tiles.TALL_GRASS, 50)
+	],
+	buildRoute: function(level, specs){
+		// Place a road based on the orientation and some patches of grass
+		switch (specs.orientation){
+			case "HORIZONTAL":
+				var midy = Math.round(specs.height/2);
+				for (var x = 0; x < specs.width; x++){
+					for (var y = midy-5; y < midy + 2; y++){
+						this.level.map[x][y] = Tiles.ROAD;
+					}
+				}
+			break;
+			case "VERTICAL":
+				var midx = Math.round(specs.width/2);
+				for (var x = midx-5; x < midx+5; x++){
+					for (var y = 0; y < specs.height; y++){
+						this.level.map[x][y] = Tiles.ROAD;
+					}
+				}
+			break;
+		}
+		var patches = Random.n(3,10);
+		for (var i = 0; i < patches; i++){
+			var w = Random.n(6,8);
+			var h = Random.n(6,8);
+			var x = Random.n(0,specs.width - w - 1);
+			var y = Random.n(0,specs.height - h - 1);
+			for (var xx = x; xx < x + w; xx++){
+				for (var yy = y; yy < y + h; yy++){
+					if (Random.chance(100)){
+						this.level.map[xx][yy] = Tiles.TALL_GRASS;
+					}
+				}
+			}
+		}
+		// Run a Non deterministic CA to smooth patches of grass
+		CA.runCA(level.map, this.CA_GRASS_RULES, 4);
 	},
 	buildTown: function(level, specs){
 		// Place houses based on specs on a grid

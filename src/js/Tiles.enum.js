@@ -40,5 +40,17 @@ module.exports = {
 		darkTile: new ut.Tile('.', 128, 128, 128),
 		solid: false,
 		opaque: false
+	},
+	ROAD: {
+		tile: new ut.Tile('.', 128, 128, 128),
+		darkTile: new ut.Tile('.', 128, 128, 128),
+		solid: false,
+		opaque: false
+	},
+	TALL_GRASS: {
+		tile: new ut.Tile('|', 0, 255, 128),
+		darkTile: new ut.Tile('|', 128, 128, 128),
+		solid: false,
+		opaque: true
 	}
 }
