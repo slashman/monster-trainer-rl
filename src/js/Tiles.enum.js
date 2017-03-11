@@ -1,7 +1,7 @@
 module.exports = {
 	GRASS: {
-		tile: new ut.Tile('.', 0, 128, 0),
-		darkTile: new ut.Tile('.', 128, 128, 128),
+		tile: new ut.Tile(',', 0, 128, 0),
+		darkTile: new ut.Tile(',', 128, 128, 128),
 		solid: false,
 		opaque: false
 	},
