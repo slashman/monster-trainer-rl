@@ -5,8 +5,22 @@ module.exports = {
 	chance: function(c){
 		return this.n(0,100) <= c;
 	},
-	from: function(array){
-		return array[this.n(0, array.length-1)];
+	from: function(array, remove){
+		var index = this.n(0, array.length-1);
+		var value = array[index];
+		if (remove){
+			array.splice(index, 1);
+		}
+		return value;
+	},
+	fromObject: function(object, remove){
+		var keys = Object.keys(object)
+		var key = keys[this.n(0, keys.length-1)];
+		var value = object[key];
+		if (remove){
+			delete object[key];
+		}
+		return value;
 	},
 	fromWeighted: function(array, totalWeight){
 		var totalWeight = 0;

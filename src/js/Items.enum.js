@@ -32,5 +32,15 @@ module.exports = {
 		type: ItemType.BADGE,
 		name: 'Boulder Badge',
 		tile: new ut.Tile('O', 255, 255, 255)
+	},
+	CASCADE_BADGE: {
+		type: ItemType.BADGE,
+		name: 'Cascade Badge',
+		tile: new ut.Tile('O', 255, 255, 255)
+	},
+	THUNDER_BADGE: {
+		type: ItemType.BADGE,
+		name: 'Thunder Badge',
+		tile: new ut.Tile('O', 255, 255, 255)
 	}
 }

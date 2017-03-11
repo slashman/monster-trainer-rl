@@ -2,42 +2,19 @@ var Races = require('./Races.enum');
 var Items = require('./Items.enum');
 var Direction = require('./util/Direction')
 var Random = require('./Random');
+var MasterPlans = require('./MasterPlans');
 
 module.exports = {
-	getMasterPlans: function(){
-		return {
-			cities: 2,
-			towns: 2,
-			gyms: [
-				{
-					trainer: {
-						race: Races.TRAINER_BROK,
-						monsters: [
-							{
-								race: Races.ONYX,
-								level: 10
-							},
-							{
-								race: Races.RATTATA,
-								level: 10
-							}
-						]
-					},
-					badge: Items.BOULDER_BADGE
-				}
-			]
-		}
-	},
 	plansComplete: function(){
 		return this.remainingTowns === 0 && this.remainingCities === 0;
 	},
 	generateMetadata: function(){
 		this.exits = [];
 		this.metadata = {};
-		this.currentRouteId = 1;
-		this.currentTownId = 1;
-		this.currentGymId = 1;
-		this.masterPlans = this.getMasterPlans();
+		this.currentRouteId = 0;
+		this.currentTownId = 0;
+		this.currentGymId = 0;
+		this.masterPlans = MasterPlans;
 		this.remainingTowns = this.masterPlans.towns;
 		this.remainingCities = this.masterPlans.cities;
 		this.placeTown({starting: true});
@@ -70,6 +47,8 @@ module.exports = {
 				toId: routeId
 			});
 			var orientation = dx.x === 0 ? "VERTICAL" : "HORIZONTAL";
+			var routeStereotype = Random.from(this.masterPlans.routeStereotypes, true);
+
 			this.metadata[routeId] = {
 				type: 'ROUTE',
 				orientation: orientation,
@@ -77,18 +56,7 @@ module.exports = {
 				width: orientation === "VERTICAL" ? 32 : 64,
 				height: orientation === "VERTICAL" ? 64 : 32,
 				initialPopulation: 5,
-				wildMonsters: [
-					{
-						race: Races.PIDGEY,
-						level: 1,
-						weight: 50
-					},
-					{
-						race: Races.RATTATA,
-						level: 1,
-						weight: 2
-					}
-				],
+				wildMonsters: routeStereotype.monsters,
 				exits: [
 					{
 						dir: Direction.opposite[exit.direction],
@@ -96,6 +64,13 @@ module.exports = {
 					}
 				]
 			}
+			this.metadata[routeId].wildMonsters = this.metadata[routeId].wildMonsters.map(function(spec){
+				return {
+					race: spec.race,
+					level: this.currentRouteId * 3 + (spec.levelBoost ? spec.levelBoost : 0),
+					weight: spec.weight
+				}
+			}, this);
 			var townId = this.createTown(specs, Direction.opposite[exit.direction], routeId);
 			this.metadata[routeId].exits.push({
 				dir: exit.direction,
@@ -141,14 +116,7 @@ module.exports = {
 				}
 			);
 		}
-		if (specs.hasGym){
-			metadata.features.push(
-				{
-					type: 'gym',
-					name: 'Test Gym',
-					toId: "GYM1"
-				}
-			);
+		if (specs.hasGym){ //TODO: Separate hasMart
 			metadata.features.push(
 				{
 					type: 'mart',
@@ -197,8 +165,30 @@ module.exports = {
 		}
 
 		if (specs.hasGym){
+			this.currentGymId++;
 			var gymId = "GYM" + this.currentGymId;
-			var metadata = {
+			metadata.features.push(
+				{
+					type: 'gym',
+					name: townName+" Gym",
+					toId: gymId
+				}
+			);
+			var gymStereotype = Random.fromObject(this.masterPlans.gymStereotypes, true);
+			var numberOfMonsters = Random.n(3,4);
+			var gymMonsters = [];
+			for (var i = 0; i < numberOfMonsters; i++){
+				var monsterSpec = Random.fromWeighted(gymStereotype.monsters);
+				var monsterRace = monsterSpec.race;
+				var levelBoost = monsterSpec.levelBoost ? monsterSpec.levelBoost : 0;
+				levelBoost += Random.n(0,3);
+				gymMonsters.push({
+					race: monsterRace,
+					level: this.currentGymId * 5 + 5 + levelBoost
+				});
+			}
+			
+			var gymMetadata = {
 				type: 'GYM',
 				name: townName+" Gym",
 				width: 24,
@@ -210,24 +200,16 @@ module.exports = {
 					}
 				],
 				trainer: {
-					race: Races.TRAINER_BROK,
-					monsters: [
-						{
-							race: Races.ONYX,
-							level: 10
-						},
-						{
-							race: Races.RATTATA,
-							level: 10
-						}
-					]
+					race: Races.GYM_LEADER,
+					monsters: gymMonsters
 				},
-				badge: Items.BOULDER_BADGE
+				badge: gymStereotype.badge
 			}
-			this.metadata[gymId] = metadata;
+			this.metadata[gymId] = gymMetadata;
 		}
 		return townId;
-	},
+	}
+	/*
 	generateFixedMetadata: function(){
 		return {
 			"PALLET_TOWN":{
@@ -342,5 +324,5 @@ module.exports = {
 				badge: Items.BOULDER_BADGE
 			}
 		}
-	}
+	}*/
 }
