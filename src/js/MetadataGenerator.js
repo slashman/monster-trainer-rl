@@ -15,6 +15,11 @@ module.exports = {
 		this.currentTownId = 0;
 		this.currentGymId = 0;
 		this.masterPlans = MasterPlans;
+
+		if (Object.keys(this.masterPlans.gymStereotypes).length < this.masterPlans.cities){
+			throw "Not enough gym stereotypes";
+		}
+
 		this.remainingTowns = this.masterPlans.towns;
 		this.remainingCities = this.masterPlans.cities;
 		this.placeTown({starting: true});
@@ -116,28 +121,22 @@ module.exports = {
 				}
 			);
 		}
+		var houses = Random.n(0,3);
+		for (var i = 0; i < houses; i++){
+			metadata.features.push(
+				{
+					type: 'house'
+				}
+			);
+		}
 		if (specs.hasGym){ //TODO: Separate hasMart
+			var maxTier = Math.floor(this.currentTownId / (this.masterPlans.cities+this.masterPlans.towns)) * 4;
+			if (maxTier < 1)
+				maxTier = 1;
 			metadata.features.push(
 				{
 					type: 'mart',
-					items: [
-						{
-							item: Items.POKEBALL,
-							weight: 100
-						},
-						{
-							item: Items.SUPERBALL,
-							weight: 20
-						},
-						{
-							item: Items.POTION,
-							weight: 100
-						},
-						{
-							item: Items.SUPER_POTION,
-							weight: 5
-						}
-					]
+					items: this.masterPlans.items.filter(function(itemDef){return itemDef.tier <= maxTier;})
 				}
 			);
 		}
@@ -209,120 +208,4 @@ module.exports = {
 		}
 		return townId;
 	}
-	/*
-	generateFixedMetadata: function(){
-		return {
-			"PALLET_TOWN":{
-				type: 'TOWN',
-				name: 'Pallet Town',
-				width: 48,
-				height: 48,
-				exits: [
-					{
-						dir: 'UP',
-						toId: "ROUTE_1"
-					}
-				],
-				startPosition: {
-					x: 16,
-					y: 16
-				},
-				features: [
-					{ // Hero's house
-						type: 'myHouse',
-						x: 1,
-						y: 1
-					},
-					{ // Oak's Lab
-						type: 'lab'
-					},
-					{
-						// Rival's house (empty)
-						type: 'house'
-					},
-					{
-						type: 'pond'
-					},
-					{
-						type: 'mart',
-						items: [
-							{
-								item: Items.POKEBALL,
-								weight: 100
-							},
-							{
-								item: Items.SUPERBALL,
-								weight: 20
-							},
-							{
-								item: Items.POTION,
-								weight: 100
-							},
-							{
-								item: Items.SUPER_POTION,
-								weight: 5
-							}
-						]
-					},
-					{
-						type: 'gym',
-						name: 'Test Gym',
-						toId: "GYM1"
-					}
-				]
-			},
-			"ROUTE_1":{
-				type: 'ROUTE',
-				orientation: 'VERTICAL',
-				name: 'Route 1',
-				width: 32,
-				height: 64,
-				initialPopulation: 5,
-				wildMonsters: [
-					{
-						race: Races.PIDGEY,
-						level: 1,
-						weight: 50
-					},
-					{
-						race: Races.RATTATA,
-						level: 1,
-						weight: 2
-					}
-				],
-				exits: [
-					{
-						dir: 'DOWN',
-						toId: "PALLET_TOWN"
-					}
-				]
-			},
-			"GYM1": {
-				type: "GYM",
-				name: "Test Gym",
-				width: 16,
-				height: 16,
-				exits: [
-					{
-						dir: "DOWN",
-						toId: "PALLET_TOWN"
-					}
-				],
-				trainer: {
-					race: Races.TRAINER_BROK,
-					monsters: [
-						{
-							race: Races.ONYX,
-							level: 10
-						},
-						{
-							race: Races.RATTATA,
-							level: 10
-						}
-					]
-				},
-				badge: Items.BOULDER_BADGE
-			}
-		}
-	}*/
 }

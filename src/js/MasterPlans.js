@@ -2,8 +2,45 @@ var Races = require('./Races.enum');
 var Items = require('./Items.enum');
 
 module.exports = {
-	cities: 2,
-	towns: 2,
+	cities: 4,
+	towns: 1,
+	items: [
+		{
+			item: Items.POKEBALL,
+			weight: 100,
+			tier: 1
+		},
+		{
+			item: Items.GREATBALL,
+			weight: 20,
+			tier: 2
+		},
+		{
+			item: Items.ULTRABALL,
+			weight: 20,
+			tier: 3
+		},
+		{
+			item: Items.POTION,
+			weight: 100,
+			tier: 1
+		},
+		{
+			item: Items.SUPER_POTION,
+			weight: 5,
+			tier: 2
+		},
+		{
+			item: Items.HYPER_POTION,
+			weight: 5,
+			tier: 3
+		},
+		{
+			item: Items.MAX_POTION,
+			weight: 5,
+			tier: 4
+		}
+	],
 	routeStereotypes: [
 		{
 			monsters: [
@@ -188,6 +225,42 @@ module.exports = {
 				}
 			],
 			badge: Items.THUNDER_BADGE
+		},
+		GRASS: {
+			monsters: [
+				{
+					race: Races.VOLTORB,
+					weight: 20
+				},
+				{
+					race: Races.PIKACHU,
+					weight: 60
+				},
+				{
+					race: Races.RAICHU,
+					levelBoost: 5,
+					weight: 60
+				}
+			],
+			badge: Items.RAINBOW_BADGE
+		},
+		PSYCHIC: {
+			monsters: [
+				{
+					race: Races.VOLTORB,
+					weight: 20
+				},
+				{
+					race: Races.PIKACHU,
+					weight: 60
+				},
+				{
+					race: Races.RAICHU,
+					levelBoost: 5,
+					weight: 60
+				}
+			],
+			badge: Items.MARSH_BADGE
 		}
 	}
 }
