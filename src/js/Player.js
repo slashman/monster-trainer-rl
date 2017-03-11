@@ -25,6 +25,7 @@ module.exports = {
 			being: being,
 			onPocket: true
 		}
+		being.isTame = true;
 		being.slotNumber = slotNumber;
 	},
 	getAvailableSlotNumber: function(){
@@ -60,7 +61,7 @@ module.exports = {
 			this.game.input.mode = "PROMPT";
 			this.game.input.promptFunction = this.confirmChallengeGym.bind(this);
 			this.endTurn();
-		} else if (this.game.world.level.exits[this.x] && this.game.world.level.exits[this.x][this.y]){
+		} else if (!this.gymTown && this.game.world.level.exits[this.x] && this.game.world.level.exits[this.x][this.y]){
 			this.game.world.loadLevel(this.game.world.level.exits[this.x][this.y]);
 			this.endTurn();
 		} else {
@@ -69,6 +70,7 @@ module.exports = {
 	},
 	confirmChallengeGym: function(confirm){
 		if (confirm){
+			this.gymTown = this.game.world.level; 
 			this.game.world.loadLevel(this.game.world.level.gymInfo.toId);
 			this.endTurn();
 		} else {
@@ -216,6 +218,14 @@ module.exports = {
 		item.def.type.useFunction(this.game, item, dx, dy);
 	},
 	releaseMonster: function(dir){
+		if (this.gymTown){
+			if (this.releasedMonster){
+				this.game.display.message("You are on a 1 on 1 duel.");
+				return;
+			} else {
+				this.releasedMonster = true;
+			}
+		}
 		var slot = this.monsterSlots[this.game.input.selectedMonsterSlot];
 		if (this.game.world.level.canWalkTo(this.x + dir.x, this.y + dir.y) &&
 			this.game.world.level.canWalkTo(this.x + dir.x * 2, this.y + dir.y * 2)){
@@ -229,10 +239,22 @@ module.exports = {
 		}
 	},
 	pullBack: function(){
+		if (this.gymTown){
+			this.releasedMonster = false;
+		}
 		var slot = this.monsterSlots[this.game.input.selectedMonsterSlot];
 		slot.onPocket = true;
 		this.game.world.level.removeBeing(slot.being);
 		this.game.display.message(slot.being.race.name+"... come back.");
 		this.endTurn();
+	},
+	pullBackAll: function(){
+		for (var i = 0; i < this.monsterSlots.length; i++){
+			var slot = this.monsterSlots[i];
+			if (slot && !slot.onPocket){
+				slot.onPocket = true;
+				this.game.world.level.removeBeing(slot.being);
+			}
+		}
 	}
 }

@@ -336,6 +336,14 @@ module.exports = {
 		var trainer = new Being(level.game, level, specs.trainer.race);
 		level.addBeing(trainer, Math.floor(specs.width/2), 3);
 		trainer.intent = 'TRAINER';
+		trainer.isTrainer = true;
+		trainer.monsters = specs.trainer.monsters.map(function(monsterSpec){
+			var being = new Being(level.game, level, monsterSpec.race, monsterSpec.level);
+			being.isTame = true;
+			being.owner = trainer;
+			return being;
+		}, this);
+		trainer.prize = specs.badge;
 	},
 
 }

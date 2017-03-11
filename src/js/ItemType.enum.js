@@ -52,5 +52,11 @@ module.exports = {
 			}
 		},
 		targetted: true
+	},
+	BADGE: {
+		name: "Badge",
+		useFunction: function(game, item){
+			game.display.message("You proudly show off the "+item.def.name+".");
+		}
 	}
 }

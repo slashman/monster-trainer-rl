@@ -1,6 +1,10 @@
 var Random = require('./Random');
 var Distance = require('./Distance');
+var Direction = require('./util/Direction');
 var Stat = require('./Stat.class');
+var Item = require('./Item.class');
+
+var TrainerAI = require('./ai/Trainer');
 
 function Being(game, level, race){
 	this.game = game;
@@ -32,7 +36,7 @@ Being.prototype = {
 		}
 	},
 	actAsTrainer: function(){
-		// Trainers just stand there commanding their pokemon
+		TrainerAI.act(this);
 	},
 	actRandom: function(){
 		var dx = Random.n(-1, 1);
@@ -98,10 +102,16 @@ Being.prototype = {
 			if (this.game.input.selectedMonsterSlot === this.slotNumber){
 				this.game.input.selectAvailableMonsterSlot();
 			}
+			if (this.game.player.gymTown){
+				this.game.player.releasedMonster = false;
+			}
 		} else {
 			this.game.display.message("The "+this.race.name+" dies!");
 		}
 		this.game.world.level.removeBeing(this);
+		if (this.owner){
+			this.owner.monsterDied(this);
+		}
 
 	},
 	getNearestEnemy: function(){
@@ -109,6 +119,9 @@ Being.prototype = {
 		var nearestEnemy = false;
 		for (var i = 0; i < this.level.beingsList.length; i++){
 			var being = this.level.beingsList[i];
+			if (this.isTame && being.isTrainer){
+				continue;
+			}
 			if (being.isFriendly != this.isFriendly){
 				var distance = Distance.flatDistance(being.x, being.y, this.x, this.y);
 				if (distance < this.getSightRange() && distance < nearestDistance){
@@ -117,7 +130,7 @@ Being.prototype = {
 				}
 			}
 		}
-		if (!this.isFriendly){
+		if (!this.isFriendly && !this.isTame){
 			// Consider the player too
 			var distance = Distance.flatDistance(this.game.player.x, this.game.player.y, this.x, this.y);
 			if (distance < this.getSightRange() && distance < nearestDistance){
@@ -140,6 +153,45 @@ Being.prototype = {
 	},
 	recoverHP: function(points){
 		this.hp.increase(points);
+	},
+	// Trainer functions
+	pullBackMonster: function(){
+		var monster = this.monsterDeployed;
+		this.game.display.message(this.race.name+" calls back "+monster.race.name+".");
+		this.game.world.level.removeBeing(monster);
+		this.monsterDeployed = false;
+	},
+	useItem: function(item){
+		//Used on the current monster
+	},
+	issueOrder: function(order){
+
+	},
+	releaseMonster: function(monster){
+		// Select a direction toward player
+		var dir = Direction.direction(this.x, this.y, this.game.player.x, this.game.player.y);
+		if (this.game.world.level.canWalkTo(this.x + dir.x, this.y + dir.y) &&
+			this.game.world.level.canWalkTo(this.x + dir.x * 2, this.y + dir.y * 2)){
+			monster.level = this.level;
+			this.game.world.level.addBeing(monster, this.x + dir.x * 2, this.y + dir.y * 2);
+			this.game.display.message(this.race.name+" sends out "+monster.race.name+".");
+			this.monsterDeployed = monster;
+		}
+	},
+	monsterDied: function(monster){
+		this.monsterDeployed = false;
+		this.monsters.splice(this.monsters.indexOf(monster), 1);
+	},
+	givePrize: function(){
+		if (this.prize){
+			this.game.display.message("Congratulations! take the "+this.prize.name+"!");
+			this.game.player.addItem(new Item(this.prize));
+			this.gavePrize = true;
+			this.game.player.gymTown.gymComplete = true;
+			this.game.player.gymTown = false;
+		} else if (this.prizeMoney){
+
+		}
 	}
 }
 

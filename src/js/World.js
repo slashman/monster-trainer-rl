@@ -14,6 +14,7 @@ module.exports = {
 		this.loadLevel("PALLET_TOWN");
 	},
 	loadLevel: function(levelId){
+		this.player.pullBackAll();
 		var oldLevel = this.game.world.level;
 		if (this.levels[levelId]){
 			this.level = this.levels[levelId];
