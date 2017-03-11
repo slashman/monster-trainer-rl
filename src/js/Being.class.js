@@ -131,6 +131,9 @@ Being.prototype = {
 	},
 	getSightRange: function(){
 		return 10;
+	},
+	recoverHP: function(points){
+		this.hp.increase(points);
 	}
 }
 

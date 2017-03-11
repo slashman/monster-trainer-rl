@@ -13,10 +13,10 @@ module.exports = {
 			for (var i = 1; i < 5; i++){
 				var monster = game.world.level.getBeing(game.player.x+i*dx, game.player.y+i*dy);
 				if (monster){
-					if (monster.slotNumber){
+					if (monster.slotNumber !== undefined){
 						game.display.message(monster.race.name+" is already in your team.");
 					} else {
-						var catchChance = 100 - monster.hp.getProportion() * 100 + 5 + (item.catchBoost ? item.catchBoost : 0);
+						var catchChance = 100 - monster.hp.getProportion() * 100 + 5 + (item.def.catchBoost ? item.def.catchBoost : 0);
 						if (Random.chance(catchChance)){
 							game.display.message("You capture the "+monster.race.name+"!");
 							game.player.addMonster(monster);
@@ -41,7 +41,16 @@ module.exports = {
 	POTION: {
 		name: 'Potion',
 		useFunction: function(game, item, dx, dy){
-			game.display.message("You read the "+item.def.name);
-		}
+			var monster = game.world.level.getBeing(game.player.x+dx, game.player.y+dy);
+			if (monster){
+				game.display.message("The "+monster.race.name+" recovers "+item.def.points+" HP.");
+				game.player.removeItem(item);
+				monster.recoverHP(item.def.points);
+				game.player.endTurn();
+			} else {
+				game.display.message("There's no pokemon there");
+			}
+		},
+		targetted: true
 	}
 }

@@ -24,5 +24,9 @@ module.exports = {
 		game.player.addItem(new Item(Items.POKEBALL));
 		game.player.addItem(new Item(Items.SUPERBALL));
 		game.player.addItem(new Item(Items.SUPERBALL));
+		game.player.addItem(new Item(Items.POTION));
+		game.player.addItem(new Item(Items.SUPER_POTION));
+		game.player.addItem(new Item(Items.POTION));
+		game.player.addItem(new Item(Items.SUPER_POTION));
 	}
 }

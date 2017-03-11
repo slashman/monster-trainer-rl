@@ -15,6 +15,13 @@ module.exports = {
 	POTION: {
 		type: ItemType.POTION,
 		name: 'Potion',
-		tile: new ut.Tile('!', 255, 255, 0)	
+		tile: new ut.Tile('!', 255, 255, 0),
+		points: 10
+	},
+	SUPER_POTION: {
+		type: ItemType.POTION,
+		name: 'Super Potion',
+		tile: new ut.Tile('!', 0, 255, 255),
+		points: 20
 	}
 }
