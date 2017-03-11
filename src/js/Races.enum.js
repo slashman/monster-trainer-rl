@@ -14,5 +14,11 @@ module.exports = {
 		name: "Charmander",
 		tile: new ut.Tile('c', 255, 0, 0),
 		hp: 20
+	},
+
+	STORE_CLERK: {
+		name: "Store Clerk",
+		tile: new ut.Tile('@', 0, 255, 0),
+		hp: 20	
 	}
 }

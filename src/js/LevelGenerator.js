@@ -124,8 +124,8 @@ module.exports = {
 	buildTown: function(level, specs){
 		// Place houses based on specs on a grid
 		var grid = [];
-		var gridx = Math.round((specs.width - 6) / 10);
-		var gridy = Math.round((specs.height - 6) / 10);
+		var gridx = Math.floor((specs.width - 6) / 10);
+		var gridy = Math.floor((specs.height - 6) / 10);
 		for (var i = 0; i < gridx; i++){
 			grid[i] = [];
 		}
@@ -168,6 +168,9 @@ module.exports = {
 				break;
 			case 'pond':
 				this.fillPond(x,y,w,h);
+				break;
+			case 'mart':
+				this.fillMart(x,y,w,h);
 				break;
 		}
 	},
@@ -212,5 +215,76 @@ module.exports = {
 				this.level.map[xx][yy] = Tiles.WATER;
 			}
 		}
+	},
+	fillMart: function(x, y, w, h){
+		for (var xx = x; xx < x + w; xx++){
+			for (var yy = y; yy < y + h; yy++){
+				if (xx === x || xx === x + w - 1 || yy === y || yy === y + h - 1){
+					this.level.map[xx][yy] = Tiles.WALL;
+				} else {
+					this.level.map[xx][yy] = Tiles.FLOOR;
+				}
+			}
+		}
+		// Place door, counter and clerk
+		var xd = x + 2 + Random.n(0, w - 4);
+		var yd = y + 2 + Random.n(0, h - 4);
+		switch (Random.n(0,3)){
+			case 0:
+				yd = y;
+				break;
+			case 1:
+				yd = y+h-1;
+				break;
+			case 2:
+				xd = x;
+				break;
+			case 3:
+				xd = x+w-1;
+				break;
+		}
+		this.level.map[xd][yd] = Tiles.FLOOR;
+		var cx = xd;
+		var cy = yd;
+		var itemAreaBounds = {
+			x1: x+1,
+			y1: y+1,
+			x2: x+w-2,
+			y2: y+h-2,
+		};
+		if (xd === x){
+			cx = x + w - 2;
+			for (var yy = y+1; yy < y + h -1; yy++){
+				this.level.map[x + w - 3][yy] = Tiles.V_COUNTER;
+			}
+			itemAreaBounds.x2 = x + w - 4;
+		} else if (xd === x + w - 1){
+			cx = x + 1;
+			for (var yy = y+1; yy < y + h -1; yy++){
+				this.level.map[x + 2][yy] = Tiles.V_COUNTER;
+			}
+			itemAreaBounds.x1 = x + 3;
+		} else if (yd === y){
+			cy = y + h - 2;
+			for (var xx = x + 1; xx < x + w - 1; xx++){
+				this.level.map[xx][y+h-3] = Tiles.H_COUNTER;
+			}
+			itemAreaBounds.y2 = y + h - 4;
+		} else {
+			cy = y + 1;
+			for (var xx = x + 1; xx < x + w - 1; xx++){
+				this.level.map[xx][y+2] = Tiles.H_COUNTER;
+			}
+			itemAreaBounds.y1 = y + 3;
+		}
+		this.level.addBeing(new Being(this.level.game, this.level, Races.STORE_CLERK), cx, cy);
+		// Let's make this Nethack style lol!
+		for (var xx = itemAreaBounds.x1; xx <= itemAreaBounds.x2; xx++){
+			for (var yy = itemAreaBounds.y1; yy <= itemAreaBounds.y2; yy++){
+				this.level.addItem(new Item(Items.POKEBALL), xx, yy);
+				this.level.storePlaces.push({x: xx, y: yy});
+			}
+		}
+
 	}
 }

@@ -51,5 +51,15 @@ module.exports = {
 		tile: new ut.Tile('|', 0, 255, 128),
 		darkTile: new ut.Tile('|', 128, 128, 128),
 		semiopaque: true
+	},
+	H_COUNTER: {
+		tile: new ut.Tile('=', 255, 255, 255),
+		darkTile: new ut.Tile('=', 128, 128, 128),
+		solid: true
+	},
+	V_COUNTER: {
+		tile: new ut.Tile('|', 255, 255, 255),
+		darkTile: new ut.Tile('|', 128, 128, 128),
+		solid: true
 	}
 }

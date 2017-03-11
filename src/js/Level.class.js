@@ -10,7 +10,9 @@ Level.prototype = {
 		this.exits = [];
 		this.exitsMap = [];
 		this.items = [];
-		this.spawnPositions = [];
+		this.spawnPositions = []; // For respawning
+
+		this.storePlaces = []; // For restocking
 
 		this.game = game;
 		this.id = id;

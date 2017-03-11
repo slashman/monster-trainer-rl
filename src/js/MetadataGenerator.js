@@ -6,8 +6,8 @@ module.exports = {
 			"PALLET_TOWN":{
 				type: 'TOWN',
 				name: 'Pallet Town',
-				width: 32,
-				height: 32,
+				width: 48,
+				height: 48,
 				exits: [
 					{
 						dir: 'UP',
@@ -33,6 +33,9 @@ module.exports = {
 					},
 					{
 						type: 'pond'
+					},
+					{
+						type: 'mart'
 					}
 				]
 			},
