@@ -26,7 +26,13 @@ Being.prototype = {
 			case 'STILL':
 				this.actStill();
 				break;
+			case 'TRAINER':
+				this.actAsTrainer();
+				break;
 		}
+	},
+	actAsTrainer: function(){
+		// Trainers just stand there commanding their pokemon
 	},
 	actRandom: function(){
 		var dx = Random.n(-1, 1);

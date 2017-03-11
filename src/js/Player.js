@@ -1,3 +1,4 @@
+var Tiles = require('./Tiles.enum');
 module.exports = {
 	MAX_SIGHT_RANGE: 10,
 	x: 20,
@@ -54,10 +55,26 @@ module.exports = {
 		this.game.input.mode = 'NONE';
 	},
 	land: function(){
-		if (this.game.world.level.exits[this.x] && this.game.world.level.exits[this.x][this.y]){
+		if (this.game.world.level.map[this.x][this.y] === Tiles.GYM_ENTRANCE && !this.game.world.level.gymComplete){
+			this.game.display.message("Are you ready to challenge "+this.game.world.level.gymInfo.name+"? [Y/N]");
+			this.game.input.mode = "PROMPT";
+			this.game.input.promptFunction = this.confirmChallengeGym.bind(this);
+			this.endTurn();
+		} else if (this.game.world.level.exits[this.x] && this.game.world.level.exits[this.x][this.y]){
 			this.game.world.loadLevel(this.game.world.level.exits[this.x][this.y]);
+			this.endTurn();
+		} else {
+			this.endTurn();
 		}
-		this.endTurn();
+	},
+	confirmChallengeGym: function(confirm){
+		if (confirm){
+			this.game.world.loadLevel(this.game.world.level.gymInfo.toId);
+			this.endTurn();
+		} else {
+			this.game.display.message("Some other time.");
+		}
+		this.game.input.mode = "MOVEMENT";
 	},
 	endTurn: function(){
 		this.updateFOV();

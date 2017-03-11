@@ -61,5 +61,9 @@ module.exports = {
 		tile: new ut.Tile('|', 255, 255, 255),
 		darkTile: new ut.Tile('|', 128, 128, 128),
 		solid: true
+	},
+	GYM_ENTRANCE: {
+		tile: new ut.Tile('/', 255, 255, 255),
+		darkTile: new ut.Tile('/', 128, 128, 128)
 	}
 }

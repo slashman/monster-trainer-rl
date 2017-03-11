@@ -55,6 +55,11 @@ module.exports = {
 								weight: 5
 							}
 						]
+					},
+					{
+						type: 'gym',
+						name: 'Test Gym',
+						toId: "GYM1"
 					}
 				]
 			},
@@ -83,6 +88,32 @@ module.exports = {
 						toId: "PALLET_TOWN"
 					}
 				]
+			},
+			"GYM1": {
+				type: "GYM",
+				name: "Test Gym",
+				width: 16,
+				height: 16,
+				exits: [
+					{
+						dir: "DOWN",
+						toId: "PALLET_TOWN"
+					}
+				],
+				trainer: {
+					race: Races.TRAINER_BROK,
+					monsters: [
+						{
+							race: Races.ONYX,
+							level: 10
+						},
+						{
+							race: Races.RATTATA,
+							level: 10
+						}
+					]
+				},
+				badge: Items.BOULDER_BADGE
 			}
 		}
 	}

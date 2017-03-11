@@ -27,5 +27,10 @@ module.exports = {
 		tile: new ut.Tile('!', 0, 255, 255),
 		points: 20,
 		cost: 100
+	},
+	BOULDER_BADGE: {
+		type: ItemType.BADGE,
+		name: 'Boulder Badge',
+		tile: new ut.Tile('O', 255, 255, 255)
 	}
 }

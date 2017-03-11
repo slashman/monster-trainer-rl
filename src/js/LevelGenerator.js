@@ -11,21 +11,17 @@ module.exports = {
 	generateTestLevel: function(level, specs){
 		this.level = level;
 		this.level.name = specs.name;
-		for (var x = 0; x < specs.width; x++){
-			level.map[x] = [];
-			for (var y = 0; y < specs.height; y++){
-				level.map[x][y] = Tiles.GRASS;
-			}
-		}
-		for (var i = 0; i < 40; i++){
-			level.map[Random.n(0,specs.width-1)][Random.n(0,specs.height-1)] = Tiles.BUSH;
-		}
 		switch (specs.type){
 			case "TOWN":
+				this.basicFill(level, specs);
 				this.buildTown(level, specs);
 				break;
 			case "ROUTE":
+				this.basicFill(level, specs);
 				this.buildRoute(level, specs);
+				break;
+			case "GYM":
+				this.buildGym(level, specs);
 				break;
 		}
 		if (specs.wildMonsters){
@@ -46,6 +42,8 @@ module.exports = {
 				level.addBeing(being, x, y);
 				if (race.aggresive){
 					being.intent = 'CHASE';
+				} else if (race.trainer){
+					being.intent = 'TRAINER';
 				} else {
 					being.intent = 'STILL';
 				}
@@ -81,6 +79,17 @@ module.exports = {
 	CA_GRASS_RULES: [
 		new Rule(Tiles.GRASS, Rule.MORE_THAN, 2, Tiles.TALL_GRASS, Tiles.TALL_GRASS, 50)
 	],
+	basicFill: function(level, specs){
+		for (var x = 0; x < specs.width; x++){
+			level.map[x] = [];
+			for (var y = 0; y < specs.height; y++){
+				level.map[x][y] = Tiles.GRASS;
+			}
+		}
+		for (var i = 0; i < 40; i++){
+			level.map[Random.n(0,specs.width-1)][Random.n(0,specs.height-1)] = Tiles.BUSH;
+		}
+	},
 	buildRoute: function(level, specs){
 		// Place a road based on the orientation and some patches of grass
 		switch (specs.orientation){
@@ -171,6 +180,9 @@ module.exports = {
 				break;
 			case 'mart':
 				this.fillMart(x,y,w,h, feature.items);
+				break;
+			case 'gym':
+				this.fillGym(x,y,w,h, feature);
 				break;
 		}
 	},
@@ -287,6 +299,43 @@ module.exports = {
 				this.level.storePlaces.push({x: xx, y: yy});
 			}
 		}
+	},
+	fillGym: function(x, y, w, h, feature){
+		for (var xx = x; xx < x + w; xx++){
+			for (var yy = y; yy < y + h; yy++){
+				this.level.map[xx][yy] = Tiles.WALL;
+			}
+		}
+		// Place door
+		var xd = x + 2 + Random.n(0, w - 4);
+		var yd = y + 2 + Random.n(0, h - 4);
+		switch (Random.n(0,3)){
+			case 0:
+				yd = y;
+				break;
+			case 1:
+				yd = y+h-1;
+				break;
+			case 2:
+				xd = x;
+				break;
+			case 3:
+				xd = x+w-1;
+				break;
+		}
+		this.level.addExit(xd, yd, feature.toId, Tiles.GYM_ENTRANCE);
+		this.level.gymInfo = feature;
+	},
+	buildGym: function(level, specs){
+		for (var x = 0; x < specs.width; x++){
+			level.map[x] = [];
+			for (var y = 0; y < specs.height; y++){
+				level.map[x][y] = Tiles.FLOOR;
+			}
+		}
+		var trainer = new Being(level.game, level, specs.trainer.race);
+		level.addBeing(trainer, Math.floor(specs.width/2), 3);
+		trainer.intent = 'TRAINER';
+	},
 
-	}
 }
