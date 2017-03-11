@@ -19,7 +19,13 @@ module.exports = {
 	onKeyDown: function(k){
 		if (!this.inputEnabled)
 			return;
-		if (this.mode === 'MOVEMENT'){
+		if (this.mode === "PROMPT"){
+			if (k === ut.KEY_Y){
+				this.promptFunction(true);
+			} else if (k === ut.KEY_N){
+				this.promptFunction(false);
+			}
+		} else if (this.mode === 'MOVEMENT'){
 			if (k === ut.KEY_COMMA){
 				this.game.player.tryPickup();
 				return;

@@ -157,10 +157,33 @@ module.exports = {
 	tryPickup: function(){
 		var item = this.game.world.level.getItem(this.x, this.y);
 		if (item){
-			this.game.display.message("You pickup the "+item.def.name);
-			this.game.world.level.removeItem(this.x, this.y);
-			this.addItem(item);
+			if (item.forSale){
+				this.game.display.message("This "+item.def.name+" costs "+item.def.cost+". Do you want to buy it? [Y/N]");
+				this.game.input.mode = "PROMPT";
+				this.buyingItem = item;
+				this.game.input.promptFunction = this.confirmBuy.bind(this);
+			} else {
+				this.game.display.message("You pickup the "+item.def.name);
+				this.game.world.level.removeItem(this.x, this.y);
+				this.addItem(item);
+			}
 		}
+	},
+	confirmBuy: function(confirm){
+		if (confirm){
+			if (this.money >= this.buyingItem.def.cost){
+				this.money -= this.buyingItem.def.cost;
+				this.game.display.message("Thank you!");
+				this.game.world.level.removeItem(this.x, this.y);
+				this.addItem(this.buyingItem);
+			} else {
+				this.game.display.message("Sorry, you can't affort it.");
+			}
+		} else {
+			this.game.display.message("Alright");
+		}
+		this.game.input.mode = "MOVEMENT";
+		this.game.player.endTurn();
 	},
 	tryDrop: function(item){
 		var underItem = this.game.world.level.items[this.x] && this.game.world.level.items[this.x][this.y];

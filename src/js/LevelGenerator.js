@@ -136,9 +136,9 @@ module.exports = {
 			var w = feature.w;
 			var h = feature.h;
 			if (!w)
-				w = Random.n(6,8);
+				w = Random.n(7,9);
 			if (!h)
-				h = Random.n(6,8);
+				h = Random.n(7,9);
 			if (!x){
 				x = Random.n(0,gridx-1);
 			}
@@ -152,11 +152,11 @@ module.exports = {
 			grid[x][y] = true;
 			x = x * 10 + Random.n(0,10-w-1) + 3;
 			y = y * 10 + Random.n(0,10-h-1) + 3;
-			this.fillFeature(feature.type, x, y, w, h);
+			this.fillFeature(feature, x, y, w, h);
 		}
 	},
-	fillFeature: function(type, x, y, w, h){
-		switch (type){
+	fillFeature: function(feature, x, y, w, h){
+		switch (feature.type){
 			case 'myHouse':
 				this.fillMyHouse(x,y,w,h);
 				break;
@@ -170,7 +170,7 @@ module.exports = {
 				this.fillPond(x,y,w,h);
 				break;
 			case 'mart':
-				this.fillMart(x,y,w,h);
+				this.fillMart(x,y,w,h, feature.items);
 				break;
 		}
 	},
@@ -216,7 +216,7 @@ module.exports = {
 			}
 		}
 	},
-	fillMart: function(x, y, w, h){
+	fillMart: function(x, y, w, h, items){
 		for (var xx = x; xx < x + w; xx++){
 			for (var yy = y; yy < y + h; yy++){
 				if (xx === x || xx === x + w - 1 || yy === y || yy === y + h - 1){
@@ -281,7 +281,9 @@ module.exports = {
 		// Let's make this Nethack style lol!
 		for (var xx = itemAreaBounds.x1; xx <= itemAreaBounds.x2; xx++){
 			for (var yy = itemAreaBounds.y1; yy <= itemAreaBounds.y2; yy++){
-				this.level.addItem(new Item(Items.POKEBALL), xx, yy);
+				if (Random.chance(80)){
+					this.level.addItem(new Item(Random.fromWeighted(items).item, true), xx, yy);
+				}
 				this.level.storePlaces.push({x: xx, y: yy});
 			}
 		}

@@ -46,6 +46,7 @@ module.exports = {
 	},
 	updateStatus: function(){
 		this.term.putString("HP "+this.game.player.hp.getText(), 2, 3, 255, 255, 255);
+		this.term.putString("$"+this.game.player.money, 2, 4, 255, 255, 255);
 		this.term.putString(this.game.world.level.name, 2, 5, 255, 255, 255);
 		// Pokemon list
 		this.term.putString("Pokemon", 2, 7, 255, 255, 255);

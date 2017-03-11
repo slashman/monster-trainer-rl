@@ -1,4 +1,5 @@
 var Races = require('./Races.enum');
+var Items = require('./Items.enum');
 
 module.exports = {
 	generateMetadata: function(){
@@ -35,7 +36,25 @@ module.exports = {
 						type: 'pond'
 					},
 					{
-						type: 'mart'
+						type: 'mart',
+						items: [
+							{
+								item: Items.POKEBALL,
+								weight: 100
+							},
+							{
+								item: Items.SUPERBALL,
+								weight: 20
+							},
+							{
+								item: Items.POTION,
+								weight: 100
+							},
+							{
+								item: Items.SUPER_POTION,
+								weight: 5
+							}
+						]
 					}
 				]
 			},

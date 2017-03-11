@@ -8,6 +8,7 @@ var Stat = require('./Stat.class');
 module.exports = {
 	start: function(game){
 		game.player.hp = new Stat(40);
+		game.player.money = 1000;
 		var charmander = new Being(game, false, Races.CHARMANDER);
 		game.player.addMonster(charmander);
 		charmander = new Being(game, false, Races.RATTATA);
