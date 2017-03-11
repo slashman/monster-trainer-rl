@@ -11,7 +11,8 @@ module.exports = {
 		this.game = game;
 		this.player = game.player;
 		this.metadata = MetadataGenerator.generateMetadata();
-		this.loadLevel("PALLET_TOWN");
+		console.log(this.metadata);
+		this.loadLevel(this.metadata._startingLevelId);
 	},
 	loadLevel: function(levelId){
 		this.player.pullBackAll();
