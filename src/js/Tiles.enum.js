@@ -36,7 +36,7 @@ module.exports = {
 		opaque: true
 	},
 	FLOOR: {
-		tile: new ut.Tile('.', 0, 0, 128),
+		tile: new ut.Tile('.', 0, 0, 255),
 		darkTile: new ut.Tile('.', 128, 128, 128),
 		solid: false,
 		opaque: false
