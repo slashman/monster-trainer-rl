@@ -27,6 +27,8 @@ module.exports = {
 			var exit = this.level.getExit(oldLevel.id);
 			this.player.x = exit.x;
 			this.player.y = exit.y;
+		} else {
+			this.metadata[levelId].startPosition = false;
 		}
 	}
 }
