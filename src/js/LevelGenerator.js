@@ -51,8 +51,8 @@ module.exports = {
 				}
 			}
 		}
-		level.addItem(new Item(Items.IRON_SWORD), Random.n(0,specs.width-1), Random.n(0,specs.height-1));
-		level.addItem(new Item(Items.BOOK_OF_MIRDAS), Random.n(0,specs.width-1), Random.n(0,specs.height-1));
+		/*level.addItem(new Item(Items.IRON_SWORD), Random.n(0,specs.width-1), Random.n(0,specs.height-1));
+		level.addItem(new Item(Items.BOOK_OF_MIRDAS), Random.n(0,specs.width-1), Random.n(0,specs.height-1));*/
 		for (var i = 0; i < specs.exits.length; i++){
 			var xs = Math.round(specs.width/2);
 			var ys = Math.round(specs.height/2);

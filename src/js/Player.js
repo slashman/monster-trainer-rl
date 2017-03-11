@@ -12,12 +12,27 @@ module.exports = {
 			this.game.display.message("Cannot put monster in that slot");
 			return;
 		}
+		if (slotNumber === undefined){
+			slotNumber = this.getAvailableSlotNumber();
+		}
+		if (slotNumber === undefined){
+			this.game.display.message("No slots available.");
+			return;
+		}
 		being.isFriendly = true;
 		this.monsterSlots[slotNumber] = {
 			being: being,
 			onPocket: true
 		}
 		being.slotNumber = slotNumber;
+	},
+	getAvailableSlotNumber: function(){
+		for (var i = 0; i < 6; i++){
+			if (!this.game.player.monsterSlots[i]){
+				return i;
+			}
+		}
+		return false;
 	},
 	init: function(game){
 		this.game = game;
@@ -167,6 +182,7 @@ module.exports = {
 			slot.onPocket = false;
 			slot.being.level = this.game.world.level;
 			this.game.world.level.addBeing(slot.being, this.x + dir.x * 2, this.y + dir.y * 2);
+			this.game.display.message("Go "+slot.being.race.name+"!");
 			this.endTurn();
 		} else {
 			this.game.display.message("No space!");
@@ -176,6 +192,7 @@ module.exports = {
 		var slot = this.monsterSlots[this.game.input.selectedMonsterSlot];
 		slot.onPocket = true;
 		this.game.world.level.removeBeing(slot.being);
+		this.game.display.message(slot.being.race.name+"... come back.");
 		this.endTurn();
 	}
 }
