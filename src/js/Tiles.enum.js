@@ -20,7 +20,7 @@ module.exports = {
 	BUSH: {
 		tile: new ut.Tile('&', 0, 128, 0),
 		darkTile: new ut.Tile('&', 128, 128, 128),
-		solid: true,
+		solid: false,
 		opaque: true
 	},
 	WATER: {
