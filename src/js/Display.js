@@ -67,7 +67,7 @@ module.exports = {
 			this.term.putString(slot.onPocket ? "  In Pokeball" : "  Released", baseX, baseY + i*3 + 2, 255, 255, 255);
 		}
 		// Pokemon actions
-		baseX = 50;
+		baseX = 60;
 		baseY = 8;
 		if (this.game.input.selectedMonsterSlot !== undefined && this.game.input.selectedMonsterSlot !== false){
 			var slot = this.game.player.monsterSlots[this.game.input.selectedMonsterSlot];
