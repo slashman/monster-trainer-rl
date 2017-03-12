@@ -1,3 +1,7 @@
+var Distance = require('./Distance');
+var Random = require('./Random');
+var Being = require('./Being.class');
+
 var Level = function(game, id){
 	this.init(game, id);
 }
@@ -11,6 +15,7 @@ Level.prototype = {
 		this.exitsMap = [];
 		this.items = [];
 		this.spawnPositions = []; // For respawning
+		this.spawnCounter = 200;
 
 		this.storePlaces = []; // For restocking
 
@@ -23,7 +28,41 @@ Level.prototype = {
 			return false;
 		return this.beings[x][y];
 	},
+	respawnMonsters: function(){
+		var initialPopulation = this.initialPopulation + Random.n(0,5);
+		var currentMonsters = this.beingsList.length;
+		initialPopulation -= currentMonsters;
+		var level = this;
+		for (var i = 0; i < initialPopulation; i++){
+			var spawnPosition = level.spawnPositions.length > 0 ? Random.from(level.spawnPositions) : false;
+			if (spawnPosition){
+				var x = spawnPosition.x;
+				var y = spawnPosition.y;
+			}
+			if (!spawnPosition || level.getBeing(x, y)){
+				// Place somewhere else
+				x = Random.n(0,this.map.length-1);
+				y = Random.n(0,this.map[0].length-1);
+			}
+			if (Distance.distance(x,y,this.game.player.x, this.game.player.y) < 20)
+				continue;
+			var race = Random.fromWeighted(this.wildMonsters).race;
+			var being = new Being(level.game, level, race);
+			level.addBeing(being, x, y);
+			if (race.aggresive){
+				being.intent = 'CHASE';
+			} else if (race.trainer){
+				being.intent = 'TRAINER';
+			} else {
+				being.intent = 'STILL';
+			}
+		}
+	},
 	beingsTurn: function(){
+		this.spawnCounter--;
+		if (this.spawnCounter === 0){
+			this.respawnMonsters();
+		}
 		for (var i = 0; i < this.beingsList.length; i++){
 			this.beingsList[i].act();
 		}

@@ -25,32 +25,10 @@ module.exports = {
 				break;
 		}
 		if (specs.wildMonsters){
-			var initialPopulation = specs.initialPopulation + Random.n(0,5);
-			for (var i = 0; i < initialPopulation; i++){
-				var spawnPosition = level.spawnPositions.length > 0 ? Random.from(level.spawnPositions) : false;
-				if (spawnPosition){
-					var x = spawnPosition.x;
-					var y = spawnPosition.y;
-				}
-				if (!spawnPosition || level.getBeing(x, y)){
-					// Place somewhere else
-					x = Random.n(0,specs.width-1);
-					y = Random.n(0,specs.height-1);
-				}
-				var race = Random.fromWeighted(specs.wildMonsters).race;
-				var being = new Being(level.game, level, race);
-				level.addBeing(being, x, y);
-				if (race.aggresive){
-					being.intent = 'CHASE';
-				} else if (race.trainer){
-					being.intent = 'TRAINER';
-				} else {
-					being.intent = 'STILL';
-				}
-			}
+			level.initialPopulation = specs.initialPopulation;
+			level.wildMonsters = specs.wildMonsters;
+			level.respawnMonsters();
 		}
-		/*level.addItem(new Item(Items.IRON_SWORD), Random.n(0,specs.width-1), Random.n(0,specs.height-1));
-		level.addItem(new Item(Items.BOOK_OF_MIRDAS), Random.n(0,specs.width-1), Random.n(0,specs.height-1));*/
 		for (var i = 0; i < specs.exits.length; i++){
 			var xs = Math.round(specs.width/2);
 			var ys = Math.round(specs.height/2);
