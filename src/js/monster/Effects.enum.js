@@ -46,6 +46,7 @@ module.exports = {
 		if (damage > 0){
 			monster.game.display.message("The "+enemy.race.name+" is hit for "+damage+" damage.");
 			enemy.hp.reduce(damage);
+			enemy.recordHitBy(monster);
 			if (enemy.hp.current <= 0){
 				enemy.die();
 			}

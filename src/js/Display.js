@@ -49,9 +49,8 @@ module.exports = {
 		this.term.putString("$"+this.game.player.money, 2, 4, 255, 255, 255);
 		this.term.putString(this.game.world.level.name, 2, 5, 255, 255, 255);
 		// Pokemon list
-		this.term.putString("Pokemon", 2, 7, 255, 255, 255);
 		var baseX = 3;
-		var baseY = 8;
+		var baseY = 7;
 		for (var i = 0; i < this.game.player.monsterSlots.length; i++){
 			var slot = this.game.player.monsterSlots[i];
 			if (!slot){
@@ -98,9 +97,16 @@ module.exports = {
 			}
 			this.term.putString(slot.being.race.name, baseX + 2, baseY, 255, 255, 255);
 			this.term.put(slot.being.race.tile, baseX, baseY);
+			this.term.putString("HP "+slot.being.hp.getText()+" Lv"+slot.being.xpLevel, baseX, baseY + 1, 255, 255, 255);
+			this.term.putString("("+slot.being.xp+"/"+slot.being.nextLevelXP+")", baseX, baseY + 2, 255, 255, 255);
+
+
+			this.term.putString(slot.being.race.name, baseX + 2, baseY, 255, 255, 255);
+			this.term.putString(slot.being.race.name, baseX + 2, baseY, 255, 255, 255);
+
 		} 
 		for (var i = 0; i < actions.length && i < 4; i++){
-			this.term.putString("("+actions[i].key + ") " +actions[i].name, baseX, baseY + i + 1, 255, 255, 255);
+			this.term.putString("("+actions[i].key + ") " +actions[i].name, baseX, baseY + i + 4, 255, 255, 255);
 		}
 	},
 	SKILL_KEYS: [

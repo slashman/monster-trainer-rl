@@ -17,7 +17,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	PIDGEY: {
 		name: "Pidgey",
@@ -33,7 +34,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	CHARMANDER: {
 		name: "Charmander",
@@ -58,7 +60,8 @@ module.exports = {
 				skill: Skills.EMBER,
 				level: 9
 			}
-		]
+		],
+		xp: 66
 	},
 	BULBASAUR: {
 		name: "Bulbasaur",
@@ -83,7 +86,8 @@ module.exports = {
 				skill: Skills.EMBER,
 				level: 9
 			}
-		]
+		],
+		xp: 66
 	},
 	SQUIRTLE: {
 		name: "Squirtle",
@@ -108,7 +112,8 @@ module.exports = {
 				skill: Skills.EMBER,
 				level: 9
 			}
-		]
+		],
+		xp: 66
 	},
 
 	ONYX: {
@@ -125,7 +130,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	GEODUDE: {
 		name: "Geodude",
@@ -141,7 +147,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	GRAVELLER: {
 		name: "Graveller",
@@ -157,7 +164,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	STARMIE: {
 		name: "Starmie",
@@ -173,7 +181,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	STARYU: {
 		name: "Staryu",
@@ -189,7 +198,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	VOLTORB: {
 		name: "Voltorb",
@@ -205,7 +215,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	PIKACHU: {
 		name: "Pikachu",
@@ -222,7 +233,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	RAICHU: {
 		name: "Raichu",
@@ -238,7 +250,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 
 
@@ -256,7 +269,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	WEEDLE: {
 		name: "Weedle",
@@ -272,7 +286,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	SPEAROW: {
 		name: "Spearow",
@@ -288,7 +303,8 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	},
 	JIGGLYPUFF: {
 		name: "Jigglypuff",
@@ -304,6 +320,7 @@ module.exports = {
 				skill: Skills.SCRATCH,
 				level: 1
 			}
-		]
+		],
+		xp: 66
 	}
 }

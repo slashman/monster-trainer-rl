@@ -22,6 +22,11 @@ function Being(game, level, race, xpLevel){
 	this.intent = 'CHASE';
 	this.isFriendly = false;
 	this.xpLevel = xpLevel;
+	this.randomId = Random.n(8,10000);
+	if (xpLevel){
+		this.xp = this.calculateXP(xpLevel);
+		this.nextLevelXP = this.calculateXP(xpLevel+1);
+	}
 	if (race.skills && xpLevel){
 		this.skills = race.skills.filter(function(def){return def.level <= xpLevel;});
 		this.skills = this.skills.map(function(val){
@@ -152,12 +157,12 @@ Being.prototype = {
 			}
 		} else {
 			this.game.display.message("The "+this.race.name+" dies!");
+			this.enemiesList.forEach(this.grantXP.bind(this));
 		}
 		this.game.world.level.removeBeing(this);
 		if (this.owner){
 			this.owner.monsterDied(this);
 		}
-
 	},
 	getNearestEnemy: function(){
 		var nearestDistance = 999;
@@ -273,6 +278,57 @@ Being.prototype = {
 	heal: function(){
 		this.hp.replenish();
 		this.skills.forEach(function(skill){skill.pp.replenish();});
+	},
+	calculateXPGain: function(){
+		var a = this.isTame ? 1.5 : 1;
+		var b = this.race.xp;
+		var e = 1; // Lucky Egg
+		var f = 1; // Affection
+		var L = this.xpLevel;
+		var p = 1; // Exp Points Power
+		var s = this.enemiesList.length;
+		var t = 1; // Trading origin
+		var v = 1; // Non evolve bonus
+		if (s === 0)
+			s = 1;
+		return Math.floor((a*t*b*e*L*p*f*v)/(7*s));
+	},
+	calculateXP: function(level){
+		return Math.pow(level, 3); // Corresponds to the Medium Fast group
+		/*
+		// Alternate 
+		if (level === 1){
+			return 0;
+		}
+		var xp = 100;
+		for (var i = 2; i <= level; i++){
+			xp += (i-1) * 50;
+		}
+		return xp;
+		*/
+	},
+	recordHitBy: function(enemy){
+		if (!this.enemiesList){
+			this.enemiesMap = {};
+			this.enemiesList = [];
+		}
+		if (!this.enemiesMap[enemy.randomId]){
+			this.enemiesList.push(enemy);
+			this.enemiesMap[enemy.randomId] = enemy;
+		}
+	},
+	grantXP: function(enemy){
+		enemy.addXP(this.calculateXPGain());
+	},
+	addXP: function(xp){
+		this.game.display.message(this.race.name+" gets "+xp+" XP");
+		this.xp += xp;
+		if (this.xp >= this.nextLevelXP){
+			this.game.display.message(this.race.name+" levels up!");
+			this.xpLevel++;
+			this.nextLevelXP = this.calculateXP(this.xpLevel+1);
+			// Check evolution and new skills
+		}
 	}
 }
 
