@@ -4,7 +4,6 @@ module.exports = {
 		this.game = game;
 		ut.initInput(this.onKeyDown.bind(this));
 		this.mode = 'MOVEMENT';
-		this.selectedMonsterSlot = 0;
 		this.SKILL_KEYS = {};
 		this.SKILL_KEYS[ut.KEY_Z] = 0;
 		this.SKILL_KEYS[ut.KEY_X] = 1;

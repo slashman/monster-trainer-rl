@@ -4,6 +4,12 @@ var Items = require('./Items.enum');
 module.exports = {
 	cities: 4,
 	towns: 1,
+	startingMonsters: [
+		Items.CHARMANDER_POKEBALL,
+		Items.BULBASAUR_POKEBALL,
+		Items.SQUIRTLE_POKEBALL,
+		Items.PIKACHU_POKEBALL
+	],
 	items: [
 		{
 			item: Items.POKEBALL,

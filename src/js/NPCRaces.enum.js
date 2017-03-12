@@ -26,6 +26,19 @@ module.exports = {
 			player.game.input.mode = "PROMPT";
 		}
 	},
+	PROFFESSOR: {
+		name: "Proffessor",
+		tile: new ut.Tile('@', 255, 255, 255),
+		hp: 20,
+		trainer: true,
+		interact: function(player){
+			if (player.pickedStarter){
+				player.game.display.message("Good luck in your quest!");
+			} else {
+				player.game.display.message("Pick one of the starter pokemon.");
+			}
+		}
+	},
 	GYM_LEADER: {
 		name: "Gym Leader",
 		tile: new ut.Tile('@', 255, 255, 0),

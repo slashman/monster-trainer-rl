@@ -1,4 +1,5 @@
-var ItemType = require('./ItemType.enum')
+var ItemType = require('./ItemType.enum');
+var Races = require('./monster/Races.enum');
 
 module.exports = {
 	POKEBALL: {
@@ -74,5 +75,31 @@ module.exports = {
 		type: ItemType.BADGE,
 		name: 'Marsh Badge',
 		tile: new ut.Tile('O', 255, 255, 255)
+	},
+
+	CHARMANDER_POKEBALL: {
+		type: ItemType.LOADED_POKEBALL,
+		name: 'Charmander Pokeball',
+		tile: new ut.Tile('*', 255, 0, 0),
+		race: Races.CHARMANDER
+	},
+	BULBASAUR_POKEBALL: {
+		type: ItemType.LOADED_POKEBALL,
+		name: 'Bulbasaur Pokeball',
+		tile: new ut.Tile('*', 0, 128, 0),
+		race: Races.BULBASAUR
+	},
+	SQUIRTLE_POKEBALL: {
+		type: ItemType.LOADED_POKEBALL,
+		name: 'Squirtle Pokeball',
+		tile: new ut.Tile('*', 83, 255, 255),
+		race: Races.SQUIRTLE
+	},
+	PIKACHU_POKEBALL: {
+		type: ItemType.LOADED_POKEBALL,
+		name: 'Pikachu Pokeball',
+		tile: new ut.Tile('*', 255, 255, 83),
+		race: Races.PIKACHU
 	}
+
 }

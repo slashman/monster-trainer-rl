@@ -1,4 +1,6 @@
 var Tiles = require('./Tiles.enum');
+var Being = require('./Being.class');
+
 module.exports = {
 	MAX_SIGHT_RANGE: 10,
 	x: 20,
@@ -44,6 +46,13 @@ module.exports = {
 	},
 	tryMove: function(dir){
 		if (!this.game.world.level.canWalkTo(this.x+dir.x, this.y+dir.y)){
+			// Check for NPCs
+			var npc = this.game.world.level.getBeing(this.x+dir.x, this.y+dir.y);
+			if (npc && npc.race.interact){
+				this.game.input.inputEnabled = true;
+				npc.race.interact(this);
+				return;
+			}
 			// Check for counters
 			var tile = this.game.world.level.getCell(this.x+dir.x, this.y+dir.y);
 			if (tile && tile.isCounter){
@@ -192,6 +201,8 @@ module.exports = {
 				this.game.input.mode = "PROMPT";
 				this.buyingItem = item;
 				this.game.input.promptFunction = this.confirmBuy.bind(this);
+			} else if (item.def.type.pickupFunction){
+				item.def.type.pickupFunction(this.game, item);
 			} else {
 				this.game.display.message("You pickup the "+item.def.name);
 				this.game.world.level.removeItem(this.x, this.y);
@@ -275,5 +286,32 @@ module.exports = {
 				slot.being.heal();
 			}
 		}
+	},
+	getMonster: function(race){
+		if (this.getAvailableSlotNumber() === false){
+			this.game.display.message("You don't have any pokeslots available");
+			return;
+		}
+		if (this.pickedStarter){
+			this.game.display.message("You already picked your starter pokemon.");
+			return;	
+		}
+
+		this.game.display.message("Do you want to pick "+race.name+", "+race.pickupDescription+"? [Y/N]");
+		this.game.input.mode = "PROMPT";
+		this.game.input.promptFunction = function(confirm){
+			if (confirm){
+				var monster = new Being(this.game, false, race, 1);
+				this.addMonster(monster);
+				this.game.display.message(race.name+" joins!");
+				this.game.world.level.removeItem(this.x, this.y);
+				this.game.input.selectAvailableMonsterSlot();
+				this.pickedStarter = true;
+			} else {
+				this.game.display.message(" N.");
+			}
+			this.endTurn();
+			this.game.input.mode = "MOVEMENT";
+		}.bind(this);
 	}
 }

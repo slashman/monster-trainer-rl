@@ -1,6 +1,12 @@
 var Random = require('./Random');
 
 module.exports = {
+	LOADED_POKEBALL: {
+		name: 'Loaded Pokeball',
+		pickupFunction: function(game, item){
+			game.player.getMonster(item.def.race);
+		}
+	},
 	POKEBALL: {
 		name: 'Pokeball',
 		useFunction: function(game, item, dx, dy){

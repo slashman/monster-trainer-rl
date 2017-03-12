@@ -44,6 +44,7 @@ module.exports = {
 		spAttack: 60,
 		spDefense: 50,
 		speed: 65,
+		pickupDescription: "the fire lizard pokemon",
 		skills: [
 			{
 				skill: Skills.SCRATCH,
@@ -59,6 +60,57 @@ module.exports = {
 			}
 		]
 	},
+	BULBASAUR: {
+		name: "Bulbasaur",
+		tile: new ut.Tile('b', 0, 128, 0),
+		hp: 20,
+		attack: 52,
+		defense: 43,
+		spAttack: 60,
+		spDefense: 50,
+		speed: 65,
+		pickupDescription: "the grass seed pokemon",
+		skills: [
+			{
+				skill: Skills.SCRATCH,
+				level: 1
+			},
+			{
+				skill: Skills.GROWL,
+				level: 1
+			},
+			{
+				skill: Skills.EMBER,
+				level: 9
+			}
+		]
+	},
+	SQUIRTLE: {
+		name: "Squirtle",
+		tile: new ut.Tile('s', 83, 255, 255),
+		hp: 20,
+		attack: 52,
+		defense: 43,
+		spAttack: 60,
+		spDefense: 50,
+		speed: 65,
+		pickupDescription: "the water turtle pokemon",
+		skills: [
+			{
+				skill: Skills.SCRATCH,
+				level: 1
+			},
+			{
+				skill: Skills.GROWL,
+				level: 1
+			},
+			{
+				skill: Skills.EMBER,
+				level: 9
+			}
+		]
+	},
+
 	ONYX: {
 		name: "Onyx",
 		tile: new ut.Tile('O', 128, 128, 128),
@@ -164,6 +216,7 @@ module.exports = {
 		spAttack: 60,
 		spDefense: 50,
 		speed: 65,
+		pickupDescription: "the electric rat pokemon",
 		skills: [
 			{
 				skill: Skills.SCRATCH,

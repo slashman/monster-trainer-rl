@@ -179,7 +179,8 @@ module.exports = {
 			);
 			metadata.features.push(
 				{ // Oak's Lab
-					type: 'lab'
+					type: 'lab',
+					monsters: this.masterPlans.startingMonsters
 				}
 			);
 			metadata.features.push(

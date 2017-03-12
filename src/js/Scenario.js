@@ -9,7 +9,7 @@ module.exports = {
 	start: function(game){
 		game.player.hp = new Stat(40);
 		game.player.money = 1000;
-		var charmander = new Being(game, false, Races.CHARMANDER, 16);
+		/*var charmander = new Being(game, false, Races.CHARMANDER, 16);
 		game.player.addMonster(charmander);
 		charmander = new Being(game, false, Races.RATTATA, 2);
 		game.player.addMonster(charmander);
@@ -18,8 +18,8 @@ module.exports = {
 		charmander = new Being(game, false, Races.PIDGEY, 4);
 		game.player.addMonster(charmander);
 		charmander = new Being(game, false, Races.CHARMANDER, 2);
-		game.player.addMonster(charmander);
-
+		game.player.addMonster(charmander);*/
+		
 		game.player.addItem(new Item(Items.POKEBALL));
 		game.player.addItem(new Item(Items.POKEBALL));
 		game.player.addItem(new Item(Items.GREATBALL));

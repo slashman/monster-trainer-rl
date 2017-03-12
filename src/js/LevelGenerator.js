@@ -148,7 +148,7 @@ module.exports = {
 				this.fillMyHouse(x,y,w,h);
 				break;
 			case 'lab':
-				this.fillLab(x,y,w,h);
+				this.fillLab(x,y,w,h, feature.monsters);
 				break;
 			case 'house':
 				this.fillHouse(x,y,w,h);
@@ -196,8 +196,29 @@ module.exports = {
 		}
 		this.level.map[xd][yd] = Tiles.FLOOR;
 	},
-	fillLab: function(x, y, w, h){
+	fillLab: function(x, y, w, h, monsters){
 		this.fillHouse(x,y,w,h);
+		monsters.forEach(function(monster){
+			while (true){
+				var xx = Random.n(x+1, x + w -2);
+				var yy = Random.n(y+1, y + h -2);
+				if (!this.level.getBeing(xx, yy) && !this.level.getItem(xx, yy)){
+					break;
+				}
+			}
+			this.level.addItem(new Item(monster), xx, yy);
+		}, this);
+		while (true){
+			var xx = Random.n(x+1, x + w -2);
+			var yy = Random.n(y+1, y + h -2);
+			if (!this.level.getItem(xx, yy)){
+				break;
+			}
+		}
+		var proffessor = new Being(this.level.game, this.level, NPCRaces.PROFFESSOR);
+		this.level.addBeing(proffessor, xx, yy);
+		proffessor.isTrainer = true;
+		proffessor.intent = 'STILL';
 	},
 	fillMyHouse: function(x, y, w, h){
 		this.fillHouse(x,y,w,h);
