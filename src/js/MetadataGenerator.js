@@ -15,6 +15,15 @@ module.exports = {
 		this.currentTownId = 0;
 		this.currentGymId = 0;
 		this.masterPlans = MasterPlans;
+		this.supermap = {
+			x: 0,
+			y: 0,
+			minx: 0,
+			miny: 0,
+			maxx: 0,
+			maxy: 0,
+			map: []
+		};
 
 		if (Object.keys(this.masterPlans.gymStereotypes).length < this.masterPlans.cities){
 			throw "Not enough gym stereotypes";
@@ -33,17 +42,69 @@ module.exports = {
 				this.remainingCities--;
 			}
 		}
+		this.showSupermap();
 		return this.metadata;
+	},
+	showSupermap: function(){
+		// Normalize
+		for (var y = this.supermap.miny; y <= this.supermap.maxy; y++){
+			var str = "";
+			for (var x = this.supermap.minx; x <= this.supermap.maxx; x++){
+				if (this.supermap.map[x] && this.supermap.map[x][y]){
+					str += (this.supermap.map[x][y]+"        ").substring(0,8);
+				} else {
+					str += "        ";
+				}
+			}
+			console.log((y-this.supermap.miny)+":"+str);
+		}
+		console.log("---------");
+	},
+	addToSuperMap: function(id){
+		if (!this.supermap.map[this.supermap.x]){
+			this.supermap.map[this.supermap.x] = [];
+		}
+		this.supermap.map[this.supermap.x][this.supermap.y] = id;
+		if (this.supermap.x < this.supermap.minx){
+			this.supermap.minx = this.supermap.x;
+		}
+		if (this.supermap.y < this.supermap.miny){
+			this.supermap.miny = this.supermap.y;
+		}
+		if (this.supermap.x > this.supermap.maxx){
+			this.supermap.maxx = this.supermap.x;
+		}
+		if (this.supermap.y > this.supermap.maxy){
+			this.supermap.maxy = this.supermap.y;
+		}
+	},
+	isClear: function(x, y, dir){
+		return !(this.supermap.map[x+dir.x] && this.supermap.map[x+dir.x][y+dir.y]) &&
+			   !(this.supermap.map[x+dir.x*2] && this.supermap.map[x+dir.x*2][y+dir.y*2])
 	},
 	placeTown: function(specs){
 		if (this.exits.length === 0){
 			// First town
+			this.supermap.x = 0;
+			this.supermap.y = 0;
 			var townId = this.createTown(specs);
 			this.metadata._startingLevelId = townId;
+			this.addToSuperMap(townId);
+			
 		} else {
-			var exit = Random.from(this.exits);
+			while (true){
+				var exit = Random.from(this.exits);
+				var dx = Direction.dxMap[exit.direction];
+				if (this.isClear(exit.x, exit.y, dx)){
+					break;
+				}
+			}
+
 			this.exits.splice(this.exits.indexOf(exit), 1);
-			var dx = Direction.dxMap[exit.direction];
+
+			this.supermap.x = exit.x;
+			this.supermap.y = exit.y;
+
 			var currentMetadata = this.metadata[exit.fromId];
 			this.currentRouteId++;
 			var routeId = "ROUTE_"+this.currentRouteId;
@@ -52,6 +113,10 @@ module.exports = {
 				toId: routeId
 			});
 			var orientation = dx.x === 0 ? "VERTICAL" : "HORIZONTAL";
+			this.supermap.x += dx.x;
+			this.supermap.y += dx.y;
+			this.addToSuperMap(routeId);
+
 			var routeStereotype = Random.from(this.masterPlans.routeStereotypes, true);
 
 			this.metadata[routeId] = {
@@ -76,11 +141,14 @@ module.exports = {
 					weight: spec.weight
 				}
 			}, this);
+			this.supermap.x += dx.x;
+			this.supermap.y += dx.y;
 			var townId = this.createTown(specs, Direction.opposite[exit.direction], routeId);
 			this.metadata[routeId].exits.push({
 				dir: exit.direction,
 				toId: townId
 			});
+			this.addToSuperMap(townId);
 		}
 	},
 	createTown: function(specs, fromDir, fromId){
@@ -152,6 +220,8 @@ module.exports = {
 				continue;
 			}
 			this.exits.push({
+				x: this.supermap.x,
+				y: this.supermap.y,
 				direction: Direction.CARDINALS[i],
 				fromId: townId
 			});
