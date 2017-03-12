@@ -44,14 +44,16 @@ Level.prototype = {
 				x = Random.n(0,this.map.length-1);
 				y = Random.n(0,this.map[0].length-1);
 			}
-			if (Distance.distance(x,y,this.game.player.x, this.game.player.y) < 20)
+			if (Distance.distance(x,y,this.game.player.x, this.game.player.y) < 12){
+				i--;
 				continue;
-			var race = Random.fromWeighted(this.wildMonsters).race;
-			var being = new Being(level.game, level, race);
+			}
+			var wm = Random.fromWeighted(this.wildMonsters);
+			var being = new Being(level.game, level, wm.race, wm.level);
 			level.addBeing(being, x, y);
-			if (race.aggresive){
+			if (wm.race.aggresive){
 				being.intent = 'CHASE';
-			} else if (race.trainer){
+			} else if (wm.race.trainer){
 				being.intent = 'TRAINER';
 			} else {
 				being.intent = 'STILL';

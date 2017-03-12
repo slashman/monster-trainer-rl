@@ -1,5 +1,5 @@
 var Tiles = require('./Tiles.enum');
-var Races = require('./Races.enum');
+var NPCRaces = require('./NPCRaces.enum');
 var Items = require('./Items.enum');
 var Being = require('./Being.class');
 var Item = require('./Item.class');
@@ -267,7 +267,7 @@ module.exports = {
 			}
 			itemAreaBounds.y1 = y + 3;
 		}
-		this.level.addBeing(new Being(this.level.game, this.level, Races.STORE_CLERK), cx, cy);
+		this.level.addBeing(new Being(this.level.game, this.level, NPCRaces.STORE_CLERK), cx, cy);
 		// Let's make this Nethack style lol!
 		for (var xx = itemAreaBounds.x1; xx <= itemAreaBounds.x2; xx++){
 			for (var yy = itemAreaBounds.y1; yy <= itemAreaBounds.y2; yy++){

@@ -1,4 +1,4 @@
-var Races = require('./Races.enum');
+var Races = require('./monster/Races.enum');
 var Items = require('./Items.enum');
 
 module.exports = {

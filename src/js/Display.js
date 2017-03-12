@@ -63,7 +63,7 @@ module.exports = {
 				this.term.putString((i+1)+"   "+slot.being.race.name, baseX, baseY + i*3, 255, 255, 255);
 			}
 			this.term.put(slot.being.race.tile, baseX + 2, baseY + i*3);
-			this.term.putString("  HP "+slot.being.hp.getText(), baseX, baseY + i*3 + 1, 255, 255, 255);
+			this.term.putString("  Lv"+slot.being.xpLevel+" HP "+slot.being.hp.getText(), baseX, baseY + i*3 + 1, 255, 255, 255);
 			this.term.putString(slot.onPocket ? "  In Pokeball" : "  Released", baseX, baseY + i*3 + 2, 255, 255, 255);
 		}
 		// Pokemon actions
@@ -71,28 +71,47 @@ module.exports = {
 		baseY = 8;
 		if (this.game.input.selectedMonsterSlot !== undefined && this.game.input.selectedMonsterSlot !== false){
 			var slot = this.game.player.monsterSlots[this.game.input.selectedMonsterSlot];
-			var actions = [];
+			var actions = []; //TODO: Cache this
 			if (slot.onPocket){
 				actions.push({
 					key: 'R',
 					name: 'Release'
 				});
 			} else {
-				// Get the pokemon actions
 				actions.push({
 					key: 'P',
 					name: 'Pull back'
 				});
+				for (var i = 0; i < slot.being.skills.length; i++){
+					actions.push({
+						key: this.SKILL_KEYS[i].key,
+						name: slot.being.skills[i].name
+					})
+				}
 			}
 			this.term.putString(slot.being.race.name, baseX + 2, baseY, 255, 255, 255);
 			this.term.put(slot.being.race.tile, baseX, baseY);
-			for (var i = 0; i < actions.length; i++){
+			for (var i = 0; i < actions.length && i < 4; i++){
 				this.term.putString("("+actions[i].key + ") " +actions[i].name, baseX, baseY + i + 1, 255, 255, 255);
 			}
 		} else {
 
 		}
 	},
+	SKILL_KEYS: [
+		{
+			key: "Z"
+		},
+		{
+			key: "X"
+		},
+		{
+			key: "C"
+		},
+		{
+			key: "V"
+		}
+	],
 	showInventory: function(){
 		this.inventoryBox.draw();
 		var xBase = 20;

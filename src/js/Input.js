@@ -5,6 +5,11 @@ module.exports = {
 		ut.initInput(this.onKeyDown.bind(this));
 		this.mode = 'MOVEMENT';
 		this.selectedMonsterSlot = 0;
+		this.SKILL_KEYS = {};
+		this.SKILL_KEYS[ut.KEY_Z] = 0;
+		this.SKILL_KEYS[ut.KEY_X] = 1;
+		this.SKILL_KEYS[ut.KEY_C] = 2;
+		this.SKILL_KEYS[ut.KEY_V] = 3;
 	},
 	movedir: { x: 0, y: 0 },
 	selectAvailableMonsterSlot: function(){
@@ -68,6 +73,15 @@ module.exports = {
 				}
 				return;
 			}
+			if (k === ut.KEY_Z || k === ut.KEY_X || k === ut.KEY_C || k === ut.KEY_V){
+				var slot = this.game.player.monsterSlots[this.selectedMonsterSlot];
+				if (slot && !slot.onPocket){
+					var index = this.SKILL_KEYS[k];
+					slot.being.useSkill(index);
+				}
+				return;
+			}
+
 			// Movement
 			this.movedir.x = 0;
 			this.movedir.y = 0;

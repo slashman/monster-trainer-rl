@@ -1,5 +1,5 @@
 var Display = require('./Display');
-var Races = require('./Races.enum');
+var Races = require('./monster/Races.enum');
 var Being = require('./Being.class');
 var Item = require('./Item.class');
 var Items = require('./Items.enum');
@@ -9,18 +9,17 @@ module.exports = {
 	start: function(game){
 		game.player.hp = new Stat(40);
 		game.player.money = 1000;
-		var charmander = new Being(game, false, Races.CHARMANDER);
+		var charmander = new Being(game, false, Races.CHARMANDER, 16);
 		game.player.addMonster(charmander);
-		charmander = new Being(game, false, Races.RATTATA);
+		charmander = new Being(game, false, Races.RATTATA, 2);
 		game.player.addMonster(charmander);
-		charmander = new Being(game, false, Races.RATTATA);
+		charmander = new Being(game, false, Races.RATTATA, 3);
 		game.player.addMonster(charmander);
-		charmander = new Being(game, false, Races.PIDGEY);
+		charmander = new Being(game, false, Races.PIDGEY, 4);
 		game.player.addMonster(charmander);
-		charmander = new Being(game, false, Races.CHARMANDER);
+		charmander = new Being(game, false, Races.CHARMANDER, 2);
 		game.player.addMonster(charmander);
 
-		Display.textBox.setText("You picked charmander, the fire pokemon.");
 		game.player.addItem(new Item(Items.POKEBALL));
 		game.player.addItem(new Item(Items.POKEBALL));
 		game.player.addItem(new Item(Items.GREATBALL));

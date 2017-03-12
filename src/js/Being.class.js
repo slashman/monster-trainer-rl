@@ -3,10 +3,10 @@ var Distance = require('./Distance');
 var Direction = require('./util/Direction');
 var Stat = require('./Stat.class');
 var Item = require('./Item.class');
-
+var Effects = require('./monster/Effects.enum');
 var TrainerAI = require('./ai/Trainer');
 
-function Being(game, level, race){
+function Being(game, level, race, xpLevel){
 	this.game = game;
 	this.race = race;
 	this.level = level;
@@ -14,12 +14,31 @@ function Being(game, level, race){
 	this.x = null;
 	this.y = null;
 	this.hp = new Stat(race.hp);
+	this.attack = new Stat(race.attack);
+	this.defense = new Stat(race.defense);
+	this.spAttack = new Stat(race.spAttack);
+	this.spDefense = new Stat(race.spDefense);
+	this.speed = new Stat(race.speed);
 	this.intent = 'CHASE';
 	this.isFriendly = false;
+	this.xpLevel = xpLevel;
+	if (race.skills && xpLevel){
+		this.skills = race.skills.filter(function(def){return def.level <= xpLevel;});
+		this.skills = this.skills.map(function(val){return val.skill;});
+		this.basicAttackSkill = this.skills.find(function(skill){return skill.effect === Effects.DAMAGE;});
+	}
 }
 
 Being.prototype = {
 	act: function(){
+		if (this.nextSkill){
+			if (this.validateSkill(this.nextSkill)){
+				this.nextSkill.effect(this, this.nextSkill);
+			}
+			this.nextSkill = false;
+			return;
+		}
+
 		switch (this.intent){
 			case 'RANDOM':
 				this.actRandom();
@@ -77,16 +96,10 @@ Being.prototype = {
 		this.moveTo(dx, dy);
 	},
 	tackle: function(enemy){
-		this.game.display.message("The "+this.race.name+" attacks the "+enemy.race.name+".");
-		if (enemy.intent === 'STILL'){
-			// No longer!!!
-			this.game.display.message("The "+enemy.race.name+" becomes hostile!");
-			enemy.intent = 'CHASE';
+		if (!this.basicAttackSkill || !this.validateSkill(this.basicAttackSkill)){
+			return;
 		}
-		enemy.hp.reduce(1);
-		if (enemy.hp.current <= 0){
-			enemy.die();
-		}
+		this.basicAttackSkill.effect(this, this.basicAttackSkill);
 	},
 	tacklePlayer: function(){
 		this.game.display.message("The "+this.race.name+" attacks you.");
@@ -191,6 +204,29 @@ Being.prototype = {
 			this.game.player.gymTown = false;
 		} else if (this.prizeMoney){
 
+		}
+	},
+	validateSkill: function(skill){
+		var nearestEnemy = this.getNearestEnemy();
+		if (!nearestEnemy){
+			this.game.display.message("No target!");
+			return false;
+		}
+		var distance = Distance.flatDistance(this.x, this.y, nearestEnemy.x, nearestEnemy.y);
+		if (!skill.range){
+			skill.range = 1;
+		}
+		if (distance > skill.range){
+			this.game.display.message(nearestEnemy.race.name+" is too far!");
+			return false;
+		}
+		return true;
+	},
+	useSkill: function(index){
+		if (this.skills && this.skills[index]){
+			this.nextSkill = this.skills[index];
+			this.game.display.message(this.race.name+", use "+this.skills[index].name+"!");
+			this.game.player.endTurn();
 		}
 	}
 }

@@ -1,4 +1,4 @@
-var Races = require('./Races.enum');
+var NPCRaces = require('./NPCRaces.enum');
 var Items = require('./Items.enum');
 var Direction = require('./util/Direction')
 var Random = require('./Random');
@@ -269,7 +269,7 @@ module.exports = {
 					}
 				],
 				trainer: {
-					race: Races.GYM_LEADER,
+					race: NPCRaces.GYM_LEADER,
 					monsters: gymMonsters
 				},
 				badge: gymStereotype.badge
