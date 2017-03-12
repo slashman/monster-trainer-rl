@@ -16,6 +16,22 @@ module.exports = {
 			{
 				skill: Skills.SCRATCH,
 				level: 1
+			},
+			{
+				skill: Skills.TACKLE,
+				level: 1
+			},
+			{
+				skill: Skills.TAIL_WHIP,
+				level: 1
+			},
+			{
+				skill: Skills.GROWL,
+				level: 1
+			},
+			{
+				skill: Skills.EMBER,
+				level: 2
 			}
 		],
 		xp: 66
@@ -55,6 +71,10 @@ module.exports = {
 			{
 				skill: Skills.GROWL,
 				level: 1
+			},
+			{
+				skill: Skills.TACKLE,
+				level: 9
 			},
 			{
 				skill: Skills.EMBER,

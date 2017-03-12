@@ -105,7 +105,7 @@ module.exports = {
 			this.term.putString(slot.being.race.name, baseX + 2, baseY, 255, 255, 255);
 
 		} 
-		for (var i = 0; i < actions.length && i < 4; i++){
+		for (var i = 0; i < actions.length && i < 5; i++){
 			this.term.putString("("+actions[i].key + ") " +actions[i].name, baseX, baseY + i + 4, 255, 255, 255);
 		}
 	},
@@ -146,7 +146,7 @@ module.exports = {
 		this.refresh();		
 	},
 	message: function(str){
-		this.textBox.addText(str);
+		this.textBox.addText(str+" ");
 		this.textBox.draw();
 		this.term.render();
 	}

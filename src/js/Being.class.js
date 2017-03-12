@@ -326,8 +326,22 @@ Being.prototype = {
 		if (this.xp >= this.nextLevelXP){
 			this.game.display.message(this.race.name+" levels up!");
 			this.xpLevel++;
+			this.xp = this.calculateXP(this.xpLevel);
 			this.nextLevelXP = this.calculateXP(this.xpLevel+1);
 			// Check evolution and new skills
+			var newSkill = this.race.skills.find(function(def){return def.level === this.xpLevel;}, this);
+			if (newSkill){
+				if (this.skills.length === 4){
+					// Randomly forget one ;)
+					var oldSkill = Random.from(this.skills, true);
+					this.game.display.message(this.race.name+" forgets "+oldSkill.skill.name+".");
+				} 
+				this.skills.push({
+					skill: newSkill.skill,
+					pp: new Stat(newSkill.skill.pp)
+				});
+				this.game.display.message(this.race.name+" learns "+newSkill.skill.name+".");
+			}
 		}
 	}
 }
