@@ -242,7 +242,7 @@ module.exports = {
 	releaseMonster: function(dir){
 		if (this.gymTown){
 			if (this.releasedMonster){
-				this.game.display.message("You are on a 1 on 1 duel.");
+				this.game.display.message("You are on a one on one duel.");
 				return;
 			} else {
 				this.releasedMonster = true;
@@ -309,6 +309,23 @@ module.exports = {
 				this.pickedStarter = true;
 			} else {
 				this.game.display.message(" N.");
+			}
+			this.endTurn();
+			this.game.input.mode = "MOVEMENT";
+		}.bind(this);
+	},
+	giveUpGymBattle: function(){
+		if (!this.gymTown){
+			return;
+		}
+		this.game.display.message("Do you want to give up this gym battle? [Y/N] ");
+		this.game.input.mode = "PROMPT";
+		this.game.input.promptFunction = function(confirm){
+			if (confirm){
+				this.game.display.message("Better luck next time!");
+				this.gymTown = false;
+			} else {
+				this.game.display.message("Keep fighting!");
 			}
 			this.endTurn();
 			this.game.input.mode = "MOVEMENT";

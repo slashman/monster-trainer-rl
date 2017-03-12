@@ -64,6 +64,11 @@ module.exports = {
 				}
 				return;
 			}
+			if (k === ut.KEY_G){
+				// Give up
+				this.game.player.giveUpGymBattle();
+				return;
+			}
 			if (k === ut.KEY_P){
 				// Pull back
 				var slot = this.game.player.monsterSlots[this.selectedMonsterSlot];

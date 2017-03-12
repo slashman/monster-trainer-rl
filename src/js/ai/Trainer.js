@@ -3,13 +3,20 @@ var Random = require('../Random');
 module.exports = {
 	act: function(being){
 		this.being = being;
-		// Trainers just stand there commanding their monster
 		if (being.monsters.length == 0){
 			// Defeated!
 			if (!being.gavePrize){
 				being.givePrize();
 			}
 			// Stand by
+			return;
+		}
+		if (!being.game.player.gymTown){
+			// Player gave up
+			if (being.monsterDeployed){
+				being.pullBackMonster();
+			}
+			being.healAll();
 			return;
 		}
 		if (being.monsterDeployed){

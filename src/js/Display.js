@@ -69,9 +69,15 @@ module.exports = {
 		// Pokemon actions
 		baseX = 60;
 		baseY = 8;
+		var actions = []; //TODO: Cache this
+		if (this.game.player.gymTown){
+			actions.push({
+				key: 'G',
+				name: 'Give up'
+			});
+		}
 		if (this.game.input.selectedMonsterSlot !== undefined && this.game.input.selectedMonsterSlot !== false){
 			var slot = this.game.player.monsterSlots[this.game.input.selectedMonsterSlot];
-			var actions = []; //TODO: Cache this
 			if (slot.onPocket){
 				actions.push({
 					key: 'R',
@@ -92,11 +98,9 @@ module.exports = {
 			}
 			this.term.putString(slot.being.race.name, baseX + 2, baseY, 255, 255, 255);
 			this.term.put(slot.being.race.tile, baseX, baseY);
-			for (var i = 0; i < actions.length && i < 4; i++){
-				this.term.putString("("+actions[i].key + ") " +actions[i].name, baseX, baseY + i + 1, 255, 255, 255);
-			}
-		} else {
-
+		} 
+		for (var i = 0; i < actions.length && i < 4; i++){
+			this.term.putString("("+actions[i].key + ") " +actions[i].name, baseX, baseY + i + 1, 255, 255, 255);
 		}
 	},
 	SKILL_KEYS: [

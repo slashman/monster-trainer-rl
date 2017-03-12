@@ -238,6 +238,11 @@ Being.prototype = {
 
 		}
 	},
+	healAll: function(){
+		for (var i = 0; i < this.monsters.length; i++){
+			this.monsters[i].heal();
+		}
+	},
 	validateSkill: function(skill){
 		if (skill.pp.empty()){
 			this.game.display.message(this.race.name+" has no power points!");
