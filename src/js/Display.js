@@ -77,17 +77,18 @@ module.exports = {
 					key: 'R',
 					name: 'Release'
 				});
+
 			} else {
 				actions.push({
 					key: 'P',
 					name: 'Pull back'
 				});
-				for (var i = 0; i < slot.being.skills.length; i++){
-					actions.push({
-						key: this.SKILL_KEYS[i].key,
-						name: slot.being.skills[i].name
-					})
-				}
+			}
+			for (var i = 0; i < slot.being.skills.length; i++){
+				actions.push({
+					key: slot.onPocket ? '*' : this.SKILL_KEYS[i].key,
+					name: slot.being.skills[i].skill.name + "["+slot.being.skills[i].pp.getText()+"]"
+				})
 			}
 			this.term.putString(slot.being.race.name, baseX + 2, baseY, 255, 255, 255);
 			this.term.put(slot.being.race.tile, baseX, baseY);

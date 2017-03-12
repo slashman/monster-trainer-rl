@@ -24,8 +24,13 @@ function Being(game, level, race, xpLevel){
 	this.xpLevel = xpLevel;
 	if (race.skills && xpLevel){
 		this.skills = race.skills.filter(function(def){return def.level <= xpLevel;});
-		this.skills = this.skills.map(function(val){return val.skill;});
-		this.basicAttackSkill = this.skills.find(function(skill){return skill.effect === Effects.DAMAGE;});
+		this.skills = this.skills.map(function(val){
+			return {
+				skill: val.skill,
+				pp: new Stat(val.skill.pp)
+			};
+		});
+		this.basicAttackSkill = this.skills.find(function(skill){return skill.skill.effect === Effects.DAMAGE;});
 	}
 }
 
@@ -33,7 +38,8 @@ Being.prototype = {
 	act: function(){
 		if (this.nextSkill){
 			if (this.validateSkill(this.nextSkill)){
-				this.nextSkill.effect(this, this.nextSkill);
+				this.nextSkill.pp.reduce(1);
+				this.nextSkill.skill.effect(this, this.nextSkill.skill);
 			}
 			this.nextSkill = false;
 			return;
@@ -96,10 +102,36 @@ Being.prototype = {
 		this.moveTo(dx, dy);
 	},
 	tackle: function(enemy){
-		if (!this.basicAttackSkill || !this.validateSkill(this.basicAttackSkill)){
+		if (!this.basicAttackSkill){
 			return;
 		}
-		this.basicAttackSkill.effect(this, this.basicAttackSkill);
+		if (this.basicAttackSkill.pp.empty()){
+			// Try to get another basic attack skill
+			this.basicAttackSkill = this.skills.find(
+				function(skill){
+					return skill.skill.effect === Effects.DAMAGE && !skill.pp.empty();
+				}
+			);
+			if (!this.basicAttackSkill){
+				// Try to use any skill
+				this.basicAttackSkill = this.skills.find(
+					function(skill){
+						return !skill.pp.empty();
+					}
+				);
+			}
+
+			if (!this.basicAttackSkill){
+				// Struggle it is then
+				this.game.display.message("The "+this.race.name+" can't attack!");
+				return;
+			}
+		}
+		if (!this.validateSkill(this.basicAttackSkill)){
+			return;
+		}
+		this.basicAttackSkill.pp.reduce(1);
+		this.basicAttackSkill.skill.effect(this, this.basicAttackSkill.skill);
 	},
 	tacklePlayer: function(){
 		this.game.display.message("The "+this.race.name+" attacks you.");
@@ -207,16 +239,20 @@ Being.prototype = {
 		}
 	},
 	validateSkill: function(skill){
+		if (skill.pp.empty()){
+			this.game.display.message(this.race.name+" has no power points!");
+			return false;
+		}
 		var nearestEnemy = this.getNearestEnemy();
 		if (!nearestEnemy){
 			this.game.display.message("No target!");
 			return false;
 		}
 		var distance = Distance.flatDistance(this.x, this.y, nearestEnemy.x, nearestEnemy.y);
-		if (!skill.range){
-			skill.range = 1;
+		if (!skill.skill.range){
+			skill.skill.range = 1;
 		}
-		if (distance > skill.range){
+		if (distance > skill.skill.range){
 			this.game.display.message(nearestEnemy.race.name+" is too far!");
 			return false;
 		}
@@ -225,7 +261,7 @@ Being.prototype = {
 	useSkill: function(index){
 		if (this.skills && this.skills[index]){
 			this.nextSkill = this.skills[index];
-			this.game.display.message(this.race.name+", use "+this.skills[index].name+"!");
+			this.game.display.message(this.race.name+", use "+this.skills[index].skill.name+"!");
 			this.game.player.endTurn();
 		}
 	}
