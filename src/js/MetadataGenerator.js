@@ -207,6 +207,11 @@ module.exports = {
 					items: this.masterPlans.items.filter(function(itemDef){return itemDef.tier <= maxTier;})
 				}
 			);
+			metadata.features.push(
+				{
+					type: 'hospital'
+				}
+			);
 		}
 		if (Random.chance(10)){
 			metadata.features.push(

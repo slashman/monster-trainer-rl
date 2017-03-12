@@ -264,6 +264,10 @@ Being.prototype = {
 			this.game.display.message(this.race.name+", use "+this.skills[index].skill.name+"!");
 			this.game.player.endTurn();
 		}
+	},
+	heal: function(){
+		this.hp.replenish();
+		this.skills.forEach(function(skill){skill.pp.replenish();});
 	}
 }
 

@@ -84,6 +84,14 @@ Level.prototype = {
 		this.beings[being.x][being.y] = false;
 		this.beingsList.splice(this.beingsList.indexOf(being), 1);
 	},
+	getCell: function(x, y){
+		try {
+			return this.map[x][y];
+		} catch (e){
+			// Catch OOB
+			return false;
+		}
+	},
 	canWalkTo: function(x, y){
 		try {
 			if (this.map[x][y].solid){

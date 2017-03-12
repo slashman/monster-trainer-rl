@@ -44,6 +44,17 @@ module.exports = {
 	},
 	tryMove: function(dir){
 		if (!this.game.world.level.canWalkTo(this.x+dir.x, this.y+dir.y)){
+			// Check for counters
+			var tile = this.game.world.level.getCell(this.x+dir.x, this.y+dir.y);
+			if (tile && tile.isCounter){
+				// Check for NPC further
+				var npc = this.game.world.level.getBeing(this.x+dir.x*2, this.y+dir.y*2);
+				if (npc && npc.race.interact){
+					this.game.input.inputEnabled = true;
+					npc.race.interact(this);
+					return;
+				}
+			}
 			this.game.input.inputEnabled = true;
 			return;
 		}
@@ -254,6 +265,14 @@ module.exports = {
 			if (slot && !slot.onPocket){
 				slot.onPocket = true;
 				this.game.world.level.removeBeing(slot.being);
+			}
+		}
+	},
+	healAll: function(){
+		for (var i = 0; i < this.monsterSlots.length; i++){
+			var slot = this.monsterSlots[i];
+			if (slot && slot.being){
+				slot.being.heal();
 			}
 		}
 	}

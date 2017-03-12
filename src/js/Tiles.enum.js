@@ -55,11 +55,13 @@ module.exports = {
 	H_COUNTER: {
 		tile: new ut.Tile('=', 255, 255, 255),
 		darkTile: new ut.Tile('=', 128, 128, 128),
+		isCounter: true,
 		solid: true
 	},
 	V_COUNTER: {
 		tile: new ut.Tile('|', 255, 255, 255),
 		darkTile: new ut.Tile('|', 128, 128, 128),
+		isCounter: true,
 		solid: true
 	},
 	GYM_ENTRANCE: {

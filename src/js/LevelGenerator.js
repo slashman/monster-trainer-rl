@@ -159,6 +159,9 @@ module.exports = {
 			case 'mart':
 				this.fillMart(x,y,w,h, feature.items);
 				break;
+			case 'hospital':
+				this.fillHospital(x,y,w,h);
+				break;
 			case 'gym':
 				this.fillGym(x,y,w,h, feature);
 				break;
@@ -206,7 +209,7 @@ module.exports = {
 			}
 		}
 	},
-	fillMart: function(x, y, w, h, items){
+	_fillWithCounter: function(x, y, w, h, clerk){
 		for (var xx = x; xx < x + w; xx++){
 			for (var yy = y; yy < y + h; yy++){
 				if (xx === x || xx === x + w - 1 || yy === y || yy === y + h - 1){
@@ -267,7 +270,14 @@ module.exports = {
 			}
 			itemAreaBounds.y1 = y + 3;
 		}
-		this.level.addBeing(new Being(this.level.game, this.level, NPCRaces.STORE_CLERK), cx, cy);
+		this.level.addBeing(new Being(this.level.game, this.level, clerk), cx, cy);
+		return itemAreaBounds;
+	},
+	fillHospital: function(x, y, w, h){
+		this._fillWithCounter(x, y, w, h, NPCRaces.NURSE);
+	},
+	fillMart: function(x, y, w, h, items){
+		var itemAreaBounds = this._fillWithCounter(x, y, w, h, NPCRaces.STORE_CLERK)
 		// Let's make this Nethack style lol!
 		for (var xx = itemAreaBounds.x1; xx <= itemAreaBounds.x2; xx++){
 			for (var yy = itemAreaBounds.y1; yy <= itemAreaBounds.y2; yy++){
