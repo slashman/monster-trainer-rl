@@ -342,7 +342,16 @@ Being.prototype = {
 				});
 				this.game.display.message(this.race.name+" learns "+newSkill.skill.name+".");
 			}
+			if (this.race.evolution && this.race.evolution.minLevel === this.xpLevel){
+				var newRace = this.race.evolution.race;
+				this.game.display.message(this.race.name+" evolves into "+newRace.name+"!");
+				this.setRace(newRace);
+			}
 		}
+	},
+	setRace: function(race){
+		this.race = race;
+		this.tile = race.tile;
 	}
 }
 

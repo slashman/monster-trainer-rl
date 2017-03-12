@@ -1,6 +1,6 @@
 var Skills = require('./Skills.enum');
 
-module.exports = {
+var Races = {
 	RATTATA: {
 		name: "Rattata",
 		tile: new ut.Tile('r', 128, 0, 128),
@@ -343,4 +343,11 @@ module.exports = {
 		],
 		xp: 66
 	}
-}
+};
+
+Races.RATTATA.evolution = {
+	minLevel: 2,
+	race: Races.PIDGEY
+};
+
+module.exports = Races;
