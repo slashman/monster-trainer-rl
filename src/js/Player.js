@@ -2,6 +2,7 @@ var Tiles = require('./Tiles.enum');
 var Being = require('./Being.class');
 
 module.exports = {
+	badgesCount: 0,
 	MAX_SIGHT_RANGE: 10,
 	x: 20,
 	y: 20,

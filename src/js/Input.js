@@ -23,7 +23,12 @@ module.exports = {
 	onKeyDown: function(k){
 		if (!this.inputEnabled)
 			return;
-		if (this.mode === "PROMPT"){
+		if (this.mode === "SCENE"){
+			if (k === ut.KEY_ENTER){
+				this.game.display.hideScene();
+				this.mode = "MOVEMENT";
+			}
+		} else if (this.mode === "PROMPT"){
 			if (k === ut.KEY_Y){
 				this.promptFunction(true);
 			} else if (k === ut.KEY_N){

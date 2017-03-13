@@ -10,6 +10,7 @@ module.exports = {
 		this.eng = new ut.Engine(this.term, this.getDisplayedTile.bind(this), 80, 25);
 		this.textBox = new TextBox(this.term, 2, 80, {x:0, y:0});
 		this.inventoryBox = new Box(this.term, 15, 40, {x:19, y:4});
+		this.sceneBox = new TextBox(this.term, 10, 45, {x:20, y:3});
 	},
 	getDisplayedTile: function(x,y){
 		var level = this.game.world.level;
@@ -43,6 +44,9 @@ module.exports = {
 		this.textBox.draw();
 		this.updateStatus();
 		this.term.render();
+		if (this.currentScene){
+			this.showScene(this.currentScene);
+		}
 	},
 	updateStatus: function(){
 		this.term.putString("HP "+this.game.player.hp.getText(), 2, 3, 255, 255, 255);
@@ -67,7 +71,7 @@ module.exports = {
 		}
 		// Pokemon actions
 		baseX = 60;
-		baseY = 8;
+		baseY = 3;
 		var actions = []; //TODO: Cache this
 		if (this.game.player.gymTown){
 			actions.push({
@@ -99,14 +103,17 @@ module.exports = {
 			this.term.put(slot.being.race.tile, baseX, baseY);
 			this.term.putString("HP "+slot.being.hp.getText()+" Lv"+slot.being.xpLevel, baseX, baseY + 1, 255, 255, 255);
 			this.term.putString("("+slot.being.xp+"/"+slot.being.nextLevelXP+")", baseX, baseY + 2, 255, 255, 255);
-
+			this.term.putString("ATK "+slot.being.attack.current, baseX, baseY + 3, 255, 255, 255);
+			this.term.putString("DEF "+slot.being.defense.current, baseX+8, baseY + 3, 255, 255, 255);
+			this.term.putString("SPA "+slot.being.spAttack.current, baseX, baseY + 4, 255, 255, 255);
+			this.term.putString("SPD "+slot.being.spDefense.current, baseX+8, baseY + 4, 255, 255, 255);
 
 			this.term.putString(slot.being.race.name, baseX + 2, baseY, 255, 255, 255);
 			this.term.putString(slot.being.race.name, baseX + 2, baseY, 255, 255, 255);
 
 		} 
 		for (var i = 0; i < actions.length && i < 5; i++){
-			this.term.putString("("+actions[i].key + ") " +actions[i].name, baseX, baseY + i + 4, 255, 255, 255);
+			this.term.putString("("+actions[i].key + ") " +actions[i].name, baseX, baseY + i + 6, 255, 255, 255);
 		}
 	},
 	SKILL_KEYS: [
@@ -149,5 +156,21 @@ module.exports = {
 		this.textBox.addText(str+" ");
 		this.textBox.draw();
 		this.term.render();
+	},
+	SCENES: {
+		WELCOME: "Welcome to PokemonRL! Find the Proffessor's Lab to get your starter Pokemon",
+		VICTORY: "Congratulations, you have become a Pokemon Master!"
+	},
+	showScene: function(id){
+		this.currentScene = id;
+		this.sceneBox.setText(this.SCENES[id]);
+		this.game.input.mode = 'SCENE';
+		this.sceneBox.draw();
+		this.term.putString("Press Enter to continue...", 30, 11, 255, 255, 255);
+		this.term.render();
+	},
+	hideScene: function(){
+		this.currentScene = false;
+		this.refresh();		
 	}
 }

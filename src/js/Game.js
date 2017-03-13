@@ -17,6 +17,7 @@ var Game = {
 		Scenario.start(this);
 		this.player.updateFOV();
 		Display.refresh();
+		Display.showScene("WELCOME");
 	}
 }
 

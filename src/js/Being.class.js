@@ -13,11 +13,13 @@ function Being(game, level, race, xpLevel){
 	this.tile = race.tile;
 	this.x = null;
 	this.y = null;
-	this.hp = new Stat(race.hp);
-	this.attack = new Stat(race.attack);
-	this.defense = new Stat(race.defense);
-	this.spAttack = new Stat(race.spAttack);
-	this.spDefense = new Stat(race.spDefense);
+	
+	this.hp = new Stat(Math.floor(110 + (race.hp/50) * xpLevel));
+	this.attack = new Stat(Math.floor(race.attack + (race.attack/50) * xpLevel));
+	this.defense = new Stat(Math.floor(race.defense + (race.defense/50) * xpLevel));
+	this.spAttack = new Stat(Math.floor(race.spAttack + (race.spAttack/50) * xpLevel));
+	this.spDefense = new Stat(Math.floor(race.spDefense + (race.spDefense/50) * xpLevel));
+
 	this.speed = new Stat(race.speed);
 	this.intent = 'CHASE';
 	this.isFriendly = false;
@@ -35,6 +37,9 @@ function Being(game, level, race, xpLevel){
 				pp: new Stat(val.skill.pp)
 			};
 		});
+		while (this.skills.length > 4){
+			Random.from(this.skills, true);
+		}
 		this.basicAttackSkill = this.skills.find(function(skill){return skill.skill.effect === Effects.DAMAGE;});
 	}
 }
@@ -239,6 +244,10 @@ Being.prototype = {
 			this.gavePrize = true;
 			this.game.player.gymTown.gymComplete = true;
 			this.game.player.gymTown = false;
+			this.game.player.badgesCount++;
+			if (this.game.player.badgesCount === 8){
+				this.game.display.showScene("VICTORY");
+			}
 		} else if (this.prizeMoney){
 
 		}
