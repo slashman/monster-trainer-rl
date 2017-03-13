@@ -45,7 +45,6 @@ Level.prototype = {
 				y = Random.n(0,this.map[0].length-1);
 			}
 			if (Distance.distance(x,y,this.game.player.x, this.game.player.y) < 12){
-				i--;
 				continue;
 			}
 			var wm = Random.fromWeighted(this.wildMonsters);
