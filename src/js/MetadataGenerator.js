@@ -3,6 +3,7 @@ var Items = require('./Items.enum');
 var Direction = require('./util/Direction')
 var Random = require('./Random');
 var MasterPlans = require('./MasterPlans');
+var TownNameGen = require('./procgen/TownNames');
 
 module.exports = {
 	plansComplete: function(){
@@ -155,7 +156,7 @@ module.exports = {
 		// Creates a town and puts this.exits
 		this.currentTownId++;
 		var townId = "TOWN_"+this.currentTownId;
-		var townName = townId;
+		var townName = TownNameGen.generateName()+(specs.hasGym?" City":" Town");;
 		var metadata = {
 			type: 'TOWN',
 			name: townName,
