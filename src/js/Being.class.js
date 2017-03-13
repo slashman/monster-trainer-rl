@@ -337,6 +337,14 @@ Being.prototype = {
 			this.xpLevel++;
 			this.xp = this.calculateXP(this.xpLevel);
 			this.nextLevelXP = this.calculateXP(this.xpLevel+1);
+			// Increase stats
+			var newMaxHP = Math.floor(110 + (this.race.hp/50) * xpLevel);
+			this.hp.max = newMaxHP;
+			this.attack = new Stat(Math.floor(this.race.attack + (this.race.attack/50) * this.xpLevel));
+			this.defense = new Stat(Math.floor(this.race.defense + (this.race.defense/50) * this.xpLevel));
+			this.spAttack = new Stat(Math.floor(this.race.spAttack + (this.race.spAttack/50) * this.xpLevel));
+			this.spDefense = new Stat(Math.floor(this.race.spDefense + (this.race.spDefense/50) * this.xpLevel));
+
 			// Check evolution and new skills
 			var newSkill = this.race.skills.find(function(def){return def.level === this.xpLevel;}, this);
 			if (newSkill){
