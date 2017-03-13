@@ -297,6 +297,7 @@ module.exports = {
 				slot.being.heal();
 			}
 		}
+		this.hp.replenish();
 	},
 	getMonster: function(race){
 		if (this.getAvailableSlotNumber() === false){
@@ -312,7 +313,7 @@ module.exports = {
 		this.game.input.mode = "PROMPT";
 		this.game.input.promptFunction = function(confirm){
 			if (confirm){
-				var monster = new Being(this.game, false, race, 1);
+				var monster = new Being(this.game, false, race, 3);
 				this.addMonster(monster);
 				this.game.display.message(race.name+" joins!");
 				this.game.world.level.removeItem(this.x, this.y);
