@@ -9,7 +9,7 @@ module.exports = {
 		this.term = new ut.Viewport(document.getElementById("game"), 80, 25);
 		this.eng = new ut.Engine(this.term, this.getDisplayedTile.bind(this), 80, 25);
 		this.textBox = new TextBox(this.term, 2, 80, {x:0, y:0});
-		this.inventoryBox = new Box(this.term, 15, 40, {x:19, y:4});
+		this.inventoryBox = new Box(this.term, 25, 40, {x:19, y:0});
 		this.sceneBox = new TextBox(this.term, 10, 45, {x:20, y:3});
 	},
 	getDisplayedTile: function(x,y){
@@ -133,7 +133,7 @@ module.exports = {
 	showInventory: function(){
 		this.inventoryBox.draw();
 		var xBase = 20;
-		var yBase = 5;
+		var yBase = 0;
 		this.term.putString("Inventory", xBase, yBase, 255, 0, 0);
 		for (var i = 0; i < this.game.player.items.length; i++){
 			var item = this.game.player.items[i];

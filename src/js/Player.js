@@ -179,7 +179,13 @@ module.exports = {
 			xx += dx; yy += dy;
 		}
 	},
+	canPick: function(){
+		return this.items.length < 24;
+	},
 	addItem: function(item){
+		if (this.items.length === 24){
+			return;
+		}
 		this.items.push(item);
 		this.items.sort(this.itemSorter);
 	},
@@ -204,6 +210,8 @@ module.exports = {
 				this.game.input.promptFunction = this.confirmBuy.bind(this);
 			} else if (item.def.type.pickupFunction){
 				item.def.type.pickupFunction(this.game, item);
+			} else if (!this.canPick()){
+				this.game.display.message("You can't pickup the "+item.def.name);
 			} else {
 				this.game.display.message("You pickup the "+item.def.name);
 				this.game.world.level.removeItem(this.x, this.y);
@@ -213,13 +221,15 @@ module.exports = {
 	},
 	confirmBuy: function(confirm){
 		if (confirm){
-			if (this.money >= this.buyingItem.def.cost){
+			if (!this.canPick())
+				this.game.display.message("You can't pickup the "+this.buyingItem.def.name);
+			else if (this.money >= this.buyingItem.def.cost){
 				this.money -= this.buyingItem.def.cost;
 				this.game.display.message("Thank you!");
 				this.game.world.level.removeItem(this.x, this.y);
 				this.addItem(this.buyingItem);
 			} else {
-				this.game.display.message("Sorry, you can't affort it.");
+				this.game.display.message("Sorry, you can't afford it.");
 			}
 		} else {
 			this.game.display.message("Alright");
