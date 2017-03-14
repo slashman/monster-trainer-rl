@@ -14,24 +14,12 @@ var Races = {
 
 		skills: [
 			{
-				skill: Skills.SCRATCH,
-				level: 1
-			},
-			{
 				skill: Skills.TACKLE,
 				level: 1
 			},
 			{
 				skill: Skills.TAIL_WHIP,
 				level: 1
-			},
-			{
-				skill: Skills.GROWL,
-				level: 1
-			},
-			{
-				skill: Skills.EMBER,
-				level: 2
 			}
 		],
 		xp: 66
@@ -73,10 +61,6 @@ var Races = {
 				level: 1
 			},
 			{
-				skill: Skills.TACKLE,
-				level: 9
-			},
-			{
 				skill: Skills.EMBER,
 				level: 9
 			}
@@ -95,16 +79,12 @@ var Races = {
 		pickupDescription: "the grass seed pokemon",
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			},
 			{
 				skill: Skills.GROWL,
 				level: 1
-			},
-			{
-				skill: Skills.EMBER,
-				level: 9
 			}
 		],
 		xp: 66
@@ -121,23 +101,19 @@ var Races = {
 		pickupDescription: "the water turtle pokemon",
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			},
 			{
-				skill: Skills.GROWL,
+				skill: Skills.TAIL_WHIP,
 				level: 1
-			},
-			{
-				skill: Skills.EMBER,
-				level: 9
 			}
 		],
 		xp: 66
 	},
 
 	ONYX: {
-		name: "Onyx",
+		name: "Onix",
 		tile: new ut.Tile('O', 128, 128, 128),
 		hp: 30,
 		attack: 52,
@@ -147,7 +123,7 @@ var Races = {
 		speed: 65,
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
@@ -164,7 +140,7 @@ var Races = {
 		speed: 65,
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
@@ -181,7 +157,7 @@ var Races = {
 		speed: 65,
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
@@ -198,7 +174,7 @@ var Races = {
 		speed: 65,
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
@@ -215,7 +191,7 @@ var Races = {
 		speed: 65,
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
@@ -232,7 +208,7 @@ var Races = {
 		speed: 65,
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
@@ -250,7 +226,7 @@ var Races = {
 		pickupDescription: "the electric rat pokemon",
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
@@ -267,7 +243,7 @@ var Races = {
 		speed: 65,
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
@@ -286,7 +262,7 @@ var Races = {
 		speed: 65,
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
@@ -303,7 +279,7 @@ var Races = {
 		speed: 65,
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
@@ -320,7 +296,7 @@ var Races = {
 		speed: 65,
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
@@ -337,7 +313,7 @@ var Races = {
 		speed: 65,
 		skills: [
 			{
-				skill: Skills.SCRATCH,
+				skill: Skills.TACKLE,
 				level: 1
 			}
 		],
