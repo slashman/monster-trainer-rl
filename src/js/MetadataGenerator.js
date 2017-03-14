@@ -279,6 +279,7 @@ module.exports = {
 					race: NPCRaces.GYM_LEADER,
 					monsters: gymMonsters
 				},
+				gymNumber: this.currentGymId,
 				badge: gymStereotype.badge
 			}
 			this.metadata[gymId] = gymMetadata;

@@ -256,6 +256,7 @@ Being.prototype = {
 			this.game.player.gymTown.gymComplete = true;
 			this.game.player.gymTown = false;
 			this.game.player.badgesCount++;
+			this.game.player.money += this.prizeMoney;
 			if (this.game.player.badgesCount === 8){
 				this.game.display.showScene("VICTORY");
 			}
