@@ -19,35 +19,35 @@ module.exports = {
 		type: ItemType.POKEBALL,
 		name: 'Ultra Ball',
 		tile: new ut.Tile('*', 0, 255, 0),
-		catchBoost: 10,
-		cost: 200
+		catchBoost: 20,
+		cost: 500
 	},
 	POTION: {
 		type: ItemType.POTION,
 		name: 'Potion',
 		tile: new ut.Tile('!', 255, 255, 0),
-		points: 10,
+		points: 50,
 		cost: 50
 	},
 	SUPER_POTION: {
 		type: ItemType.POTION,
 		name: 'Super Potion',
 		tile: new ut.Tile('!', 0, 255, 255),
-		points: 20,
+		points: 150,
 		cost: 100
 	},
 	HYPER_POTION: {
 		type: ItemType.POTION,
 		name: 'Hyper Potion',
 		tile: new ut.Tile('!', 0, 255, 255),
-		points: 20,
+		points: 400,
 		cost: 100
 	},
 	MAX_POTION: {
 		type: ItemType.POTION,
 		name: 'Max Potion',
 		tile: new ut.Tile('!', 0, 255, 255),
-		points: 20,
+		points: 1000,
 		cost: 100
 	},
 
