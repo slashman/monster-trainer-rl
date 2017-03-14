@@ -13,13 +13,23 @@ function Being(game, level, race, xpLevel){
 	this.tile = race.tile;
 	this.x = null;
 	this.y = null;
-	
-	this.hp = new Stat(Math.floor(110 + (race.hp/50) * xpLevel));
-	this.attack = new Stat(Math.floor(race.attack + (race.attack/50) * xpLevel));
-	this.defense = new Stat(Math.floor(race.defense + (race.defense/50) * xpLevel));
-	this.spAttack = new Stat(Math.floor(race.spAttack + (race.spAttack/50) * xpLevel));
-	this.spDefense = new Stat(Math.floor(race.spDefense + (race.spDefense/50) * xpLevel));
 
+	this.iv = {
+		hp: 0,
+		attack: 0,
+		defense: 0,
+		spAttack: 0,
+		spDefense: 0 
+	};
+
+	this.ev = {
+		hp: 1,
+		attack: 1,
+		defense: 1,
+		spAttack: 1,
+		spDefense: 1 
+	}
+	
 	this.speed = new Stat(race.speed);
 	this.intent = 'CHASE';
 	this.isFriendly = false;
@@ -28,6 +38,7 @@ function Being(game, level, race, xpLevel){
 	if (xpLevel){
 		this.xp = this.calculateXP(xpLevel);
 		this.nextLevelXP = this.calculateXP(xpLevel+1);
+		this.calculateStats();
 	}
 	if (race.skills && xpLevel){
 		this.skills = race.skills.filter(function(def){return def.level <= xpLevel;});
@@ -338,12 +349,7 @@ Being.prototype = {
 			this.xp = this.calculateXP(this.xpLevel);
 			this.nextLevelXP = this.calculateXP(this.xpLevel+1);
 			// Increase stats
-			var newMaxHP = Math.floor(110 + (this.race.hp/50) * xpLevel);
-			this.hp.max = newMaxHP;
-			this.attack = new Stat(Math.floor(this.race.attack + (this.race.attack/50) * this.xpLevel));
-			this.defense = new Stat(Math.floor(this.race.defense + (this.race.defense/50) * this.xpLevel));
-			this.spAttack = new Stat(Math.floor(this.race.spAttack + (this.race.spAttack/50) * this.xpLevel));
-			this.spDefense = new Stat(Math.floor(this.race.spDefense + (this.race.spDefense/50) * this.xpLevel));
+			this.calculateStats();
 
 			// Check evolution and new skills
 			var newSkill = this.race.skills.find(function(def){return def.level === this.xpLevel;}, this);
@@ -369,6 +375,38 @@ Being.prototype = {
 	setRace: function(race){
 		this.race = race;
 		this.tile = race.tile;
+	},
+	_calculateStatBase: function(stat){
+		var base = this.race[stat];
+		var iv = this.iv[stat];
+		var ev = this.ev[stat];
+		//return Math.floor((Math.floor((base + iv) * 2 + (Math.sqrt(ev) / 4))*this.xpLevel)/100);
+		if (stat === 'hp'){
+			var statValue = (base + iv + 50) * this.xpLevel / 50 + 10;
+		} else {
+ 			statValue = (base + iv) * this.xpLevel / 50 + 5;
+		}
+		statValue = Math.floor(statValue);
+		var extraPoints = Math.floor(((Math.sqrt(ev - 1)) + 1) * this.xpLevel / 400);
+		extraPoints = Math.floor(extraPoints);
+		return statValue + extraPoints;
+	},
+	calculateStats: function(){
+		var hp = this._calculateStatBase('hp') + this.xpLevel;
+		var attack = this._calculateStatBase('attack');
+		var defense = this._calculateStatBase('defense');
+		var spAttack = this._calculateStatBase('spAttack');
+		var spDefense = this._calculateStatBase('spDefense');
+
+		if (this.hp){
+			this.hp.max = hp;
+		} else {
+			this.hp = new Stat(hp);
+		} 
+		this.attack = new Stat(attack);
+		this.defense = new Stat(defense);
+		this.spAttack = new Stat(spAttack);
+		this.spDefense = new Stat(spDefense);
 	}
 }
 
