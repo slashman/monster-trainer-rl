@@ -46,6 +46,25 @@ ut.Tile = function(ch, r, g, b, br, bg, bb) {
 	this.br = br;
 	this.bg = bg;
 	this.bb = bb;
+
+	// Inverse patch
+	/*this.br = 255;
+	this.bg = 255;
+	this.bb = 255;*/
+
+	this.br = 127;
+	this.bg = 136;
+	this.bb = 109;
+	
+	if (this.r === 255 && this.g === 255 && this.b === 255){
+		this.r = 0;
+		this.g = 0;
+		this.b = 0;
+	};
+	
+	if (this.r) this.r = Math.floor(this.r / 3);
+	if (this.g) this.g = Math.floor(this.g / 3);
+	if (this.b) this.b = Math.floor(this.b / 3);
 };
 
 	/// Function: getChar
