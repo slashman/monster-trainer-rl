@@ -100,6 +100,7 @@ module.exports = {
 		this.game.input.mode = "MOVEMENT";
 	},
 	endTurn: function(){
+		this.game.display.textBox.checkFaint();
 		this.updateFOV();
 		this.game.display.refresh();
 		this.game.world.level.beingsTurn();

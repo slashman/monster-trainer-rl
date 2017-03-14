@@ -8,9 +8,9 @@ module.exports = {
 		this.game = game;
 		this.term = new ut.Viewport(document.getElementById("game"), 80, 25);
 		this.eng = new ut.Engine(this.term, this.getDisplayedTile.bind(this), 80, 25);
-		this.textBox = new TextBox(this.term, 2, 80, {x:0, y:0});
+		this.textBox = new TextBox(this.term, 2, 80, {x:0, y:0}, this);
 		this.inventoryBox = new Box(this.term, 25, 40, {x:19, y:0});
-		this.sceneBox = new TextBox(this.term, 10, 45, {x:20, y:3});
+		this.sceneBox = new TextBox(this.term, 10, 45, {x:20, y:3}, this);
 	},
 	getDisplayedTile: function(x,y){
 		var level = this.game.world.level;
@@ -41,8 +41,8 @@ module.exports = {
 	},
 	refresh: function(){
 		this.eng.update(this.game.player.x, this.game.player.y);
-		this.textBox.draw();
 		this.updateStatus();
+		this.textBox.draw();
 		this.term.render();
 		if (this.currentScene){
 			this.showScene(this.currentScene);
