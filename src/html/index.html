@@ -12,10 +12,8 @@
 	<script src="rl-min.js?v=1"></script>
 	<style>
 		body {
-			background-color: black;
 			background-color: #7f886d;
 			font-family: sans-serif;
-			color: white;
 		}
 		.centerer {
 			margin-left: auto;
@@ -26,6 +24,10 @@
 		.disclaimer {
 			font-size: x-small;
 		}
+
+		table td {
+			border: 1px solid black;
+		}
 	</style>
 </head>
 
@@ -35,6 +37,31 @@
 	</div>
 	<div class="centerer">
     	<p>A production of <a href = "http://slashie.net/" target = "_blank">Slashie</a>, powered by <a href = "http://tapiov.net/unicodetiles.js/" target = "_blank">unicodetiles.js</a></p>
+    </div>
+    <div>
+    	<p><b>How to play</b></p>
+
+    	<p>Your goal is to become a Pokemon master by defeating the gym leaders of the 8 cities in your region.</p>
+    	<p>Look for the Professor's lab in your home town to pick your starter pokemon (using ,). Then find the exit to route 1 from your hometown.</p>
+    	<p>When you find wild pokemon, use "r" to release your selected pokemon in a given direction. He will automatically fight nearby
+    		enemies with his default skill</p>
+    	<p>If you want to use a different skill, press the key as indicated on the right bar</p>
+    	<p>To call back your pokemon, use "P"</p>
+    	<p>To use pokeballs or potions, go to the "I"nventory and select a direction</p>
+
+    	<p><b>Keyboard Commands</b></p>
+    	<table>
+    		<tr>
+    			<td>Arrow keys</td><td>Move around.</td></tr>
+    			<td>I</td><td>Show Inventory.</td></tr>
+    			<td>,</td><td>Pick up items and pokeballs.</td></tr>
+    			<td>1 to 6</td><td>Select pokemon slot.</td></tr>
+    			<td>R</td><td>Release selected pokemon.</td></tr>
+    			<td>P</td><td>Pull back selected pokemon.</td></tr>
+    			<td>Z,X,C,V</td><td>Use pokemon skills.</td></tr>
+    		</tr>
+    	</table>
+
     	<p class = "disclaimer">This is the 7DRL++ edition, which contains only critical bugfixes over the original version. The original 7DRL Challenge submission can be found <a href = "7drl">here</a></p>
 	</div>
 </body>
