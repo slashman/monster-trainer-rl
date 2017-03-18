@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>PokemonRL</title>
 	<link href="lib/unicodetiles/unicodetiles.css" rel="stylesheet" type="text/css" />
-	<script src="lib/unicodetiles/unicodetiles.js"></script>
+	<script src="lib/unicodetiles/unicodetiles-lcd.js"></script>
 	<script src="lib/unicodetiles/input.js"></script>
 	<script src="lib/unicodetiles/ut.WebGLRenderer.js"></script>
 	<script src="lib/unicodetiles/ut.CanvasRenderer.js"></script>
@@ -12,9 +12,8 @@
 	<script src="rl-min.js?v=1"></script>
 	<style>
 		body {
-			background-color: black;
+			background-color: #7f886d;
 			font-family: sans-serif;
-			color: white;
 		}
 		.centerer {
 			margin-left: auto;
@@ -27,18 +26,14 @@
 		}
 
 		table td {
-			border: 1px solid white;
-		}
-
-		a{
-			color: white;
+			border: 1px solid black;
 		}
 	</style>
 </head>
 
 <body onload="Game.start();">
 	<div class="centerer">
-		Terminal Mode - <a href = "lcd.html">LCD mode</a>
+		<a href = "index.html">Terminal mode</a> - LCD mode
 	</div>
 	<div class="centerer">
 		<div id="game"></div>

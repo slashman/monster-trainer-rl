@@ -353,6 +353,7 @@ module.exports = {
 			return being;
 		}, this);
 		trainer.prize = specs.badge;
+		trainer.prizeMoney = specs.gymNumber * 1500;
 	},
 
 }
