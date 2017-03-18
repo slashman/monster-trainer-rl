@@ -345,32 +345,35 @@ Being.prototype = {
 		this.game.display.message(this.race.name+" gets "+xp+" XP");
 		this.xp += xp;
 		if (this.xp >= this.nextLevelXP){
-			this.game.display.message(this.race.name+" levels up!");
-			this.xpLevel++;
-			this.xp = this.calculateXP(this.xpLevel);
-			this.nextLevelXP = this.calculateXP(this.xpLevel+1);
-			// Increase stats
-			this.calculateStats();
+			this.levelUp();
+		}
+	},
+	levelUp: function(){
+		this.game.display.message(this.race.name+" levels up!");
+		this.xpLevel++;
+		this.xp = this.calculateXP(this.xpLevel);
+		this.nextLevelXP = this.calculateXP(this.xpLevel+1);
+		// Increase stats
+		this.calculateStats();
 
-			// Check evolution and new skills
-			var newSkill = this.race.skills.find(function(def){return def.level === this.xpLevel;}, this);
-			if (newSkill){
-				if (this.skills.length === 4){
-					// Randomly forget one ;)
-					var oldSkill = Random.from(this.skills, true);
-					this.game.display.message(this.race.name+" forgets "+oldSkill.skill.name+".");
-				} 
-				this.skills.push({
-					skill: newSkill.skill,
-					pp: new Stat(newSkill.skill.pp)
-				});
-				this.game.display.message(this.race.name+" learns "+newSkill.skill.name+".");
-			}
-			if (this.race.evolution && this.race.evolution.minLevel === this.xpLevel){
-				var newRace = this.race.evolution.race;
-				this.game.display.message(this.race.name+" evolves into "+newRace.name+"!");
-				this.setRace(newRace);
-			}
+		// Check evolution and new skills
+		var newSkill = this.race.skills.find(function(def){return def.level === this.xpLevel;}, this);
+		if (newSkill){
+			if (this.skills.length === 4){
+				// Randomly forget one ;)
+				var oldSkill = Random.from(this.skills, true);
+				this.game.display.message(this.race.name+" forgets "+oldSkill.skill.name+".");
+			} 
+			this.skills.push({
+				skill: newSkill.skill,
+				pp: new Stat(newSkill.skill.pp)
+			});
+			this.game.display.message(this.race.name+" learns "+newSkill.skill.name+".");
+		}
+		if (this.race.evolution && this.race.evolution.minLevel === this.xpLevel){
+			var newRace = this.race.evolution.race;
+			this.game.display.message(this.race.name+" evolves into "+newRace.name+"!");
+			this.setRace(newRace);
 		}
 	},
 	setRace: function(race){
