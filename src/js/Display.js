@@ -43,6 +43,7 @@ module.exports = {
 		this.eng.update(this.game.player.x, this.game.player.y);
 		this.updateStatus();
 		this.textBox.draw();
+		this.term.putString(this.game.version, 70, 24, 255, 255, 255);
 		this.term.render();
 		if (this.currentScene){
 			this.showScene(this.currentScene);

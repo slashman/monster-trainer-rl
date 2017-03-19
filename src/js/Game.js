@@ -18,7 +18,8 @@ var Game = {
 		this.player.updateFOV();
 		Display.refresh();
 		Display.showScene("WELCOME");
-	}
+	},
+	version: "1.1"
 }
 
 window.Game = Game;
