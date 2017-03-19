@@ -310,7 +310,7 @@ module.exports = {
 			return;	
 		}
 
-		this.game.display.message("Do you want to pick "+race.name+", "+race.pickupDescription+"? [Y/N]");
+		this.game.display.message("Do you want to pick "+race.name+"? [Y/N]");
 		this.game.input.mode = "PROMPT";
 		this.game.input.promptFunction = function(confirm){
 			if (confirm){
