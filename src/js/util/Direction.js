@@ -20,11 +20,11 @@ module.exports = {
 			y: 1
 		},
 		LEFT: {
-			x: 1,
+			x: -1,
 			y: 0
 		},
 		RIGHT: {
-			x: -1,
+			x: 1,
 			y: 0
 		}
 	},

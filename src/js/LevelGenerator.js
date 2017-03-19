@@ -6,6 +6,7 @@ var Item = require('./Item.class');
 var CA = require('./ca/CA');
 var Rule = require('./ca/Rule.class');
 var Random = require('./Random');
+var Direction = require('./util/Direction');
 
 module.exports = {
 	generateTestLevel: function(level, specs){
@@ -47,7 +48,27 @@ module.exports = {
 					xs = specs.width-1;
 					break;
 			}
-			level.addExit(xs, ys, exit.toId, Tiles.STAIRS_DOWN);
+			var dx = Direction.dxMap[Direction.opposite[exit.dir]];
+			switch (specs.type){
+				case "TOWN":
+					level.map[xs][ys] = Tiles.GRASS;
+					level.map[xs+dx.x][ys+dx.y] = Tiles.GRASS;
+					if (dx.x == 0){
+						level.map[xs+1][ys] = Tiles.FENCE;
+						level.map[xs-1][ys] = Tiles.FENCE;
+					} else {
+						level.map[xs][ys+1] = Tiles.FENCE;
+						level.map[xs][ys-1] = Tiles.FENCE;
+					}
+					break;
+				case "ROUTE":
+				case "GYM":
+					level.map[xs][ys] = Tiles.STAIRS_DOWN;
+					break;
+			}
+
+			
+			level.addExit(xs, ys, exit.toId);
 		}
 		if (specs.startPosition){
 			level.player.x = specs.startPosition.x;
@@ -109,6 +130,16 @@ module.exports = {
 		CA.runCA(level.map, this.CA_GRASS_RULES, 4);
 	},
 	buildTown: function(level, specs){
+		// Place the borders
+		for (var xx = 1; xx < specs.width - 1; xx++){
+			this.level.map[xx][1] = Tiles.FENCE;
+			this.level.map[xx][specs.height - 2] = Tiles.FENCE;
+		}
+		for (var yy = 1; yy < specs.height - 1; yy++){
+			this.level.map[1][yy] = Tiles.FENCE;
+			this.level.map[specs.width - 2][yy] = Tiles.FENCE;
+		}
+
 		// Place houses based on specs on a grid
 		var grid = [];
 		var gridx = Math.floor((specs.width - 6) / 10);
@@ -332,7 +363,8 @@ module.exports = {
 				xd = x+w-1;
 				break;
 		}
-		this.level.addExit(xd, yd, feature.toId, Tiles.GYM_ENTRANCE);
+		this.level.map[xd][yd] = Tiles.GYM_ENTRANCE;
+		this.level.addExit(xd, yd, feature.toId);
 		this.level.gymInfo = feature;
 	},
 	buildGym: function(level, specs){

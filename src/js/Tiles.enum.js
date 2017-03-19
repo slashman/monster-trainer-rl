@@ -1,4 +1,10 @@
 module.exports = {
+	FENCE: {
+		tile: new ut.Tile('+', 255, 255, 85),
+		darkTile: new ut.Tile('+', 128, 128, 128),
+		solid: true,
+		opaque: false
+	},
 	GRASS: {
 		tile: new ut.Tile(',', 0, 128, 0),
 		darkTile: new ut.Tile(',', 128, 128, 128),

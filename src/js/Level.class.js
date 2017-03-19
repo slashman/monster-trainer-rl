@@ -106,9 +106,6 @@ Level.prototype = {
 		return true;
 	},
 	addExit: function(x,y, levelId, tile){
-		if (!this.map[x])
-			this.map[x] = [];
-		this.map[x][y] = tile;
 		if (!this.exits[x])
 			this.exits[x] = [];
 		this.exits[x][y] = levelId;
