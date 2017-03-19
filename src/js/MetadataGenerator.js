@@ -173,15 +173,15 @@ module.exports = {
 			};
 			metadata.features.push(
 				{ // Hero's house
-					type: 'myHouse',
-					x: 1,
-					y: 1
+					type: 'myHouse'
 				}
 			);
 			metadata.features.push(
 				{ // Oak's Lab
 					type: 'lab',
-					monsters: this.masterPlans.startingMonsters
+					monsters: this.masterPlans.startingMonsters,
+					x: 1,
+					y: 1
 				}
 			);
 			metadata.features.push(
