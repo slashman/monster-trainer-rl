@@ -64,101 +64,168 @@ module.exports = {
 		{
 			monsters: [
 				{
-					race: Races.RATTATA,
-					weight: 45
-				},
-				{
-					race: Races.PIDGEY,
-					levelBoost: 1,
-					weight: 55
-				}
-			]
-		},
-		{
-			monsters: [
-				{
-					race: Races.RATTATA,
-					weight: 45
-				},
-				{
-					race: Races.PIDGEY,
-					levelBoost: 1,
-					weight: 55
-				}
-			]
-		},
-		{
-			monsters: [
-				{
-					race: Races.RATTATA,
-					weight: 45
-				},
-				{
-					race: Races.PIDGEY,
-					levelBoost: 1,
-					weight: 55
-				}
-			]
-		},
-		{
-			monsters: [
-				{
-					race: Races.RATTATA,
-					weight: 45
-				},
-				{
-					race: Races.PIDGEY,
-					levelBoost: 1,
-					weight: 55
-				}
-			]
-		},
-		{
-			monsters: [
-				{
-					race: Races.RATTATA,
-					weight: 45
-				},
-				{
-					race: Races.PIDGEY,
-					levelBoost: 1,
-					weight: 55
-				}
-			]
-		},
-		{
-			monsters: [
-				{
-					race: Races.RATTATA,
-					weight: 45
-				},
-				{
-					race: Races.PIDGEY,
-					levelBoost: 1,
-					weight: 55
-				}
-			]
-		},
-		{
-			monsters: [
-				{
 					race: Races.CATERPIE,
-					levelBoost: 1,
 					weight: 15
 				},
 				{
 					race: Races.WEEDLE,
-					levelBoost: 1,
 					weight: 15
 				},
+				{
+					race: Races.PIDGEY,
+					weight: 40
+				},
+				{
+					race: Races.RATTATA,
+					weight: 45
+				}
+			]
+		},
+		{
+			monsters: [
+				{
+					race: Races.PIDGEY,
+					levelBoost: 1,
+					weight: 50
+				},
+				{
+					race: Races.SPEAROW,
+					levelBoost: 1,
+					weight: 40
+				},
+				{
+					race: Races.JIGGLYPUFF,
+					weight: 10
+				}
+			]
+		},
+		{
+			monsters: [
+				{
+					race: Races.RATTATA,
+					levelBoost: 1,
+					weight: 45
+				},
+				{
+					race: Races.SPEAROW,
+					levelBoost: 1,
+					weight: 30
+				},
+				{
+					race: Races.EKANS,
+					weight: 25
+				},
+				{
+					race: Races.SANDSHREW,
+					weight: 25
+				}
+			]
+		},
+		{
+			monsters: [
 				{
 					race: Races.RATTATA,
 					weight: 45
 				},
 				{
+					race: Races.SPEAROW,
+					weight: 30
+				},
+				{
+					race: Races.EKANS,
+					weight: 25
+				},
+				{
+					race: Races.SANDSHREW,
+					weight: 25
+				}
+			]
+		},
+		{
+			monsters: [
+				{
 					race: Races.PIDGEY,
-					levelBoost: 1,
+					weight: 35
+				},
+				{
+					race: Races.ODDISH,
 					weight: 40
+				},
+				{
+					race: Races.MEOWTH,
+					weight: 25
+				},
+				{
+					race: Races.MANKEY,
+					weight: 25
+				},
+				{
+					race: Races.BELLSPROUT,
+					weight: 40
+				}
+			]
+		},
+		{
+			monsters: [
+				{
+					race: Races.PIDGEY,
+					weight: 35
+				},
+				{
+					race: Races.VULPIX,
+					weight: 10
+				},
+				{
+					race: Races.ODDISH,
+					weight: 25
+				},
+				{
+					race: Races.MEOWTH,
+					weight: 30
+				},
+				{
+					race: Races.MANKEY,
+					weight: 30
+				},
+				{
+					race: Races.GROWLITHE,
+					weight: 30
+				},
+				{
+					race: Races.BELLSPROUT,
+					weight: 25
+				}
+			]
+		},
+		{
+			monsters: [
+				{
+					race: Races.PIDGEY,
+					weight: 35
+				},
+				{
+					race: Races.EKANS,
+					weight: 20
+				},
+				{
+					race: Races.SANDSHREW,
+					weight: 20
+				},
+				{
+					race: Races.VULPIX,
+					weight: 20
+				},
+				{
+					race: Races.MEOWTH,
+					weight: 25
+				},
+				{
+					race: Races.GROWLITHE,
+					weight: 20
+				},
+				{
+					race: Races.MANKEY,
+					weight: 25
 				}
 			]
 		},
@@ -166,20 +233,70 @@ module.exports = {
 			monsters: [
 				{
 					race: Races.SPEAROW,
-					levelBoost: 2,
+					weight: 30
+				},
+				{
+					race: Races.EKANS,
+					weight: 25
+				},
+				{
+					race: Races.SANDSHREW,
+					weight: 25
+				},
+				{
+					race: Races.VOLTORB,
+					weight: 45
+				}
+			]
+		},
+		{
+			monsters: [
+				{
+					race: Races.SPEAROW,
+					weight: 30
+				},
+				{
+					race: Races.EKANS,
+					weight: 45
+				},
+				{
+					race: Races.SANDSHREW,
+					weight: 45
+				},
+				{
+					race: Races.DROWZEE,
+					weight: 25
+				}
+			]
+		},
+		{
+			monsters: [
+				{
+					race: Races.PIDGEY,
+					weight: 35
+				},
+				{
+					race: Races.ODDISH,
 					weight: 40
 				},
 				{
-					race: Races.PIDGEY,
-					levelBoost: 3,
-					weight: 50
+					race: Races.GLOOM,
+					weight: 5
 				},
 				{
-					race: Races.JIGGLYPUFF,
-					weight: 10
+					race: Races.VENONAT,
+					weight: 20
+				},
+				{
+					race: Races.BELLSPROUT,
+					weight: 40
+				},
+				{
+					race: Races.WEEPINBELL,
+					weight: 5
 				}
 			]
-		}
+		},
 	],
 	gymStereotypes: {
 		ROCK: {
