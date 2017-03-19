@@ -13,7 +13,8 @@ function Being(game, level, race, xpLevel){
 	this.tile = race.tile;
 	this.x = null;
 	this.y = null;
-
+	this.counters = [];
+	this.statusFlags = {};
 	this.iv = {
 		hp: 0,
 		attack: 0,
@@ -411,6 +412,61 @@ Being.prototype = {
 		this.defense = new Stat(defense);
 		this.spAttack = new Stat(spAttack);
 		this.spDefense = new Stat(spDefense);
+	},
+	takeDamage: function(damage){
+		this.hp.reduce(damage);
+		if (this.hp.current <= 0){
+			this.die();
+		}
+	},
+	isUnderground: function(){
+		return false; //TODO: Implement
+	},
+	reduceStat: function(stat, turns){
+		this.counters.push({type: "LOWER_STAT", stat: stat, turns: turns});
+	},
+	lowerCounters: function(){
+		for (var i = 0; i < this.counters.length; i++){
+			this.counters[i].turns--;
+			if (this.counters[i].turns < 0){
+				if (this.counters[i].type === "LOWER_STAT"){
+					this.game.display.message("The "+this.race.name+"'s "+this.counters[i].stat.name+" recovers!");
+				}
+				this.counters.splice(i,1);
+				i--;
+			}
+		}
+	},
+	getEffectiveAttack: function(){
+		return this.getEffectiveStat('attack', 'ATK');
+	},
+	getEffectiveDefense: function(){
+		return this.getEffectiveStat('defense', 'ATK');
+	},
+	getEffectiveSpecialAttack: function(){
+		return this.getEffectiveStat('spAttack', 'ATK');
+	},
+	getEffectiveSpecialDefense: function(){
+		return this.getEffectiveStat('spDefense', 'ATK');
+	},
+	getEffectiveSpeed: function(){
+		return this.getEffectiveStat('speed', 'ATK');
+	},
+	getEffectiveStat: function(statName, statId){
+		var variation = 0;
+		for (var i = 0; i < this.counters.length; i++){
+			if (this.counters[i].type === "LOWER_STAT" && this.counters[i].stat.id === statId){
+				variation--;
+			}
+		}
+		var statValue = this[statName].current - variation;
+		if (statValue < 1){
+			statValue = 1;
+		}
+		return statValue;
+	},
+	inflictStatus: function(status){
+		this.statusFlags[status.id] = true;
 	}
 }
 
