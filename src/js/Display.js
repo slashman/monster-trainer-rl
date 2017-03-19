@@ -96,7 +96,8 @@ module.exports = {
 			for (var i = 0; i < slot.being.skills.length; i++){
 				actions.push({
 					key: slot.onPocket ? '*' : this.SKILL_KEYS[i].key,
-					name: slot.being.skills[i].skill.name + "["+slot.being.skills[i].pp.getText()+"]"
+					name: slot.being.skills[i].skill.name,
+					info: "["+slot.being.skills[i].pp.getText()+"]"
 				})
 			}
 			this.term.putString(slot.being.race.name, baseX + 2, baseY, 255, 255, 255);
@@ -113,7 +114,11 @@ module.exports = {
 
 		} 
 		for (var i = 0; i < actions.length && i < 5; i++){
-			this.term.putString("("+actions[i].key + ") " +actions[i].name, baseX, baseY + i + 6, 255, 255, 255);
+			this.term.putString("("+actions[i].key + ")",  baseX, baseY + (i*2) + 6, 255, 0, 0);
+			this.term.putString(actions[i].name, baseX+4, baseY + (i*2) + 6, 255, 255, 255);
+			if (actions[i].info){
+				this.term.putString(actions[i].info, baseX+4, baseY + (i*2)+1 + 6, 255, 255, 255);
+			}
 		}
 	},
 	SKILL_KEYS: [
@@ -158,7 +163,7 @@ module.exports = {
 		this.term.render();
 	},
 	SCENES: {
-		WELCOME: "Welcome to PokemonRL! Find the Proffessor's Lab to get your starter Pokemon",
+		WELCOME: "Welcome to PokemonRL! Select your starter Pokemon using ,",
 		VICTORY: "Congratulations, you have become a Pokemon Master!"
 	},
 	showScene: function(id){
