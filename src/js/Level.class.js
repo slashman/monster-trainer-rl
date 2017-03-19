@@ -50,7 +50,7 @@ Level.prototype = {
 			var wm = Random.fromWeighted(this.wildMonsters);
 			var being = new Being(level.game, level, wm.race, wm.level);
 			level.addBeing(being, x, y);
-			if (wm.race.aggresive){
+			if (wm.race.aggressive){
 				being.intent = 'CHASE';
 			} else if (wm.race.trainer){
 				being.intent = 'TRAINER';
