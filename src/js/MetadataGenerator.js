@@ -222,16 +222,26 @@ module.exports = {
 				}
 			);
 		}
-		for (var i = 0; i < Direction.CARDINALS.length; i++){
-			if (fromDir === Direction.CARDINALS[i]){
-				continue;
-			}
+		if (specs.starting){
+			// A single exit for the starting town
 			this.exits.push({
 				x: this.supermap.x,
 				y: this.supermap.y,
-				direction: Direction.CARDINALS[i],
+				direction: "UP",
 				fromId: townId
 			});
+		} else {
+			for (var i = 0; i < Direction.CARDINALS.length; i++){
+				if (fromDir === Direction.CARDINALS[i]){
+					continue;
+				}
+				this.exits.push({
+					x: this.supermap.x,
+					y: this.supermap.y,
+					direction: Direction.CARDINALS[i],
+					fromId: townId
+				});
+			}
 		}
 		if (fromDir){
 			metadata.exits.push({
