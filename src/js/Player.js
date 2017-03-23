@@ -11,6 +11,7 @@ module.exports = {
 	memory: {},
 	items: [],
 	monsterSlots: [],
+	observedMonsters: [],
 	addMonster: function(being, slotNumber){
 		if (slotNumber && this.monsterSlots[slotNumber]){
 			this.game.display.message("Cannot put monster in that slot");
@@ -146,6 +147,7 @@ module.exports = {
 		for (var j = -this.MAX_SIGHT_RANGE; j <= this.MAX_SIGHT_RANGE; j++)
 			for (var i = -this.MAX_SIGHT_RANGE; i <= this.MAX_SIGHT_RANGE; i++)
 				this.visible[i][j] = false;
+		this.observedMonsters.length = 0;
 		var step = Math.PI * 2.0 / 1080;
 		for (var a = 0; a < Math.PI * 2; a += step)
 			this.shootRay(a);
@@ -164,6 +166,12 @@ module.exports = {
 			var testy = Math.round(yy);
 			this.visible[testx-this.x][testy-this.y] = true;
 			this.remember(testx, testy);
+			var monster = this.game.world.level.getBeing(testx, testy);
+			if (monster && !monster.isFriendly){
+				if (this.observedMonsters.indexOf(monster) === -1){
+					this.observedMonsters.push(monster);
+				}
+			}
 			try { 
 				if (this.game.world.level.map[testx][testy].opaque){
 					return;

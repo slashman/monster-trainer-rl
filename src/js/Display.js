@@ -43,7 +43,6 @@ module.exports = {
 		this.eng.update(this.game.player.x, this.game.player.y);
 		this.updateStatus();
 		this.textBox.draw();
-		this.term.putString(this.game.version, 70, 24, 255, 255, 255);
 		this.term.render();
 		if (this.currentScene){
 			this.showScene(this.currentScene);
@@ -119,6 +118,18 @@ module.exports = {
 			this.term.putString(actions[i].name, baseX+4, baseY + (i*2) + 6, 255, 255, 255);
 			if (actions[i].info){
 				this.term.putString(actions[i].info, baseX+4, baseY + (i*2)+1 + 6, 255, 255, 255);
+			}
+		}
+
+		// Show nearby monsters
+		baseX = 19;
+		baseY = 23;
+		for (var i = 0; i < this.game.player.observedMonsters.length && i < 4; i++){
+			var monster = this.game.player.observedMonsters[i];
+			this.term.putString("  "+monster.race.name, baseX + i * 15, baseY, 255, 255, 255);
+			this.term.put(monster.race.tile, baseX  + i * 15, baseY);
+			if (monster.hp){
+				this.term.putString("Lv"+monster.xpLevel+" HP "+Math.round(monster.hp.getProportion()*100)+"%", baseX + i * 15, baseY + 1, 255, 255, 255);
 			}
 		}
 	},
