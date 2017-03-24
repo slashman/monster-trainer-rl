@@ -18,5 +18,13 @@ module.exports = {
 	SP_DEF: {
 		id: "SP_DEF",
 		name: "Special Defense"
+	},
+	ACC: {
+		id: "ACC",
+		name: "Accuracy"
+	},
+	EVA: {
+		id: "EVA",
+		name: "Evasion"
 	}
 }

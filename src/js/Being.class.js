@@ -275,6 +275,9 @@ Being.prototype = {
 			this.game.display.message(this.race.name+" has no power points!");
 			return false;
 		}
+		if (skill.skill.effect === Effects.RAISE_STAT){
+			return true;
+		}
 		var nearestEnemy = this.getNearestEnemy();
 		if (!nearestEnemy){
 			this.game.display.message("No target!");
@@ -422,15 +425,16 @@ Being.prototype = {
 	isUnderground: function(){
 		return false; //TODO: Implement
 	},
-	reduceStat: function(stat, turns){
-		this.counters.push({type: "LOWER_STAT", stat: stat, turns: turns});
+	changeStat: function(stat, turns, level){
+		this.counters.push({type: "CHANGE_STAT", stat: stat, turns: turns, level: level});
 	},
 	lowerCounters: function(){
 		for (var i = 0; i < this.counters.length; i++){
 			this.counters[i].turns--;
 			if (this.counters[i].turns < 0){
-				if (this.counters[i].type === "LOWER_STAT"){
-					this.game.display.message("The "+this.race.name+"'s "+this.counters[i].stat.name+" recovers!");
+				if (this.counters[i].type === "CHANGE_STAT"){
+					if (this.counters[i].level < 0)
+						this.game.display.message("The "+this.race.name+"'s "+this.counters[i].stat.name+" recovers.");
 				}
 				this.counters.splice(i,1);
 				i--;
@@ -441,32 +445,54 @@ Being.prototype = {
 		return this.getEffectiveStat('attack', 'ATK');
 	},
 	getEffectiveDefense: function(){
-		return this.getEffectiveStat('defense', 'ATK');
+		return this.getEffectiveStat('defense', 'DEF');
 	},
 	getEffectiveSpecialAttack: function(){
-		return this.getEffectiveStat('spAttack', 'ATK');
+		return this.getEffectiveStat('spAttack', 'SP_ATK');
 	},
 	getEffectiveSpecialDefense: function(){
-		return this.getEffectiveStat('spDefense', 'ATK');
+		return this.getEffectiveStat('spDefense', 'SP_DEF');
 	},
 	getEffectiveSpeed: function(){
-		return this.getEffectiveStat('speed', 'ATK');
+		return this.getEffectiveStat('speed', 'SPD');
 	},
 	getEffectiveStat: function(statName, statId){
 		var variation = 0;
 		for (var i = 0; i < this.counters.length; i++){
-			if (this.counters[i].type === "LOWER_STAT" && this.counters[i].stat.id === statId){
-				variation--;
+			if (this.counters[i].type === "CHANGE_STAT" && this.counters[i].stat === statId){
+				variation += this.counters[i].level;
 			}
 		}
-		var statValue = this[statName].current - variation;
-		if (statValue < 1){
-			statValue = 1;
+		if (statId === 'EVA'){
+			variation *= -1;
 		}
-		return statValue;
+		if (variation < -6)
+			variation = -6;
+		if (variation > 6){
+			variation = 6;
+		}
+		return this[statName].current * this.STAGE_MULTIPLIERS[variation];
+	},
+	STAGE_MULTIPLIERS: {
+		"-6": 25 / 100,
+		"-5": 28 / 100,
+		"-4": 33 / 100,
+		"-3": 40 / 100,
+		"-2": 50 / 100,
+		"-1": 66 / 100,
+		"0": 100 / 100,
+		"1": 150 / 100,
+		"2": 200 / 100,
+		"3": 250 / 100,
+		"4": 300 / 100,
+		"5": 350 / 100,
+		"6": 400 / 100
 	},
 	inflictStatus: function(status){
 		this.statusFlags[status.id] = true;
+	},
+	endTurn: function(){
+		this.lowerCounters();
 	}
 }
 

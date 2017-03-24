@@ -104,6 +104,12 @@ module.exports = {
 		this.game.display.textBox.checkFaint();
 		this.updateFOV();
 		this.game.display.refresh();
+		for (var i = 0; i < this.monsterSlots.length; i++){
+			var slot = this.monsterSlots[i];
+			if (slot && slot.onPocket){
+				slot.being.endTurn();
+			}
+		}
 		this.game.world.level.beingsTurn();
 	},
 	remember: function(x, y){

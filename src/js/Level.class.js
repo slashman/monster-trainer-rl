@@ -65,6 +65,7 @@ Level.prototype = {
 			this.respawnMonsters();
 		}
 		for (var i = 0; i < this.beingsList.length; i++){
+			this.beingsList[i].endTurn();
 			this.beingsList[i].act();
 		}
 		this.player.updateFOV();
