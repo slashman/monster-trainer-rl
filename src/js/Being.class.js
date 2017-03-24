@@ -275,7 +275,7 @@ Being.prototype = {
 			this.game.display.message(this.race.name+" has no power points!");
 			return false;
 		}
-		if (skill.skill.effect === Effects.RAISE_STAT){
+		if (Effects.skipTarget(skill.skill)){
 			return true;
 		}
 		var nearestEnemy = this.getNearestEnemy();
