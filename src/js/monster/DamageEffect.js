@@ -9,8 +9,7 @@ module.exports = {
 		}
 		if (skill.params.alwaysHit)
 			return true;
-		var hitChance = skill.accuracy;
-		// TODO: use modifiers for accuracy and evasion
+		var hitChance = skill.accuracy * (monster.getEffectiveAccuracy() / enemy.getEffectiveEvasion());
 		return Random.chance(hitChance);
 	},
 	calculateDamage: function(monster, enemy, skill){

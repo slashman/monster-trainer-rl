@@ -456,22 +456,31 @@ Being.prototype = {
 	getEffectiveSpeed: function(){
 		return this.getEffectiveStat('speed', 'SPD');
 	},
+	getEffectiveAccuracy: function(){
+		return this.getEffectiveStat('accuracy', 'ACC');
+	},
+	getEffectiveEvasion: function(){
+		return this.getEffectiveStat('evasion', 'EVA');
+	},
 	getEffectiveStat: function(statName, statId){
 		var variation = 0;
+		var base = 0;
 		for (var i = 0; i < this.counters.length; i++){
 			if (this.counters[i].type === "CHANGE_STAT" && this.counters[i].stat === statId){
 				variation += this.counters[i].level;
 			}
 		}
-		if (statId === 'EVA'){
-			variation *= -1;
+		if (statId === 'EVA' || statId === 'ACC'){
+			base = 1;
+		} else {
+			base = this[statName].current;
 		}
 		if (variation < -6)
 			variation = -6;
 		if (variation > 6){
 			variation = 6;
 		}
-		return this[statName].current * this.STAGE_MULTIPLIERS[variation];
+		return base * this.STAGE_MULTIPLIERS[variation];
 	},
 	STAGE_MULTIPLIERS: {
 		"-6": 25 / 100,
