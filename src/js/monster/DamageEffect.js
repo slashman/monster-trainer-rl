@@ -157,7 +157,7 @@ module.exports = {
 
 			if (skill.params.lowerChance && Random.chance(skill.params.lowerChance)){
 				monster.game.display.message("The "+enemy.race.name+"'s "+skill.params.lowerStat.name+" is lowered!");
-				enemy.changeStat(skill.params.lowerStat, 5, -1);
+				enemy.changeStat(skill.params.lowerStat.id, 5, -1);
 			}
 
 			if (skill.params.suicide){
