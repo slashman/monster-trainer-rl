@@ -3,6 +3,7 @@ module.exports = {
 		name: "Store Clerk",
 		tile: new ut.Tile('@', 0, 255, 0),
 		hp: 20,
+		speed: 50,
 		interact: function(player){
 			player.game.display.message("Welcome! please grab the items you would be interested on!");
 		}
@@ -11,6 +12,7 @@ module.exports = {
 		name: "Nurse",
 		tile: new ut.Tile('@', 255, 85, 255),
 		hp: 20,
+		speed: 50,
 		interact: function(player){
 			player.game.display.message("Would you like me to heal your pokemon back to perfect health? [Y/N]");
 			player.game.input.promptFunction = function(confirm){
@@ -30,6 +32,7 @@ module.exports = {
 		name: "Proffessor",
 		tile: new ut.Tile('@', 255, 255, 255),
 		hp: 20,
+		speed: 50,
 		trainer: true,
 		interact: function(player){
 			if (player.pickedStarter){
@@ -43,6 +46,7 @@ module.exports = {
 		name: "Gym Leader",
 		tile: new ut.Tile('@', 255, 255, 0),
 		hp: 20,
+		speed: 50,
 		trainer: true
 	}
 }

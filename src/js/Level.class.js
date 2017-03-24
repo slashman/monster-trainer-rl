@@ -64,6 +64,12 @@ Level.prototype = {
 		if (this.spawnCounter === 0){
 			this.respawnMonsters();
 		}
+		this.beingsList.sort(this.speedSorter);
+		/*
+		this.beingsList.map(function(monster, i){
+			console.log(i+": "+monster.race.name+" "+monster.getEffectiveSpeed());
+		})
+		*/
 		for (var i = 0; i < this.beingsList.length; i++){
 			this.beingsList[i].endTurn();
 			this.beingsList[i].act();
@@ -71,6 +77,9 @@ Level.prototype = {
 		this.player.updateFOV();
 		this.game.display.refresh();
 		this.game.input.inputEnabled = true;
+	},
+	speedSorter: function(a, b){
+		return b.getEffectiveSpeed() - a.getEffectiveSpeed();
 	},
 	addBeing: function(being, x, y){
 		this.beingsList.push(being);
