@@ -12,6 +12,16 @@ module.exports = {
 		var hitChance = skill.accuracy * (monster.getEffectiveAccuracy() / enemy.getEffectiveEvasion());
 		return Random.chance(hitChance);
 	},
+	getCriticalHitChance: function(monster, skill){
+		var t = monster.speed.current / 2; // This uses the base speed, not affected by modifiers
+		if (skill.params.critBoost){
+			t *= 8;
+		}
+		if (monster.hasStatus(Status.FOCUSED)){
+			t *= 4;
+		}
+		return t / 256;
+	},
 	calculateDamage: function(monster, enemy, skill){
 		if (skill.params.fixedDamage){
 			if (skill.params.fixedDamage === "Level"){
@@ -29,13 +39,10 @@ module.exports = {
 				return Random.n(1, Math.floor(monster.xpLevel * 1.5));
 			}
 		}
-		var criticalHitChance = (monster.getEffectiveSpeed() / 512)*100;
-		if (skill.params.critBoost){
-			criticalHitChance += skill.params.critBoost;
-		}
+		var criticalHitChance = this.getCriticalHitChance(monster, skill) * 100;
 		var criticalHit = Random.chance(criticalHitChance);
 		if (criticalHit){
-			monster.game.display.message("Critical Hit!");
+			monster.game.display.message("A Critical Hit!");
 		}
 		var level = criticalHit ? monster.xpLevel * 2 : monster.xpLevel;
 		var a = skill.damageType = 'PHYS' ? monster.getEffectiveAttack() : monster.getEffectiveSpecialAttack();
@@ -120,32 +127,32 @@ module.exports = {
 
 			if (skill.params.burnChance && Random.chance(skill.params.burnChance)){
 				monster.game.display.message("The "+enemy.race.name+" is burned!");
-				enemy.inflictStatus(Status.BURN);
+				enemy.inflictStatus(Status.BURN, 5);
 			}
 
 			if (skill.params.confuseChance && Random.chance(skill.params.confuseChance)){
 				monster.game.display.message("The "+enemy.race.name+" is confused!");
-				enemy.inflictStatus(Status.CONFUSION);
+				enemy.inflictStatus(Status.CONFUSION, 5);
 			}
 
 			if (skill.params.flinchChance && Random.chance(skill.params.flinchChance)){
 				monster.game.display.message("The "+enemy.race.name+" flinches!");
-				enemy.inflictStatus(Status.FLINCH);
+				enemy.inflictStatus(Status.FLINCH, 1);
 			}
 
 			if (skill.params.freezeChance && Random.chance(skill.params.freezeChance)){
 				monster.game.display.message("The "+enemy.race.name+" is frozen!");
-				enemy.inflictStatus(Status.FREEZE);
+				enemy.inflictStatus(Status.FREEZE, 20);
 			}
 
 			if (skill.params.paralyzeChance && Random.chance(skill.params.paralyzeChance)){
 				monster.game.display.message("The "+enemy.race.name+" is paralyzed!");
-				enemy.inflictStatus(Status.PARALYZE);
+				enemy.inflictStatus(Status.PARALYZE, 5);
 			}
 
 			if (skill.params.poisonChance && Random.chance(skill.params.poisonChance)){
 				monster.game.display.message("The "+enemy.race.name+" is poisoned!");
-				enemy.inflictStatus(Status.POISON);
+				enemy.inflictStatus(Status.POISON, 10);
 			}
 
 			if (skill.params.lowerChance && Random.chance(skill.params.lowerChance)){

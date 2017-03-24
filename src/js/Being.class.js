@@ -14,7 +14,6 @@ function Being(game, level, race, xpLevel){
 	this.x = null;
 	this.y = null;
 	this.counters = [];
-	this.statusFlags = {};
 	this.iv = {
 		hp: 0,
 		attack: 0,
@@ -497,11 +496,18 @@ Being.prototype = {
 		"5": 350 / 100,
 		"6": 400 / 100
 	},
-	inflictStatus: function(status){
-		this.statusFlags[status.id] = true;
+	inflictStatus: function(status, turns){
+		this.counters.push({type: "SET_STATUS", statusId: status.id, turns: turns});
 	},
 	endTurn: function(){
 		this.lowerCounters();
+	},
+	hasStatus: function(status){
+		for (var i = 0; i < this.counters.length; i++){
+			if (this.counters[i].type === "SET_STATUS" && this.counters[i].statusId === status.id){
+				return true;
+			}
+		}
 	}
 }
 

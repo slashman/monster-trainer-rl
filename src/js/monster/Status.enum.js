@@ -19,5 +19,9 @@ module.exports = {
 	},
 	RAGE: {
 		id: 'rage'
+	},
+	FOCUSED: {
+		id: 'focused',
+		onSetMessage: "focuses on the battle!"
 	}
 }
