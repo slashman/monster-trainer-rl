@@ -4,6 +4,7 @@ var Direction = require('./util/Direction');
 var Stat = require('./Stat.class');
 var Item = require('./Item.class');
 var Effects = require('./monster/Effects.enum');
+var Stats = require('./monster/Stats.enum');
 var TrainerAI = require('./ai/Trainer');
 
 function Being(game, level, race, xpLevel){
@@ -436,7 +437,7 @@ Being.prototype = {
 			if (this.counters[i].turns < 0){
 				if (this.counters[i].type === "CHANGE_STAT"){
 					if (this.counters[i].level < 0)
-						this.game.display.message("The "+this.race.name+"'s "+this.counters[i].stat.name+" recovers.");
+						this.game.display.message("The "+this.race.name+"'s "+Stats[this.counters[i].stat].name+" recovers.");
 				}
 				this.counters.splice(i,1);
 				i--;
