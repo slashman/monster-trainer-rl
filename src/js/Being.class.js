@@ -364,7 +364,14 @@ Being.prototype = {
 		this.calculateStats();
 
 		// Check evolution and new skills
-		var newSkill = this.race.skills.find(function(def){return def.level === this.xpLevel;}, this);
+		var newSkill = this.race.skills.find(function(def){
+			return def.level === this.xpLevel;
+		}, this);
+
+		if (newSkill && this.skills.find(function(existingSkill){ return existingSkill.skill === newSkill.skill;})){
+			newSkill = false;
+		}
+
 		if (newSkill){
 			if (this.skills.length === 4){
 				// Randomly forget one ;)
