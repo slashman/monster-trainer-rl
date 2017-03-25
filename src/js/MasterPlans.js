@@ -302,7 +302,7 @@ module.exports = {
 		ROCK: {
 			monsters: [
 				{
-					race: Races.ONYX,
+					race: Races.ONIX,
 					levelBoost: 5,
 					weight: 60
 				},
@@ -311,7 +311,7 @@ module.exports = {
 					weight: 60
 				},
 				{
-					race: Races.GRAVELLER,
+					race: Races.GRAVELER,
 					weight: 20
 				}
 			],
