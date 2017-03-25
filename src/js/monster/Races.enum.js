@@ -156,157 +156,6 @@ MEWTWO: new Race('Mewtwo', 'M', 170, 0, 170, true, Types.PSYCHIC, null, 106, 110
 MEW: new Race('Mew', 'm', 255, 85, 255, true, Types.PSYCHIC, null, 100, 100, 100, 100, 100, 100, 64)
 };
 
-Races.BULBASAUR.setMainEvolution(16, Races.IVYSAUR); 
-Races.IVYSAUR.setMainEvolution(32, Races.VENUSAUR); 
-
-Races.CHARMANDER.setMainEvolution(16, Races.CHARMELEON); 
-Races.CHARMELEON.setMainEvolution(36, Races.CHARIZARD); 
-
-Races.SQUIRTLE.setMainEvolution(16, Races.WARTORTLE); 
-Races.WARTORTLE.setMainEvolution(36, Races.BLASTOISE); 
-
-Races.CATERPIE.setMainEvolution(7, Races.METAPOD); 
-Races.METAPOD.setMainEvolution(10, Races.BUTERFREE); 
-
-Races.WEEDLE.setMainEvolution(7, Races.KAKUNA); 
-Races.KAKUNA.setMainEvolution(10, Races.BEEDRILL); 
-
-Races.PIDGEY.setMainEvolution(18, Races.PIDGEOTTO); 
-Races.PIDGEOTTO.setMainEvolution(36, Races.PIDGEOT); 
-
-Races.RATTATA.setMainEvolution(20, Races.RATICATE); 
-
-Races.SPEAROW.setMainEvolution(20, Races.FEAROW); 
-
-Races.EKANS.setMainEvolution(22, Races.ARBOK); 
-
-
-
-Races.SANDSHREW.setMainEvolution(22, Races.SANDSLASH); 
-
-Races.NIDORAN_F.setMainEvolution(16, Races.NIDORINA); 
-
-
-Races.NIDORAN_M.setMainEvolution(16, Races.NIDORINO); 
-
-
-
-
-
-
-
-
-Races.ZUBAT.setMainEvolution(22, Races.GOLBAT); 
-
-Races.ODDISH.setMainEvolution(21, Races.GLOOM); 
-
-
-Races.PARAS.setMainEvolution(24, Races.PARASECT); 
-
-Races.VENONAT.setMainEvolution(31, Races.VENOMOTH); 
-
-Races.DIGLETT.setMainEvolution(26, Races.DUGTRIO); 
-
-Races.MEOWTH.setMainEvolution(28, Races.PERSIAN); 
-
-Races.PSYDUCK.setMainEvolution(33, Races.GOLDUCK); 
-
-Races.MANKEY.setMainEvolution(28, Races.PRIMEAPE); 
-
-
-
-Races.POLIWAG.setMainEvolution(25, Races.POLIWHIRL); 
-
-
-Races.ABRA.setMainEvolution(16, Races.KADABRA); 
-
-
-Races.MACHOP.setMainEvolution(28, Races.MACHOKE); 
-
-
-Races.BELLSPROUT.setMainEvolution(21, Races.WEEPINBELL); 
-
-
-Races.TENTACOOL.setMainEvolution(30, Races.TENTACRUEL); 
-
-Races.GEODUDE.setMainEvolution(25, Races.GRAVELER); 
-
-
-Races.PONYTA.setMainEvolution(40, Races.RAPIDASH); 
-
-Races.SLOWPOKE.setMainEvolution(37, Races.SLOWBRO); 
-
-Races.MAGNEMITE.setMainEvolution(30, Races.MAGNETON); 
-
-
-Races.DODUO.setMainEvolution(31, Races.DODRIO); 
-
-Races.SEEL.setMainEvolution(34, Races.DEWGONG); 
-
-Races.GRIMER.setMainEvolution(38, Races.MUK); 
-
-
-
-Races.GASTLY.setMainEvolution(25, Races.HAUNTER); 
-
-
-
-Races.DROWZEE.setMainEvolution(26, Races.HYPNO); 
-
-Races.KRABBY.setMainEvolution(28, Races.KINGLER); 
-
-Races.VOLTORB.setMainEvolution(30, Races.ELECTRODE); 
-
-
-
-Races.CUBONE.setMainEvolution(28, Races.MAROWAK); 
-
-
-
-
-Races.KOFFING.setMainEvolution(35, Races.WEEZING); 
-
-Races.RHYHORN.setMainEvolution(42, Races.RHYDON); 
-
-
-
-
-Races.HORSEA.setMainEvolution(32, Races.SEADRA); 
-
-Races.GOLDEEN.setMainEvolution(33, Races.SEAKING); 
-
-
-
-
-
-
-
-
-
-
-Races.MAGIKARP.setMainEvolution(20, Races.GYARADOS); 
-
-
-
-
-
-
-
-
-Races.OMANYTE.setMainEvolution(40, Races.OMASTAR); 
-
-Races.KABUTO.setMainEvolution(40, Races.KABUTOPS); 
-
-
-
-
-
-
-Races.DRATINI.setMainEvolution(30, Races.DRAGONAIR); 
-Races.DRAGONAIR.setMainEvolution(55, Races.DRAGONITE); 
-
-
-
 Races.BULBASAUR.skills.push({skill: Skills.TACKLE, level: 1});
 Races.BULBASAUR.skills.push({skill: Skills.GROWL, level: 1});
 Races.BULBASAUR.skills.push({skill: Skills.LEECH_SEED, level: 7});
@@ -472,6 +321,14 @@ Races.NIDORINO.skills.push({skill: Skills.HORN_DRILL, level: 41});
 Races.NIDORINO.skills.push({skill: Skills.LIGHT_SCREEN, level: 48});
 Races.NIDORINO.skills.push({skill: Skills.DOUBLE_KICK, level: 50});
 Races.NIDOKING.skills.push({skill: Skills.THRASH, level: 23});
+Races.CLEFAIRY.skills.push({skill: Skills.POUND, level: 1});
+Races.CLEFAIRY.skills.push({skill: Skills.GROWL, level: 1});
+Races.CLEFAIRY.skills.push({skill: Skills.SING, level: 13});
+Races.CLEFAIRY.skills.push({skill: Skills.DOUBLE_SLAP, level: 18});
+Races.CLEFAIRY.skills.push({skill: Skills.MINIMIZE, level: 24});
+Races.CLEFAIRY.skills.push({skill: Skills.METRONOME, level: 31});
+Races.CLEFAIRY.skills.push({skill: Skills.DEFENSE_CURL, level: 39});
+Races.CLEFAIRY.skills.push({skill: Skills.LIGHT_SCREEN, level: 48});
 Races.VULPIX.skills.push({skill: Skills.EMBER, level: 1});
 Races.VULPIX.skills.push({skill: Skills.TAIL_WHIP, level: 1});
 Races.VULPIX.skills.push({skill: Skills.QUICK_ATTACK, level: 16});
@@ -1041,5 +898,154 @@ Races.MEW.skills.push({skill: Skills.TRANSFORM, level: 10});
 Races.MEW.skills.push({skill: Skills.MEGA_PUNCH, level: 20});
 Races.MEW.skills.push({skill: Skills.METRONOME, level: 30});
 Races.MEW.skills.push({skill: Skills.PSYCHIC, level: 40});
+
+Races.BULBASAUR.setMainEvolution(16, Races.IVYSAUR); 
+Races.IVYSAUR.setMainEvolution(32, Races.VENUSAUR); 
+
+Races.CHARMANDER.setMainEvolution(16, Races.CHARMELEON); 
+Races.CHARMELEON.setMainEvolution(36, Races.CHARIZARD); 
+
+Races.SQUIRTLE.setMainEvolution(16, Races.WARTORTLE); 
+Races.WARTORTLE.setMainEvolution(36, Races.BLASTOISE); 
+
+Races.CATERPIE.setMainEvolution(7, Races.METAPOD); 
+Races.METAPOD.setMainEvolution(10, Races.BUTERFREE); 
+
+Races.WEEDLE.setMainEvolution(7, Races.KAKUNA); 
+Races.KAKUNA.setMainEvolution(10, Races.BEEDRILL); 
+
+Races.PIDGEY.setMainEvolution(18, Races.PIDGEOTTO); 
+Races.PIDGEOTTO.setMainEvolution(36, Races.PIDGEOT); 
+
+Races.RATTATA.setMainEvolution(20, Races.RATICATE); 
+
+Races.SPEAROW.setMainEvolution(20, Races.FEAROW); 
+
+Races.EKANS.setMainEvolution(22, Races.ARBOK); 
+
+
+
+Races.SANDSHREW.setMainEvolution(22, Races.SANDSLASH); 
+
+Races.NIDORAN_F.setMainEvolution(16, Races.NIDORINA); 
+
+
+Races.NIDORAN_M.setMainEvolution(16, Races.NIDORINO); 
+
+
+
+
+
+
+
+
+Races.ZUBAT.setMainEvolution(22, Races.GOLBAT); 
+
+Races.ODDISH.setMainEvolution(21, Races.GLOOM); 
+
+
+Races.PARAS.setMainEvolution(24, Races.PARASECT); 
+
+Races.VENONAT.setMainEvolution(31, Races.VENOMOTH); 
+
+Races.DIGLETT.setMainEvolution(26, Races.DUGTRIO); 
+
+Races.MEOWTH.setMainEvolution(28, Races.PERSIAN); 
+
+Races.PSYDUCK.setMainEvolution(33, Races.GOLDUCK); 
+
+Races.MANKEY.setMainEvolution(28, Races.PRIMEAPE); 
+
+
+
+Races.POLIWAG.setMainEvolution(25, Races.POLIWHIRL); 
+
+
+Races.ABRA.setMainEvolution(16, Races.KADABRA); 
+
+
+Races.MACHOP.setMainEvolution(28, Races.MACHOKE); 
+
+
+Races.BELLSPROUT.setMainEvolution(21, Races.WEEPINBELL); 
+
+
+Races.TENTACOOL.setMainEvolution(30, Races.TENTACRUEL); 
+
+Races.GEODUDE.setMainEvolution(25, Races.GRAVELER); 
+
+
+Races.PONYTA.setMainEvolution(40, Races.RAPIDASH); 
+
+Races.SLOWPOKE.setMainEvolution(37, Races.SLOWBRO); 
+
+Races.MAGNEMITE.setMainEvolution(30, Races.MAGNETON); 
+
+
+Races.DODUO.setMainEvolution(31, Races.DODRIO); 
+
+Races.SEEL.setMainEvolution(34, Races.DEWGONG); 
+
+Races.GRIMER.setMainEvolution(38, Races.MUK); 
+
+
+
+Races.GASTLY.setMainEvolution(25, Races.HAUNTER); 
+
+
+
+Races.DROWZEE.setMainEvolution(26, Races.HYPNO); 
+
+Races.KRABBY.setMainEvolution(28, Races.KINGLER); 
+
+Races.VOLTORB.setMainEvolution(30, Races.ELECTRODE); 
+
+
+
+Races.CUBONE.setMainEvolution(28, Races.MAROWAK); 
+
+
+
+
+Races.KOFFING.setMainEvolution(35, Races.WEEZING); 
+
+Races.RHYHORN.setMainEvolution(42, Races.RHYDON); 
+
+
+
+
+Races.HORSEA.setMainEvolution(32, Races.SEADRA); 
+
+Races.GOLDEEN.setMainEvolution(33, Races.SEAKING); 
+
+
+
+
+
+
+
+
+
+
+Races.MAGIKARP.setMainEvolution(20, Races.GYARADOS); 
+
+
+
+
+
+
+
+
+Races.OMANYTE.setMainEvolution(40, Races.OMASTAR); 
+
+Races.KABUTO.setMainEvolution(40, Races.KABUTOPS); 
+
+
+
+
+
+
+Races.DRATINI.setMainEvolution(30, Races.DRAGONAIR); 
+Races.DRAGONAIR.setMainEvolution(55, Races.DRAGONITE); 
 
 module.exports = Races;

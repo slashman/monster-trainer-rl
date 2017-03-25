@@ -18,11 +18,16 @@ function Race(name, chara, r, g, b, aggressive, type, typeb, hp, attack, defense
 Race.prototype = {
 	setMainEvolution: function(level, race){
 		this.evolution = {minLevel: level, race: race};
-		race.setPreevolution(level, race);
+		race.setPreevolution(level, this);
 	},
 	setPreevolution: function(level, race){
-		// Get the skills from the preevolution
-		this.preevolution = {level: level, race: race};
+		// Add the skills from the preevolution
+		var originalSkills = this.skills;
+		this.skills = this.skills.concat(race.skills.filter((skill) => {
+			if (originalSkills.find((originalSkill) => { return originalSkill.skill === skill.skill }))
+				return false;
+			return skill.level <= level;
+		}));
 	}
 
 }
