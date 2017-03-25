@@ -1,10 +1,19 @@
 module.exports = function(skill, monster, target){
 	if (modifiers[skill.type.id]){
-		if (modifiers[skill.type.id][target.race.type.id])
-			return modifiers[skill.type.id][target.race.type.id];
-		if (target.race.typeb && modifiers[skill.type.id][target.race.typeb.id])
-			return modifiers[skill.type.id][target.race.typeb.id];
-		return 1;
+		var modifier = 1;
+		if (modifiers[skill.type.id][target.race.type.id] !== undefined){
+			if (modifiers[skill.type.id][target.race.type.id] === 0){
+				return 0;
+			}
+			modifier *= modifiers[skill.type.id][target.race.type.id];
+		}
+		if (target.race.typeb && modifiers[skill.type.id][target.race.typeb.id] !== undefined){
+			if (modifiers[skill.type.id][target.race.typeb.id] === 0){
+				return 0;
+			}
+			modifier *= modifiers[skill.type.id][target.race.typeb.id];
+		}
+		return modifier;
 	} else {
 		return 1;
 	}
