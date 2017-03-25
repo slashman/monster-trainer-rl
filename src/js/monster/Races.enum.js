@@ -1066,5 +1066,10 @@ Races.VAPOREON.setStoneEvolution("WATER_STONE", Races.EEVEE);
 Races.JOLTEON.setStoneEvolution("THUNDER_STONE", Races.EEVEE); 
 Races.FLAREON.setStoneEvolution("FIRE_STONE", Races.EEVEE); 
 
+Races.ALAKAZAM.setStoneEvolution("TRADING", Races.KADABRA); 
+Races.MACHAMP.setStoneEvolution("TRADING", Races.MACHOKE); 
+Races.GOLEM.setStoneEvolution("TRADING", Races.GRAVELER); 
+Races.GENGAR.setStoneEvolution("TRADING", Races.HAUNTER); 
+
 
 module.exports = Races;
