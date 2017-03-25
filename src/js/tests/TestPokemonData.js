@@ -11,7 +11,7 @@ var mockLevel = {
 	game: {
 		display: {
 			message: function(m){
-				console.log(m)
+				
 			}
 		}
 	}
@@ -20,12 +20,14 @@ var mockLevel = {
 
 for (var r in Races){
 	r = Races[r];
-	console.log("Testing race "+r.name);
 	var being = new Being(mockLevel.game, mockLevel, r, 1);
 	for (var i = 0; i < 100; i++){
-		//console.log("Level "+i);
 		being.levelUp();
 	}
-	console.log("Skills "+being.skills.map((skill) => skill.skill.name));
-	//if (being.skills[0]) console.log("Skills "+JSON.stringify(being.skills[0]));
+	if (being.skills.length === 0){
+		console.log("**** "+r.name+ " has no skills");
+	} else {
+		console.log(r.name+ " ("+being.race.name+")");
+		console.log(""+being.skills.map((skill) => " "+skill.skill.name));
+	}
 }
