@@ -1048,4 +1048,23 @@ Races.KABUTO.setMainEvolution(40, Races.KABUTOPS);
 Races.DRATINI.setMainEvolution(30, Races.DRAGONAIR); 
 Races.DRAGONAIR.setMainEvolution(55, Races.DRAGONITE); 
 
+
+Races.RAICHU.setStoneEvolution("THUNDER_STONE", Races.PIKACHU); 
+Races.NIDOQUEEN.setStoneEvolution("MOON_STONE", Races.NIDORINA); 
+Races.NIDOKING.setStoneEvolution("MOON_STONE", Races.NIDORINO); 
+Races.CLEFABLE.setStoneEvolution("MOON_STONE", Races.CLEFAIRY); 
+Races.NINETALES.setStoneEvolution("FIRE_STONE", Races.VULPIX); 
+Races.WIGGLYTUFF.setStoneEvolution("MOON_STONE", Races.JIGGLYPUFF); 
+Races.VILEPLUME.setStoneEvolution("LEAF_STONE", Races.GLOOM); 
+Races.ARCANINE.setStoneEvolution("FIRE_STONE", Races.GROWLITHE); 
+Races.POLIWRATH.setStoneEvolution("WATER_STONE", Races.POLIWHIRL); 
+Races.VICTREEBEL.setStoneEvolution("LEAF_STONE", Races.WEEPINBELL); 
+Races.CLOYSTER.setStoneEvolution("WATER_STONE", Races.SHELLDER); 
+Races.EXEGGUTOR.setStoneEvolution("LEAF_STONE", Races.EXEGGCUTE); 
+Races.STARMIE.setStoneEvolution("WATER_STONE", Races.STARYU); 
+Races.VAPOREON.setStoneEvolution("WATER_STONE", Races.EEVEE); 
+Races.JOLTEON.setStoneEvolution("THUNDER_STONE", Races.EEVEE); 
+Races.FLAREON.setStoneEvolution("FIRE_STONE", Races.EEVEE); 
+
+
 module.exports = Races;

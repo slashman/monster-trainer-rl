@@ -28,8 +28,10 @@ Race.prototype = {
 				return false;
 			return skill.level <= level;
 		}));
+	},
+	setStoneEvolution: function(itemId, fromRace){
+		this.parentRace = fromRace;
 	}
-
 }
 
 module.exports = Race;
