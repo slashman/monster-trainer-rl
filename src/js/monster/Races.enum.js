@@ -1,192 +1,193 @@
 var Skills = require('./Skills.enum');
 var Types = require('./Types.enum');
+var Race = require('./Race.class');
 
 var Races = {
-BULBASAUR: {name: 'Bulbasaur', tile: new ut.Tile('b', 85, 255, 85), aggressive: true, type: Types.GRASS, typeb: Types.POISON, hp: 45, attack:49, defense: 49, spAttack:65, spDefense:65, speed: 45, xp: 64, skills: []},
-IVYSAUR: {name: 'Ivysaur', tile: new ut.Tile('i', 85, 255, 85), aggressive: true, type: Types.GRASS, typeb: Types.POISON, hp: 60, attack:62, defense: 63, spAttack:80, spDefense:80, speed: 60, xp: 141, skills: []},
-VENUSAUR: {name: 'Venusaur', tile: new ut.Tile('V', 85, 255, 85), aggressive: true, type: Types.GRASS, typeb: Types.POISON, hp: 80, attack:82, defense: 83, spAttack:100, spDefense:100, speed: 80, xp: 208, skills: []},
-CHARMANDER: {name: 'Charmander', tile: new ut.Tile('c', 255, 85, 85), aggressive: true, type: Types.FIRE, hp: 39, attack:52, defense: 43, spAttack:60, spDefense:50, speed: 65, xp: 65, skills: []},
-CHARMELEON: {name: 'Charmeleon', tile: new ut.Tile('c', 255, 85, 85), aggressive: true, type: Types.FIRE, hp: 58, attack:64, defense: 58, spAttack:80, spDefense:65, speed: 80, xp: 142, skills: []},
-CHARIZARD: {name: 'Charizard', tile: new ut.Tile('C', 255, 85, 85), aggressive: true, type: Types.FIRE, typeb: Types.FLYING, hp: 78, attack:84, defense: 78, spAttack:109, spDefense:85, speed: 100, xp: 209, skills: []},
-SQUIRTLE: {name: 'Squirtle', tile: new ut.Tile('s', 85, 85, 255), aggressive: true, type: Types.WATER, hp: 44, attack:48, defense: 65, spAttack:50, spDefense:64, speed: 43, xp: 66, skills: []},
-WARTORTLE: {name: 'Wartortle', tile: new ut.Tile('w', 85, 85, 255), aggressive: true, type: Types.WATER, hp: 59, attack:63, defense: 80, spAttack:65, spDefense:80, speed: 58, xp: 143, skills: []},
-BLASTOISE: {name: 'Blastoise', tile: new ut.Tile('B', 85, 85, 255), aggressive: true, type: Types.WATER, hp: 79, attack:83, defense: 100, spAttack:85, spDefense:105, speed: 78, xp: 210, skills: []},
-CATERPIE: {name: 'Caterpie', tile: new ut.Tile('c', 85, 255, 85), aggressive: false, type: Types.BUG, hp: 45, attack:30, defense: 35, spAttack:20, spDefense:20, speed: 45, xp: 53, skills: []},
-METAPOD: {name: 'Metapod', tile: new ut.Tile('m', 85, 255, 85), aggressive: false, type: Types.BUG, hp: 50, attack:20, defense: 55, spAttack:25, spDefense:25, speed: 30, xp: 72, skills: []},
-BUTERFREE: {name: 'Butterfree', tile: new ut.Tile('b', 255, 255, 255), aggressive: false, type: Types.BUG, typeb: Types.FLYING, hp: 60, attack:45, defense: 50, spAttack:80, spDefense:80, speed: 70, xp: 160, skills: []},
-WEEDLE: {name: 'Weedle', tile: new ut.Tile('w', 170, 85, 0), aggressive: false, type: Types.BUG, typeb: Types.POISON, hp: 40, attack:35, defense: 30, spAttack:20, spDefense:20, speed: 50, xp: 52, skills: []},
-KAKUNA: {name: 'Kakuna', tile: new ut.Tile('k', 255, 255, 85), aggressive: false, type: Types.BUG, typeb: Types.POISON, hp: 45, attack:25, defense: 50, spAttack:25, spDefense:25, speed: 35, xp: 71, skills: []},
-BEEDRILL: {name: 'Beedrill', tile: new ut.Tile('b', 255, 255, 85), aggressive: true, type: Types.BUG, typeb: Types.POISON, hp: 65, attack:80, defense: 40, spAttack:45, spDefense:80, speed: 75, xp: 159, skills: []},
-PIDGEY: {name: 'Pidgey', tile: new ut.Tile('p', 170, 85, 0), aggressive: false, type: Types.NORMAL, typeb: Types.FLYING, hp: 40, attack:45, defense: 40, spAttack:35, spDefense:35, speed: 56, xp: 55, skills: []},
-PIDGEOTTO: {name: 'Pidgeotto', tile: new ut.Tile('p', 170, 85, 0), aggressive: true, type: Types.NORMAL, typeb: Types.FLYING, hp: 63, attack:60, defense: 55, spAttack:50, spDefense:50, speed: 71, xp: 113, skills: []},
-PIDGEOT: {name: 'Pidgeot', tile: new ut.Tile('P', 170, 85, 0), aggressive: true, type: Types.NORMAL, typeb: Types.FLYING, hp: 83, attack:80, defense: 75, spAttack:70, spDefense:70, speed: 91, xp: 172, skills: []},
-RATTATA: {name: 'Rattata', tile: new ut.Tile('r', 170, 0, 170), aggressive: true, type: Types.NORMAL, hp: 30, attack:56, defense: 35, spAttack:25, spDefense:35, speed: 72, xp: 57, skills: []},
-RATICATE: {name: 'Raticate', tile: new ut.Tile('R', 170, 85, 0), aggressive: true, type: Types.NORMAL, hp: 55, attack:81, defense: 60, spAttack:50, spDefense:70, speed: 97, xp: 116, skills: []},
-SPEAROW: {name: 'Spearow', tile: new ut.Tile('s', 170, 85, 0), aggressive: true, type: Types.NORMAL, typeb: Types.FLYING, hp: 40, attack:60, defense: 30, spAttack:31, spDefense:31, speed: 70, xp: 58, skills: []},
-FEAROW: {name: 'Fearow', tile: new ut.Tile('F', 170, 85, 0), aggressive: true, type: Types.NORMAL, typeb: Types.FLYING, hp: 65, attack:90, defense: 65, spAttack:61, spDefense:61, speed: 100, xp: 162, skills: []},
-EKANS: {name: 'Ekans', tile: new ut.Tile('e', 170, 0, 170), aggressive: true, type: Types.POISON, hp: 30, attack:60, defense: 44, spAttack:40, spDefense:54, speed: 55, xp: 62, skills: []},
-ARBOK: {name: 'Arbok', tile: new ut.Tile('a', 170, 0, 170), aggressive: true, type: Types.POISON, hp: 60, attack:85, defense: 69, spAttack:65, spDefense:79, speed: 80, xp: 147, skills: []},
-PIKACHU: {name: 'Pikachu', tile: new ut.Tile('p', 255, 255, 85), aggressive: true, type: Types.ELECTRIC, hp: 35, attack:55, defense: 30, spAttack:50, spDefense:40, speed: 90, xp: 82, skills: []},
-RAICHU: {name: 'Raichu', tile: new ut.Tile('R', 255, 255, 85), aggressive: true, type: Types.ELECTRIC, hp: 60, attack:90, defense: 55, spAttack:90, spDefense:80, speed: 100, xp: 122, skills: []},
-SANDSHREW: {name: 'Sandshrew', tile: new ut.Tile('s', 255, 255, 85), aggressive: true, type: Types.GROUND, hp: 50, attack:75, defense: 85, spAttack:20, spDefense:30, speed: 40, xp: 93, skills: []},
-SANDSLASH: {name: 'Sandslash', tile: new ut.Tile('S', 255, 255, 85), aggressive: true, type: Types.GROUND, hp: 75, attack:100, defense: 110, spAttack:45, spDefense:55, speed: 65, xp: 163, skills: []},
-NIDORAN_F: {name: 'Nidoran♀', tile: new ut.Tile('n', 85, 85, 255), aggressive: false, type: Types.POISON, hp: 55, attack:47, defense: 52, spAttack:40, spDefense:40, speed: 41, xp: 59, skills: []},
-NIDORINA: {name: 'Nidorina', tile: new ut.Tile('n', 85, 85, 255), aggressive: true, type: Types.POISON, hp: 70, attack:62, defense: 67, spAttack:55, spDefense:55, speed: 56, xp: 117, skills: []},
-NIDOQUEEN: {name: 'Nidoqueen', tile: new ut.Tile('N', 85, 85, 255), aggressive: true, type: Types.POISON, typeb: Types.GROUND, hp: 90, attack:82, defense: 87, spAttack:75, spDefense:85, speed: 76, xp: 194, skills: []},
-NIDORAN_M: {name: 'Nidoran♂', tile: new ut.Tile('n', 170, 0, 170), aggressive: false, type: Types.POISON, hp: 46, attack:57, defense: 40, spAttack:40, spDefense:40, speed: 50, xp: 60, skills: []},
-NIDORINO: {name: 'Nidorino', tile: new ut.Tile('n', 170, 0, 170), aggressive: true, type: Types.POISON, hp: 61, attack:72, defense: 57, spAttack:55, spDefense:55, speed: 65, xp: 118, skills: []},
-NIDOKING: {name: 'Nidoking', tile: new ut.Tile('N', 170, 0, 170), aggressive: true, type: Types.POISON, typeb: Types.GROUND, hp: 81, attack:92, defense: 77, spAttack:85, spDefense:75, speed: 85, xp: 195, skills: []},
-CLEFAIRY: {name: 'Clefairy', tile: new ut.Tile('c', 255, 85, 255), aggressive: false, type: Types.NORMAL, hp: 70, attack:45, defense: 48, spAttack:60, spDefense:65, speed: 35, xp: 68, skills: []},
-CLEFABLE: {name: 'Clefable', tile: new ut.Tile('C', 255, 85, 255), aggressive: false, type: Types.NORMAL, hp: 95, attack:70, defense: 73, spAttack:85, spDefense:90, speed: 60, xp: 129, skills: []},
-VULPIX: {name: 'Vulpix', tile: new ut.Tile('v', 170, 85, 0), aggressive: false, type: Types.FIRE, hp: 38, attack:41, defense: 40, spAttack:50, spDefense:65, speed: 65, xp: 63, skills: []},
-NINETALES: {name: 'Ninetales', tile: new ut.Tile('N', 255, 255, 85), aggressive: true, type: Types.FIRE, hp: 73, attack:76, defense: 75, spAttack:81, spDefense:100, speed: 100, xp: 178, skills: []},
-JIGGLYPUFF: {name: 'Jigglypuff', tile: new ut.Tile('j', 255, 85, 255), aggressive: false, type: Types.NORMAL, hp: 115, attack:45, defense: 20, spAttack:45, spDefense:25, speed: 20, xp: 76, skills: []},
-WIGGLYTUFF: {name: 'Wigglytuff', tile: new ut.Tile('w', 255, 85, 255), aggressive: true, type: Types.NORMAL, hp: 140, attack:70, defense: 45, spAttack:75, spDefense:50, speed: 45, xp: 109, skills: []},
-ZUBAT: {name: 'Zubat', tile: new ut.Tile('z', 170, 0, 170), aggressive: false, type: Types.POISON, typeb: Types.FLYING, hp: 40, attack:45, defense: 35, spAttack:30, spDefense:40, speed: 55, xp: 54, skills: []},
-GOLBAT: {name: 'Golbat', tile: new ut.Tile('G', 170, 0, 170), aggressive: true, type: Types.POISON, typeb: Types.FLYING, hp: 75, attack:80, defense: 70, spAttack:65, spDefense:75, speed: 90, xp: 171, skills: []},
-ODDISH: {name: 'Oddish', tile: new ut.Tile('o', 85, 85, 255), aggressive: false, type: Types.GRASS, typeb: Types.POISON, hp: 45, attack:50, defense: 55, spAttack:75, spDefense:65, speed: 30, xp: 78, skills: []},
-GLOOM: {name: 'Gloom', tile: new ut.Tile('g', 85, 85, 255), aggressive: false, type: Types.GRASS, typeb: Types.POISON, hp: 60, attack:65, defense: 70, spAttack:85, spDefense:75, speed: 40, xp: 132, skills: []},
-VILEPLUME: {name: 'Vileplume', tile: new ut.Tile('V', 255, 85, 85), aggressive: false, type: Types.GRASS, typeb: Types.POISON, hp: 75, attack:80, defense: 85, spAttack:100, spDefense:90, speed: 50, xp: 184, skills: []},
-PARAS: {name: 'Paras', tile: new ut.Tile('p', 255, 85, 85), aggressive: false, type: Types.BUG, typeb: Types.GRASS, hp: 35, attack:70, defense: 55, spAttack:45, spDefense:55, speed: 25, xp: 70, skills: []},
-PARASECT: {name: 'Parasect', tile: new ut.Tile('P', 255, 85, 85), aggressive: true, type: Types.BUG, typeb: Types.GRASS, hp: 60, attack:95, defense: 80, spAttack:60, spDefense:80, speed: 30, xp: 128, skills: []},
-VENONAT: {name: 'Venonat', tile: new ut.Tile('v', 170, 0, 170), aggressive: true, type: Types.BUG, typeb: Types.POISON, hp: 60, attack:55, defense: 50, spAttack:40, spDefense:55, speed: 45, xp: 75, skills: []},
-VENOMOTH: {name: 'Venomoth', tile: new ut.Tile('v', 170, 0, 170), aggressive: true, type: Types.BUG, typeb: Types.POISON, hp: 70, attack:65, defense: 60, spAttack:90, spDefense:75, speed: 90, xp: 138, skills: []},
-DIGLETT: {name: 'Diglett', tile: new ut.Tile('d', 170, 85, 0), aggressive: true, type: Types.GROUND, hp: 10, attack:55, defense: 25, spAttack:35, spDefense:45, speed: 95, xp: 81, skills: []},
-DUGTRIO: {name: 'Dugtrio', tile: new ut.Tile('d', 170, 85, 0), aggressive: true, type: Types.GROUND, hp: 35, attack:80, defense: 50, spAttack:50, spDefense:70, speed: 120, xp: 153, skills: []},
-MEOWTH: {name: 'Meowth', tile: new ut.Tile('m', 255, 255, 85), aggressive: true, type: Types.NORMAL, hp: 40, attack:45, defense: 35, spAttack:40, spDefense:40, speed: 90, xp: 69, skills: []},
-PERSIAN: {name: 'Persian', tile: new ut.Tile('p', 255, 255, 85), aggressive: true, type: Types.NORMAL, hp: 65, attack:70, defense: 60, spAttack:65, spDefense:65, speed: 115, xp: 148, skills: []},
-PSYDUCK: {name: 'Psyduck', tile: new ut.Tile('p', 255, 255, 85), aggressive: false, type: Types.WATER, hp: 50, attack:52, defense: 48, spAttack:65, spDefense:50, speed: 55, xp: 80, skills: []},
-GOLDUCK: {name: 'Golduck', tile: new ut.Tile('g', 85, 85, 255), aggressive: true, type: Types.WATER, hp: 80, attack:82, defense: 78, spAttack:95, spDefense:80, speed: 85, xp: 174, skills: []},
-MANKEY: {name: 'Mankey', tile: new ut.Tile('m', 170, 85, 0), aggressive: true, type: Types.FIGHTING, hp: 40, attack:80, defense: 35, spAttack:35, spDefense:45, speed: 70, xp: 74, skills: []},
-PRIMEAPE: {name: 'Primeape', tile: new ut.Tile('p', 170, 85, 0), aggressive: true, type: Types.FIGHTING, hp: 65, attack:105, defense: 60, spAttack:60, spDefense:70, speed: 95, xp: 149, skills: []},
-GROWLITHE: {name: 'Growlithe', tile: new ut.Tile('g', 170, 85, 0), aggressive: true, type: Types.FIRE, hp: 55, attack:70, defense: 45, spAttack:70, spDefense:50, speed: 60, xp: 91, skills: []},
-ARCANINE: {name: 'Arcanine', tile: new ut.Tile('A', 170, 85, 0), aggressive: true, type: Types.FIRE, hp: 90, attack:110, defense: 80, spAttack:100, spDefense:80, speed: 95, xp: 213, skills: []},
-POLIWAG: {name: 'Poliwag', tile: new ut.Tile('p', 85, 85, 255), aggressive: false, type: Types.WATER, hp: 40, attack:50, defense: 40, spAttack:40, spDefense:40, speed: 90, xp: 77, skills: []},
-POLIWHIRL: {name: 'Poliwhirl', tile: new ut.Tile('p', 85, 85, 255), aggressive: true, type: Types.WATER, hp: 65, attack:65, defense: 65, spAttack:50, spDefense:50, speed: 90, xp: 131, skills: []},
-POLIWRATH: {name: 'Poliwrath', tile: new ut.Tile('P', 85, 85, 255), aggressive: true, type: Types.WATER, typeb: Types.FIGHTING, hp: 90, attack:85, defense: 95, spAttack:70, spDefense:90, speed: 70, xp: 185, skills: []},
-ABRA: {name: 'Abra', tile: new ut.Tile('a', 170, 85, 0), aggressive: false, type: Types.PSYCHIC, hp: 25, attack:20, defense: 15, spAttack:105, spDefense:55, speed: 90, xp: 73, skills: []},
-KADABRA: {name: 'Kadabra', tile: new ut.Tile('k', 170, 85, 0), aggressive: true, type: Types.PSYCHIC, hp: 40, attack:35, defense: 30, spAttack:120, spDefense:70, speed: 105, xp: 145, skills: []},
-ALAKAZAM: {name: 'Alakazam', tile: new ut.Tile('A', 170, 85, 0), aggressive: true, type: Types.PSYCHIC, hp: 55, attack:50, defense: 45, spAttack:135, spDefense:85, speed: 120, xp: 186, skills: []},
-MACHOP: {name: 'Machop', tile: new ut.Tile('m', 170, 170, 170), aggressive: true, type: Types.FIGHTING, hp: 70, attack:80, defense: 50, spAttack:35, spDefense:35, speed: 35, xp: 88, skills: []},
-MACHOKE: {name: 'Machoke', tile: new ut.Tile('m', 170, 170, 170), aggressive: true, type: Types.FIGHTING, hp: 80, attack:100, defense: 70, spAttack:50, spDefense:60, speed: 45, xp: 146, skills: []},
-MACHAMP: {name: 'Machamp', tile: new ut.Tile('M', 170, 170, 170), aggressive: true, type: Types.FIGHTING, hp: 90, attack:130, defense: 80, spAttack:65, spDefense:85, speed: 55, xp: 193, skills: []},
-BELLSPROUT: {name: 'Bellsprout', tile: new ut.Tile('b', 85, 255, 85), aggressive: false, type: Types.GRASS, typeb: Types.POISON, hp: 50, attack:75, defense: 35, spAttack:70, spDefense:30, speed: 40, xp: 84, skills: []},
-WEEPINBELL: {name: 'Weepinbell', tile: new ut.Tile('w', 85, 255, 85), aggressive: false, type: Types.GRASS, typeb: Types.POISON, hp: 65, attack:90, defense: 50, spAttack:85, spDefense:45, speed: 55, xp: 151, skills: []},
-VICTREEBEL: {name: 'Victreebel', tile: new ut.Tile('V', 85, 255, 85), aggressive: true, type: Types.GRASS, typeb: Types.POISON, hp: 80, attack:105, defense: 65, spAttack:100, spDefense:60, speed: 70, xp: 191, skills: []},
-TENTACOOL: {name: 'Tentacool', tile: new ut.Tile('t', 85, 85, 255), aggressive: true, type: Types.WATER, typeb: Types.POISON, hp: 40, attack:40, defense: 35, spAttack:50, spDefense:100, speed: 70, xp: 105, skills: []},
-TENTACRUEL: {name: 'Tentacruel', tile: new ut.Tile('t', 85, 85, 255), aggressive: true, type: Types.WATER, typeb: Types.POISON, hp: 80, attack:70, defense: 65, spAttack:80, spDefense:120, speed: 100, xp: 205, skills: []},
-GEODUDE: {name: 'Geodude', tile: new ut.Tile('g', 170, 85, 0), aggressive: true, type: Types.ROCK, typeb: Types.GROUND, hp: 40, attack:80, defense: 100, spAttack:30, spDefense:30, speed: 20, xp: 86, skills: []},
-GRAVELER: {name: 'Graveler', tile: new ut.Tile('G', 170, 85, 0), aggressive: true, type: Types.ROCK, typeb: Types.GROUND, hp: 55, attack:95, defense: 115, spAttack:45, spDefense:45, speed: 35, xp: 134, skills: []},
-GOLEM: {name: 'Golem', tile: new ut.Tile('G', 170, 85, 0), aggressive: true, type: Types.ROCK, typeb: Types.GROUND, hp: 80, attack:110, defense: 130, spAttack:55, spDefense:65, speed: 45, xp: 177, skills: []},
-PONYTA: {name: 'Ponyta', tile: new ut.Tile('p', 255, 255, 85), aggressive: false, type: Types.FIRE, hp: 50, attack:85, defense: 55, spAttack:65, spDefense:65, speed: 90, xp: 152, skills: []},
-RAPIDASH: {name: 'Rapidash', tile: new ut.Tile('R', 255, 255, 85), aggressive: false, type: Types.FIRE, hp: 65, attack:100, defense: 70, spAttack:80, spDefense:80, speed: 105, xp: 192, skills: []},
-SLOWPOKE: {name: 'Slowpoke', tile: new ut.Tile('s', 255, 85, 255), aggressive: false, type: Types.WATER, typeb: Types.PSYCHIC, hp: 90, attack:65, defense: 65, spAttack:40, spDefense:40, speed: 15, xp: 99, skills: []},
-SLOWBRO: {name: 'Slowbro', tile: new ut.Tile('s', 255, 85, 255), aggressive: false, type: Types.WATER, typeb: Types.PSYCHIC, hp: 95, attack:75, defense: 110, spAttack:100, spDefense:80, speed: 30, xp: 164, skills: []},
-MAGNEMITE: {name: 'Magnemite', tile: new ut.Tile('m', 170, 170, 170), aggressive: true, type: Types.ELECTRIC, typeb: Types.STEEL, hp: 25, attack:35, defense: 70, spAttack:95, spDefense:55, speed: 45, xp: 89, skills: []},
-MAGNETON: {name: 'Magneton', tile: new ut.Tile('m', 170, 170, 170), aggressive: true, type: Types.ELECTRIC, typeb: Types.STEEL, hp: 50, attack:60, defense: 95, spAttack:120, spDefense:70, speed: 70, xp: 161, skills: []},
-FARFETCHD: {name: 'Farfetch\'d', tile: new ut.Tile('f', 170, 85, 0), aggressive: true, type: Types.NORMAL, typeb: Types.FLYING, hp: 52, attack:65, defense: 55, spAttack:58, spDefense:62, speed: 60, xp: 94, skills: []},
-DODUO: {name: 'Doduo', tile: new ut.Tile('d', 170, 85, 0), aggressive: true, type: Types.NORMAL, typeb: Types.FLYING, hp: 35, attack:85, defense: 45, spAttack:35, spDefense:35, speed: 75, xp: 96, skills: []},
-DODRIO: {name: 'Dodrio', tile: new ut.Tile('d', 170, 85, 0), aggressive: true, type: Types.NORMAL, typeb: Types.FLYING, hp: 60, attack:110, defense: 70, spAttack:60, spDefense:60, speed: 100, xp: 158, skills: []},
-SEEL: {name: 'Seel', tile: new ut.Tile('s', 255, 255, 255), aggressive: false, type: Types.WATER, hp: 65, attack:45, defense: 55, spAttack:45, spDefense:70, speed: 45, xp: 100, skills: []},
-DEWGONG: {name: 'Dewgong', tile: new ut.Tile('d', 255, 255, 255), aggressive: true, type: Types.WATER, typeb: Types.ICE, hp: 90, attack:70, defense: 80, spAttack:70, spDefense:95, speed: 70, xp: 176, skills: []},
-GRIMER: {name: 'Grimer', tile: new ut.Tile('g', 170, 0, 170), aggressive: true, type: Types.POISON, hp: 80, attack:80, defense: 50, spAttack:40, spDefense:50, speed: 25, xp: 90, skills: []},
-MUK: {name: 'Muk', tile: new ut.Tile('m', 170, 0, 170), aggressive: true, type: Types.POISON, hp: 105, attack:105, defense: 75, spAttack:65, spDefense:100, speed: 50, xp: 157, skills: []},
-SHELLDER: {name: 'Shellder', tile: new ut.Tile('s', 170, 0, 170), aggressive: false, type: Types.WATER, hp: 30, attack:65, defense: 100, spAttack:45, spDefense:25, speed: 40, xp: 97, skills: []},
-CLOYSTER: {name: 'Cloyster', tile: new ut.Tile('c', 170, 0, 170), aggressive: true, type: Types.WATER, typeb: Types.ICE, hp: 50, attack:90, defense: 180, spAttack:85, spDefense:45, speed: 70, xp: 203, skills: []},
-GASTLY: {name: 'Gastly', tile: new ut.Tile('g', 170, 0, 170), aggressive: true, type: Types.GHOST, typeb: Types.POISON, hp: 30, attack:35, defense: 30, spAttack:100, spDefense:35, speed: 80, xp: 95, skills: []},
-HAUNTER: {name: 'Haunter', tile: new ut.Tile('h', 170, 0, 170), aggressive: true, type: Types.GHOST, typeb: Types.POISON, hp: 45, attack:50, defense: 45, spAttack:115, spDefense:55, speed: 95, xp: 126, skills: []},
-GENGAR: {name: 'Gengar', tile: new ut.Tile('G', 170, 0, 170), aggressive: true, type: Types.GHOST, typeb: Types.POISON, hp: 60, attack:65, defense: 60, spAttack:130, spDefense:75, speed: 110, xp: 190, skills: []},
-ONIX: {name: 'Onix', tile: new ut.Tile('O', 170, 170, 170), aggressive: true, type: Types.ROCK, typeb: Types.GROUND, hp: 35, attack:45, defense: 160, spAttack:30, spDefense:45, speed: 70, xp: 108, skills: []},
-DROWZEE: {name: 'Drowzee', tile: new ut.Tile('d', 255, 255, 85), aggressive: false, type: Types.PSYCHIC, hp: 60, attack:48, defense: 45, spAttack:43, spDefense:90, speed: 42, xp: 102, skills: []},
-HYPNO: {name: 'Hypno', tile: new ut.Tile('h', 255, 255, 85), aggressive: false, type: Types.PSYCHIC, hp: 85, attack:73, defense: 70, spAttack:73, spDefense:115, speed: 67, xp: 165, skills: []},
-KRABBY: {name: 'Krabby', tile: new ut.Tile('k', 255, 85, 85), aggressive: false, type: Types.WATER, hp: 30, attack:105, defense: 90, spAttack:25, spDefense:25, speed: 50, xp: 115, skills: []},
-KINGLER: {name: 'Kingler', tile: new ut.Tile('K', 255, 85, 85), aggressive: true, type: Types.WATER, hp: 55, attack:130, defense: 115, spAttack:50, spDefense:50, speed: 75, xp: 206, skills: []},
-VOLTORB: {name: 'Voltorb', tile: new ut.Tile('v', 255, 85, 85), aggressive: true, type: Types.ELECTRIC, hp: 40, attack:30, defense: 50, spAttack:55, spDefense:55, speed: 100, xp: 103, skills: []},
-ELECTRODE: {name: 'Electrode', tile: new ut.Tile('E', 255, 85, 85), aggressive: true, type: Types.ELECTRIC, hp: 60, attack:50, defense: 70, spAttack:80, spDefense:80, speed: 140, xp: 150, skills: []},
-EXEGGCUTE: {name: 'Exeggcute', tile: new ut.Tile('e', 255, 85, 255), aggressive: true, type: Types.GRASS, typeb: Types.PSYCHIC, hp: 60, attack:40, defense: 80, spAttack:60, spDefense:45, speed: 40, xp: 98, skills: []},
-EXEGGUTOR: {name: 'Exeggutor', tile: new ut.Tile('E', 255, 255, 85), aggressive: true, type: Types.GRASS, typeb: Types.PSYCHIC, hp: 95, attack:95, defense: 85, spAttack:125, spDefense:65, speed: 55, xp: 212, skills: []},
-CUBONE: {name: 'Cubone', tile: new ut.Tile('c', 170, 85, 0), aggressive: true, type: Types.GROUND, hp: 50, attack:50, defense: 95, spAttack:40, spDefense:50, speed: 35, xp: 87, skills: []},
-MAROWAK: {name: 'Marowak', tile: new ut.Tile('m', 170, 85, 0), aggressive: true, type: Types.GROUND, hp: 60, attack:80, defense: 110, spAttack:50, spDefense:80, speed: 45, xp: 124, skills: []},
-HITMONLEE: {name: 'Hitmonlee', tile: new ut.Tile('h', 170, 85, 0), aggressive: true, type: Types.FIGHTING, hp: 50, attack:120, defense: 53, spAttack:35, spDefense:110, speed: 87, xp: 139, skills: []},
-HITMONCHAN: {name: 'Hitmonchan', tile: new ut.Tile('h', 170, 85, 0), aggressive: true, type: Types.FIGHTING, hp: 50, attack:105, defense: 79, spAttack:35, spDefense:110, speed: 76, xp: 140, skills: []},
-LICKITUNG: {name: 'Lickitung', tile: new ut.Tile('l', 255, 85, 255), aggressive: true, type: Types.NORMAL, hp: 90, attack:55, defense: 75, spAttack:60, spDefense:75, speed: 30, xp: 127, skills: []},
-KOFFING: {name: 'Koffing', tile: new ut.Tile('k', 170, 0, 170), aggressive: true, type: Types.POISON, hp: 40, attack:65, defense: 95, spAttack:60, spDefense:45, speed: 35, xp: 114, skills: []},
-WEEZING: {name: 'Weezing', tile: new ut.Tile('w', 170, 0, 170), aggressive: true, type: Types.POISON, hp: 65, attack:90, defense: 120, spAttack:85, spDefense:70, speed: 60, xp: 173, skills: []},
-RHYHORN: {name: 'Rhyhorn', tile: new ut.Tile('R', 170, 170, 170), aggressive: true, type: Types.GROUND, typeb: Types.ROCK, hp: 80, attack:85, defense: 95, spAttack:30, spDefense:30, speed: 25, xp: 135, skills: []},
-RHYDON: {name: 'Rhydon', tile: new ut.Tile('R', 170, 170, 170), aggressive: true, type: Types.GROUND, typeb: Types.ROCK, hp: 105, attack:130, defense: 120, spAttack:45, spDefense:45, speed: 40, xp: 204, skills: []},
-CHANSEY: {name: 'Chansey', tile: new ut.Tile('c', 255, 85, 255), aggressive: false, type: Types.NORMAL, hp: 250, attack:5, defense: 5, spAttack:35, spDefense:105, speed: 50, xp: 255, skills: []},
-TANGELA: {name: 'Tangela', tile: new ut.Tile('t', 85, 85, 255), aggressive: false, type: Types.GRASS, hp: 65, attack:55, defense: 115, spAttack:100, spDefense:40, speed: 60, xp: 166, skills: []},
-KANGASKHAN: {name: 'Kangaskhan', tile: new ut.Tile('K', 170, 85, 0), aggressive: true, type: Types.NORMAL, hp: 105, attack:95, defense: 80, spAttack:40, spDefense:80, speed: 90, xp: 175, skills: []},
-HORSEA: {name: 'Horsea', tile: new ut.Tile('h', 85, 85, 255), aggressive: false, type: Types.WATER, hp: 30, attack:40, defense: 70, spAttack:70, spDefense:25, speed: 60, xp: 83, skills: []},
-SEADRA: {name: 'Seadra', tile: new ut.Tile('s', 85, 85, 255), aggressive: true, type: Types.WATER, hp: 55, attack:65, defense: 95, spAttack:95, spDefense:45, speed: 85, xp: 155, skills: []},
-GOLDEEN: {name: 'Goldeen', tile: new ut.Tile('g', 255, 85, 85), aggressive: false, type: Types.WATER, hp: 45, attack:67, defense: 60, spAttack:35, spDefense:50, speed: 63, xp: 111, skills: []},
-SEAKING: {name: 'Seaking', tile: new ut.Tile('S', 255, 85, 85), aggressive: true, type: Types.WATER, hp: 80, attack:92, defense: 65, spAttack:65, spDefense:80, speed: 68, xp: 170, skills: []},
-STARYU: {name: 'Staryu', tile: new ut.Tile('s', 170, 85, 0), aggressive: true, type: Types.WATER, hp: 30, attack:45, defense: 55, spAttack:70, spDefense:55, speed: 85, xp: 106, skills: []},
-STARMIE: {name: 'Starmie', tile: new ut.Tile('s', 170, 0, 170), aggressive: true, type: Types.WATER, typeb: Types.PSYCHIC, hp: 60, attack:75, defense: 85, spAttack:100, spDefense:85, speed: 115, xp: 207, skills: []},
-MR_MIME: {name: 'Mr. Mime', tile: new ut.Tile('m', 255, 85, 255), aggressive: false, type: Types.PSYCHIC, hp: 40, attack:45, defense: 65, spAttack:100, spDefense:120, speed: 90, xp: 136, skills: []},
-SCYTHER: {name: 'Scyther', tile: new ut.Tile('s', 85, 255, 85), aggressive: true, type: Types.BUG, typeb: Types.FLYING, hp: 70, attack:110, defense: 80, spAttack:55, spDefense:80, speed: 105, xp: 187, skills: []},
-JYNX: {name: 'Jynx', tile: new ut.Tile('j', 255, 85, 85), aggressive: false, type: Types.ICE, typeb: Types.PSYCHIC, hp: 65, attack:50, defense: 35, spAttack:115, spDefense:95, speed: 95, xp: 137, skills: []},
-ELECTABUZZ: {name: 'Electabuzz', tile: new ut.Tile('e', 255, 255, 85), aggressive: true, type: Types.ELECTRIC, hp: 65, attack:83, defense: 57, spAttack:95, spDefense:85, speed: 105, xp: 156, skills: []},
-MAGMAR: {name: 'Magmar', tile: new ut.Tile('m', 255, 85, 85), aggressive: true, type: Types.FIRE, hp: 65, attack:95, defense: 57, spAttack:100, spDefense:85, speed: 93, xp: 167, skills: []},
-PINSIR: {name: 'Pinsir', tile: new ut.Tile('p', 170, 85, 0), aggressive: true, type: Types.BUG, hp: 65, attack:125, defense: 100, spAttack:55, spDefense:70, speed: 85, xp: 200, skills: []},
-TAUROS: {name: 'Tauros', tile: new ut.Tile('T', 170, 85, 0), aggressive: true, type: Types.NORMAL, hp: 75, attack:100, defense: 95, spAttack:40, spDefense:70, speed: 110, xp: 211, skills: []},
-MAGIKARP: {name: 'Magikarp', tile: new ut.Tile('m', 255, 85, 85), aggressive: false, type: Types.WATER, hp: 20, attack:10, defense: 55, spAttack:15, spDefense:20, speed: 80, xp: 20, skills: []},
-GYARADOS: {name: 'Gyarados', tile: new ut.Tile('G', 85, 85, 255), aggressive: true, type: Types.WATER, typeb: Types.FLYING, hp: 95, attack:125, defense: 79, spAttack:60, spDefense:100, speed: 81, xp: 214, skills: []},
-LAPRAS: {name: 'Lapras', tile: new ut.Tile('L', 85, 85, 255), aggressive: true, type: Types.WATER, typeb: Types.ICE, hp: 130, attack:85, defense: 80, spAttack:85, spDefense:95, speed: 60, xp: 219, skills: []},
-DITTO: {name: 'Ditto', tile: new ut.Tile('d', 170, 0, 170), aggressive: true, type: Types.NORMAL, hp: 48, attack:48, defense: 48, spAttack:48, spDefense:48, speed: 48, xp: 61, skills: []},
-EEVEE: {name: 'Eevee', tile: new ut.Tile('e', 170, 85, 0), aggressive: true, type: Types.NORMAL, hp: 55, attack:55, defense: 50, spAttack:45, spDefense:65, speed: 55, xp: 92, skills: []},
-VAPOREON: {name: 'Vaporeon', tile: new ut.Tile('v', 85, 85, 255), aggressive: true, type: Types.WATER, hp: 130, attack:65, defense: 60, spAttack:110, spDefense:95, speed: 65, xp: 196, skills: []},
-JOLTEON: {name: 'Jolteon', tile: new ut.Tile('j', 255, 255, 85), aggressive: true, type: Types.ELECTRIC, hp: 65, attack:65, defense: 60, spAttack:110, spDefense:95, speed: 130, xp: 197, skills: []},
-FLAREON: {name: 'Flareon', tile: new ut.Tile('f', 255, 85, 85), aggressive: true, type: Types.FIRE, hp: 65, attack:130, defense: 60, spAttack:95, spDefense:110, speed: 65, xp: 198, skills: []},
-PORYGON: {name: 'Porygon', tile: new ut.Tile('p', 255, 85, 255), aggressive: true, type: Types.NORMAL, hp: 65, attack:60, defense: 70, spAttack:85, spDefense:75, speed: 40, xp: 130, skills: []},
-OMANYTE: {name: 'Omanyte', tile: new ut.Tile('o', 85, 85, 255), aggressive: true, type: Types.ROCK, typeb: Types.WATER, hp: 35, attack:40, defense: 100, spAttack:90, spDefense:55, speed: 35, xp: 120, skills: []},
-OMASTAR: {name: 'Omastar', tile: new ut.Tile('o', 85, 85, 255), aggressive: true, type: Types.ROCK, typeb: Types.WATER, hp: 70, attack:60, defense: 125, spAttack:115, spDefense:70, speed: 55, xp: 199, skills: []},
-KABUTO: {name: 'Kabuto', tile: new ut.Tile('k', 170, 85, 0), aggressive: true, type: Types.ROCK, typeb: Types.WATER, hp: 30, attack:80, defense: 90, spAttack:55, spDefense:45, speed: 55, xp: 119, skills: []},
-KABUTOPS: {name: 'Kabutops', tile: new ut.Tile('K', 170, 85, 0), aggressive: true, type: Types.ROCK, typeb: Types.WATER, hp: 60, attack:115, defense: 105, spAttack:65, spDefense:70, speed: 80, xp: 201, skills: []},
-AERODACTYL: {name: 'Aerodactyl', tile: new ut.Tile('A', 170, 0, 170), aggressive: true, type: Types.ROCK, typeb: Types.FLYING, hp: 80, attack:105, defense: 65, spAttack:60, spDefense:75, speed: 130, xp: 202, skills: []},
-SNORLAX: {name: 'Snorlax', tile: new ut.Tile('S', 85, 85, 85), aggressive: false, type: Types.NORMAL, hp: 160, attack:110, defense: 65, spAttack:65, spDefense:110, speed: 30, xp: 154, skills: []},
-ARTICUNO: {name: 'Articuno', tile: new ut.Tile('A', 85, 85, 255), aggressive: true, type: Types.ICE, typeb: Types.FLYING, hp: 90, attack:85, defense: 100, spAttack:95, spDefense:125, speed: 85, xp: 215, skills: []},
-ZAPDOS: {name: 'Zapdos', tile: new ut.Tile('Z', 255, 255, 85), aggressive: true, type: Types.ELECTRIC, typeb: Types.FLYING, hp: 90, attack:90, defense: 85, spAttack:125, spDefense:90, speed: 100, xp: 216, skills: []},
-MOLTRES: {name: 'Moltres', tile: new ut.Tile('M', 255, 255, 85), aggressive: true, type: Types.FIRE, typeb: Types.FLYING, hp: 90, attack:100, defense: 90, spAttack:125, spDefense:85, speed: 90, xp: 217, skills: []},
-DRATINI: {name: 'Dratini', tile: new ut.Tile('d', 85, 85, 255), aggressive: true, type: Types.DRAGON, hp: 41, attack:64, defense: 45, spAttack:50, spDefense:50, speed: 50, xp: 67, skills: []},
-DRAGONAIR: {name: 'Dragonair', tile: new ut.Tile('d', 85, 85, 255), aggressive: true, type: Types.DRAGON, hp: 61, attack:84, defense: 65, spAttack:70, spDefense:70, speed: 70, xp: 144, skills: []},
-DRAGONITE: {name: 'Dragonite', tile: new ut.Tile('D', 170, 85, 0), aggressive: true, type: Types.DRAGON, typeb: Types.FLYING, hp: 91, attack:134, defense: 95, spAttack:100, spDefense:100, speed: 80, xp: 218, skills: []},
-MEWTWO: {name: 'Mewtwo', tile: new ut.Tile('M', 170, 0, 170), aggressive: true, type: Types.PSYCHIC, hp: 106, attack:110, defense: 90, spAttack:154, spDefense:90, speed: 130, xp: 220, skills: []},
-MEW: {name: 'Mew', tile: new ut.Tile('m', 255, 85, 255), aggressive: true, type: Types.PSYCHIC, hp: 100, attack:100, defense: 100, spAttack:100, spDefense:100, speed: 100, xp: 64, skills: []}
+BULBASAUR: new Race('Bulbasaur', 'b', 85, 255, 85, true, Types.GRASS, Types.POISON, 45, 49, 49, 65, 65, 45, 64),
+IVYSAUR: new Race('Ivysaur', 'i', 85, 255, 85, true, Types.GRASS, Types.POISON, 60, 62, 63, 80, 80, 60, 141),
+VENUSAUR: new Race('Venusaur', 'V', 85, 255, 85, true, Types.GRASS, Types.POISON, 80, 82, 83, 100, 100, 80, 208),
+CHARMANDER: new Race('Charmander', 'c', 255, 85, 85, true, Types.FIRE, null, 39, 52, 43, 60, 50, 65, 65),
+CHARMELEON: new Race('Charmeleon', 'c', 255, 85, 85, true, Types.FIRE, null, 58, 64, 58, 80, 65, 80, 142),
+CHARIZARD: new Race('Charizard', 'C', 255, 85, 85, true, Types.FIRE, Types.FLYING, 78, 84, 78, 109, 85, 100, 209),
+SQUIRTLE: new Race('Squirtle', 's', 85, 85, 255, true, Types.WATER, null, 44, 48, 65, 50, 64, 43, 66),
+WARTORTLE: new Race('Wartortle', 'w', 85, 85, 255, true, Types.WATER, null, 59, 63, 80, 65, 80, 58, 143),
+BLASTOISE: new Race('Blastoise', 'B', 85, 85, 255, true, Types.WATER, null, 79, 83, 100, 85, 105, 78, 210),
+CATERPIE: new Race('Caterpie', 'c', 85, 255, 85, false, Types.BUG, null, 45, 30, 35, 20, 20, 45, 53),
+METAPOD: new Race('Metapod', 'm', 85, 255, 85, false, Types.BUG, null, 50, 20, 55, 25, 25, 30, 72),
+BUTERFREE: new Race('Butterfree', 'b', 255, 255, 255, false, Types.BUG, Types.FLYING, 60, 45, 50, 80, 80, 70, 160),
+WEEDLE: new Race('Weedle', 'w', 170, 85, 0, false, Types.BUG, Types.POISON, 40, 35, 30, 20, 20, 50, 52),
+KAKUNA: new Race('Kakuna', 'k', 255, 255, 85, false, Types.BUG, Types.POISON, 45, 25, 50, 25, 25, 35, 71),
+BEEDRILL: new Race('Beedrill', 'b', 255, 255, 85, true, Types.BUG, Types.POISON, 65, 80, 40, 45, 80, 75, 159),
+PIDGEY: new Race('Pidgey', 'p', 170, 85, 0, false, Types.NORMAL, Types.FLYING, 40, 45, 40, 35, 35, 56, 55),
+PIDGEOTTO: new Race('Pidgeotto', 'p', 170, 85, 0, true, Types.NORMAL, Types.FLYING, 63, 60, 55, 50, 50, 71, 113),
+PIDGEOT: new Race('Pidgeot', 'P', 170, 85, 0, true, Types.NORMAL, Types.FLYING, 83, 80, 75, 70, 70, 91, 172),
+RATTATA: new Race('Rattata', 'r', 170, 0, 170, true, Types.NORMAL, null, 30, 56, 35, 25, 35, 72, 57),
+RATICATE: new Race('Raticate', 'R', 170, 85, 0, true, Types.NORMAL, null, 55, 81, 60, 50, 70, 97, 116),
+SPEAROW: new Race('Spearow', 's', 170, 85, 0, true, Types.NORMAL, Types.FLYING, 40, 60, 30, 31, 31, 70, 58),
+FEAROW: new Race('Fearow', 'F', 170, 85, 0, true, Types.NORMAL, Types.FLYING, 65, 90, 65, 61, 61, 100, 162),
+EKANS: new Race('Ekans', 'e', 170, 0, 170, true, Types.POISON, null, 30, 60, 44, 40, 54, 55, 62),
+ARBOK: new Race('Arbok', 'a', 170, 0, 170, true, Types.POISON, null, 60, 85, 69, 65, 79, 80, 147),
+PIKACHU: new Race('Pikachu', 'p', 255, 255, 85, true, Types.ELECTRIC, null, 35, 55, 30, 50, 40, 90, 82),
+RAICHU: new Race('Raichu', 'R', 255, 255, 85, true, Types.ELECTRIC, null, 60, 90, 55, 90, 80, 100, 122),
+SANDSHREW: new Race('Sandshrew', 's', 255, 255, 85, true, Types.GROUND, null, 50, 75, 85, 20, 30, 40, 93),
+SANDSLASH: new Race('Sandslash', 'S', 255, 255, 85, true, Types.GROUND, null, 75, 100, 110, 45, 55, 65, 163),
+NIDORAN_F: new Race('Nidoran♀', 'n', 85, 85, 255, false, Types.POISON, null, 55, 47, 52, 40, 40, 41, 59),
+NIDORINA: new Race('Nidorina', 'n', 85, 85, 255, true, Types.POISON, null, 70, 62, 67, 55, 55, 56, 117),
+NIDOQUEEN: new Race('Nidoqueen', 'N', 85, 85, 255, true, Types.POISON, Types.GROUND, 90, 82, 87, 75, 85, 76, 194),
+NIDORAN_M: new Race('Nidoran♂', 'n', 170, 0, 170, false, Types.POISON, null, 46, 57, 40, 40, 40, 50, 60),
+NIDORINO: new Race('Nidorino', 'n', 170, 0, 170, true, Types.POISON, null, 61, 72, 57, 55, 55, 65, 118),
+NIDOKING: new Race('Nidoking', 'N', 170, 0, 170, true, Types.POISON, Types.GROUND, 81, 92, 77, 85, 75, 85, 195),
+CLEFAIRY: new Race('Clefairy', 'c', 255, 85, 255, false, Types.NORMAL, null, 70, 45, 48, 60, 65, 35, 68),
+CLEFABLE: new Race('Clefable', 'C', 255, 85, 255, false, Types.NORMAL, null, 95, 70, 73, 85, 90, 60, 129),
+VULPIX: new Race('Vulpix', 'v', 170, 85, 0, false, Types.FIRE, null, 38, 41, 40, 50, 65, 65, 63),
+NINETALES: new Race('Ninetales', 'N', 255, 255, 85, true, Types.FIRE, null, 73, 76, 75, 81, 100, 100, 178),
+JIGGLYPUFF: new Race('Jigglypuff', 'j', 255, 85, 255, false, Types.NORMAL, null, 115, 45, 20, 45, 25, 20, 76),
+WIGGLYTUFF: new Race('Wigglytuff', 'w', 255, 85, 255, true, Types.NORMAL, null, 140, 70, 45, 75, 50, 45, 109),
+ZUBAT: new Race('Zubat', 'z', 170, 0, 170, false, Types.POISON, Types.FLYING, 40, 45, 35, 30, 40, 55, 54),
+GOLBAT: new Race('Golbat', 'G', 170, 0, 170, true, Types.POISON, Types.FLYING, 75, 80, 70, 65, 75, 90, 171),
+ODDISH: new Race('Oddish', 'o', 85, 85, 255, false, Types.GRASS, Types.POISON, 45, 50, 55, 75, 65, 30, 78),
+GLOOM: new Race('Gloom', 'g', 85, 85, 255, false, Types.GRASS, Types.POISON, 60, 65, 70, 85, 75, 40, 132),
+VILEPLUME: new Race('Vileplume', 'V', 255, 85, 85, false, Types.GRASS, Types.POISON, 75, 80, 85, 100, 90, 50, 184),
+PARAS: new Race('Paras', 'p', 255, 85, 85, false, Types.BUG, Types.GRASS, 35, 70, 55, 45, 55, 25, 70),
+PARASECT: new Race('Parasect', 'P', 255, 85, 85, true, Types.BUG, Types.GRASS, 60, 95, 80, 60, 80, 30, 128),
+VENONAT: new Race('Venonat', 'v', 170, 0, 170, true, Types.BUG, Types.POISON, 60, 55, 50, 40, 55, 45, 75),
+VENOMOTH: new Race('Venomoth', 'v', 170, 0, 170, true, Types.BUG, Types.POISON, 70, 65, 60, 90, 75, 90, 138),
+DIGLETT: new Race('Diglett', 'd', 170, 85, 0, true, Types.GROUND, null, 10, 55, 25, 35, 45, 95, 81),
+DUGTRIO: new Race('Dugtrio', 'd', 170, 85, 0, true, Types.GROUND, null, 35, 80, 50, 50, 70, 120, 153),
+MEOWTH: new Race('Meowth', 'm', 255, 255, 85, true, Types.NORMAL, null, 40, 45, 35, 40, 40, 90, 69),
+PERSIAN: new Race('Persian', 'p', 255, 255, 85, true, Types.NORMAL, null, 65, 70, 60, 65, 65, 115, 148),
+PSYDUCK: new Race('Psyduck', 'p', 255, 255, 85, false, Types.WATER, null, 50, 52, 48, 65, 50, 55, 80),
+GOLDUCK: new Race('Golduck', 'g', 85, 85, 255, true, Types.WATER, null, 80, 82, 78, 95, 80, 85, 174),
+MANKEY: new Race('Mankey', 'm', 170, 85, 0, true, Types.FIGHTING, null, 40, 80, 35, 35, 45, 70, 74),
+PRIMEAPE: new Race('Primeape', 'p', 170, 85, 0, true, Types.FIGHTING, null, 65, 105, 60, 60, 70, 95, 149),
+GROWLITHE: new Race('Growlithe', 'g', 170, 85, 0, true, Types.FIRE, null, 55, 70, 45, 70, 50, 60, 91),
+ARCANINE: new Race('Arcanine', 'A', 170, 85, 0, true, Types.FIRE, null, 90, 110, 80, 100, 80, 95, 213),
+POLIWAG: new Race('Poliwag', 'p', 85, 85, 255, false, Types.WATER, null, 40, 50, 40, 40, 40, 90, 77),
+POLIWHIRL: new Race('Poliwhirl', 'p', 85, 85, 255, true, Types.WATER, null, 65, 65, 65, 50, 50, 90, 131),
+POLIWRATH: new Race('Poliwrath', 'P', 85, 85, 255, true, Types.WATER, Types.FIGHTING, 90, 85, 95, 70, 90, 70, 185),
+ABRA: new Race('Abra', 'a', 170, 85, 0, false, Types.PSYCHIC, null, 25, 20, 15, 105, 55, 90, 73),
+KADABRA: new Race('Kadabra', 'k', 170, 85, 0, true, Types.PSYCHIC, null, 40, 35, 30, 120, 70, 105, 145),
+ALAKAZAM: new Race('Alakazam', 'A', 170, 85, 0, true, Types.PSYCHIC, null, 55, 50, 45, 135, 85, 120, 186),
+MACHOP: new Race('Machop', 'm', 170, 170, 170, true, Types.FIGHTING, null, 70, 80, 50, 35, 35, 35, 88),
+MACHOKE: new Race('Machoke', 'm', 170, 170, 170, true, Types.FIGHTING, null, 80, 100, 70, 50, 60, 45, 146),
+MACHAMP: new Race('Machamp', 'M', 170, 170, 170, true, Types.FIGHTING, null, 90, 130, 80, 65, 85, 55, 193),
+BELLSPROUT: new Race('Bellsprout', 'b', 85, 255, 85, false, Types.GRASS, Types.POISON, 50, 75, 35, 70, 30, 40, 84),
+WEEPINBELL: new Race('Weepinbell', 'w', 85, 255, 85, false, Types.GRASS, Types.POISON, 65, 90, 50, 85, 45, 55, 151),
+VICTREEBEL: new Race('Victreebel', 'V', 85, 255, 85, true, Types.GRASS, Types.POISON, 80, 105, 65, 100, 60, 70, 191),
+TENTACOOL: new Race('Tentacool', 't', 85, 85, 255, true, Types.WATER, Types.POISON, 40, 40, 35, 50, 100, 70, 105),
+TENTACRUEL: new Race('Tentacruel', 't', 85, 85, 255, true, Types.WATER, Types.POISON, 80, 70, 65, 80, 120, 100, 205),
+GEODUDE: new Race('Geodude', 'g', 170, 85, 0, true, Types.ROCK, Types.GROUND, 40, 80, 100, 30, 30, 20, 86),
+GRAVELER: new Race('Graveler', 'G', 170, 85, 0, true, Types.ROCK, Types.GROUND, 55, 95, 115, 45, 45, 35, 134),
+GOLEM: new Race('Golem', 'G', 170, 85, 0, true, Types.ROCK, Types.GROUND, 80, 110, 130, 55, 65, 45, 177),
+PONYTA: new Race('Ponyta', 'p', 255, 255, 85, false, Types.FIRE, null, 50, 85, 55, 65, 65, 90, 152),
+RAPIDASH: new Race('Rapidash', 'R', 255, 255, 85, false, Types.FIRE, null, 65, 100, 70, 80, 80, 105, 192),
+SLOWPOKE: new Race('Slowpoke', 's', 255, 85, 255, false, Types.WATER, Types.PSYCHIC, 90, 65, 65, 40, 40, 15, 99),
+SLOWBRO: new Race('Slowbro', 's', 255, 85, 255, false, Types.WATER, Types.PSYCHIC, 95, 75, 110, 100, 80, 30, 164),
+MAGNEMITE: new Race('Magnemite', 'm', 170, 170, 170, true, Types.ELECTRIC, Types.STEEL, 25, 35, 70, 95, 55, 45, 89),
+MAGNETON: new Race('Magneton', 'm', 170, 170, 170, true, Types.ELECTRIC, Types.STEEL, 50, 60, 95, 120, 70, 70, 161),
+FARFETCHD: new Race('Farfetch\'d', 'f', 170, 85, 0, true, Types.NORMAL, Types.FLYING, 52, 65, 55, 58, 62, 60, 94),
+DODUO: new Race('Doduo', 'd', 170, 85, 0, true, Types.NORMAL, Types.FLYING, 35, 85, 45, 35, 35, 75, 96),
+DODRIO: new Race('Dodrio', 'd', 170, 85, 0, true, Types.NORMAL, Types.FLYING, 60, 110, 70, 60, 60, 100, 158),
+SEEL: new Race('Seel', 's', 255, 255, 255, false, Types.WATER, null, 65, 45, 55, 45, 70, 45, 100),
+DEWGONG: new Race('Dewgong', 'd', 255, 255, 255, true, Types.WATER, Types.ICE, 90, 70, 80, 70, 95, 70, 176),
+GRIMER: new Race('Grimer', 'g', 170, 0, 170, true, Types.POISON, null, 80, 80, 50, 40, 50, 25, 90),
+MUK: new Race('Muk', 'm', 170, 0, 170, true, Types.POISON, null, 105, 105, 75, 65, 100, 50, 157),
+SHELLDER: new Race('Shellder', 's', 170, 0, 170, false, Types.WATER, null, 30, 65, 100, 45, 25, 40, 97),
+CLOYSTER: new Race('Cloyster', 'c', 170, 0, 170, true, Types.WATER, Types.ICE, 50, 90, 180, 85, 45, 70, 203),
+GASTLY: new Race('Gastly', 'g', 170, 0, 170, true, Types.GHOST, Types.POISON, 30, 35, 30, 100, 35, 80, 95),
+HAUNTER: new Race('Haunter', 'h', 170, 0, 170, true, Types.GHOST, Types.POISON, 45, 50, 45, 115, 55, 95, 126),
+GENGAR: new Race('Gengar', 'G', 170, 0, 170, true, Types.GHOST, Types.POISON, 60, 65, 60, 130, 75, 110, 190),
+ONIX: new Race('Onix', 'O', 170, 170, 170, true, Types.ROCK, Types.GROUND, 35, 45, 160, 30, 45, 70, 108),
+DROWZEE: new Race('Drowzee', 'd', 255, 255, 85, false, Types.PSYCHIC, null, 60, 48, 45, 43, 90, 42, 102),
+HYPNO: new Race('Hypno', 'h', 255, 255, 85, false, Types.PSYCHIC, null, 85, 73, 70, 73, 115, 67, 165),
+KRABBY: new Race('Krabby', 'k', 255, 85, 85, false, Types.WATER, null, 30, 105, 90, 25, 25, 50, 115),
+KINGLER: new Race('Kingler', 'K', 255, 85, 85, true, Types.WATER, null, 55, 130, 115, 50, 50, 75, 206),
+VOLTORB: new Race('Voltorb', 'v', 255, 85, 85, true, Types.ELECTRIC, null, 40, 30, 50, 55, 55, 100, 103),
+ELECTRODE: new Race('Electrode', 'E', 255, 85, 85, true, Types.ELECTRIC, null, 60, 50, 70, 80, 80, 140, 150),
+EXEGGCUTE: new Race('Exeggcute', 'e', 255, 85, 255, true, Types.GRASS, Types.PSYCHIC, 60, 40, 80, 60, 45, 40, 98),
+EXEGGUTOR: new Race('Exeggutor', 'E', 255, 255, 85, true, Types.GRASS, Types.PSYCHIC, 95, 95, 85, 125, 65, 55, 212),
+CUBONE: new Race('Cubone', 'c', 170, 85, 0, true, Types.GROUND, null, 50, 50, 95, 40, 50, 35, 87),
+MAROWAK: new Race('Marowak', 'm', 170, 85, 0, true, Types.GROUND, null, 60, 80, 110, 50, 80, 45, 124),
+HITMONLEE: new Race('Hitmonlee', 'h', 170, 85, 0, true, Types.FIGHTING, null, 50, 120, 53, 35, 110, 87, 139),
+HITMONCHAN: new Race('Hitmonchan', 'h', 170, 85, 0, true, Types.FIGHTING, null, 50, 105, 79, 35, 110, 76, 140),
+LICKITUNG: new Race('Lickitung', 'l', 255, 85, 255, true, Types.NORMAL, null, 90, 55, 75, 60, 75, 30, 127),
+KOFFING: new Race('Koffing', 'k', 170, 0, 170, true, Types.POISON, null, 40, 65, 95, 60, 45, 35, 114),
+WEEZING: new Race('Weezing', 'w', 170, 0, 170, true, Types.POISON, null, 65, 90, 120, 85, 70, 60, 173),
+RHYHORN: new Race('Rhyhorn', 'R', 170, 170, 170, true, Types.GROUND, Types.ROCK, 80, 85, 95, 30, 30, 25, 135),
+RHYDON: new Race('Rhydon', 'R', 170, 170, 170, true, Types.GROUND, Types.ROCK, 105, 130, 120, 45, 45, 40, 204),
+CHANSEY: new Race('Chansey', 'c', 255, 85, 255, false, Types.NORMAL, null, 250, 5, 5, 35, 105, 50, 255),
+TANGELA: new Race('Tangela', 't', 85, 85, 255, false, Types.GRASS, null, 65, 55, 115, 100, 40, 60, 166),
+KANGASKHAN: new Race('Kangaskhan', 'K', 170, 85, 0, true, Types.NORMAL, null, 105, 95, 80, 40, 80, 90, 175),
+HORSEA: new Race('Horsea', 'h', 85, 85, 255, false, Types.WATER, null, 30, 40, 70, 70, 25, 60, 83),
+SEADRA: new Race('Seadra', 's', 85, 85, 255, true, Types.WATER, null, 55, 65, 95, 95, 45, 85, 155),
+GOLDEEN: new Race('Goldeen', 'g', 255, 85, 85, false, Types.WATER, null, 45, 67, 60, 35, 50, 63, 111),
+SEAKING: new Race('Seaking', 'S', 255, 85, 85, true, Types.WATER, null, 80, 92, 65, 65, 80, 68, 170),
+STARYU: new Race('Staryu', 's', 170, 85, 0, true, Types.WATER, null, 30, 45, 55, 70, 55, 85, 106),
+STARMIE: new Race('Starmie', 's', 170, 0, 170, true, Types.WATER, Types.PSYCHIC, 60, 75, 85, 100, 85, 115, 207),
+MR_MIME: new Race('Mr. Mime', 'm', 255, 85, 255, false, Types.PSYCHIC, null, 40, 45, 65, 100, 120, 90, 136),
+SCYTHER: new Race('Scyther', 's', 85, 255, 85, true, Types.BUG, Types.FLYING, 70, 110, 80, 55, 80, 105, 187),
+JYNX: new Race('Jynx', 'j', 255, 85, 85, false, Types.ICE, Types.PSYCHIC, 65, 50, 35, 115, 95, 95, 137),
+ELECTABUZZ: new Race('Electabuzz', 'e', 255, 255, 85, true, Types.ELECTRIC, null, 65, 83, 57, 95, 85, 105, 156),
+MAGMAR: new Race('Magmar', 'm', 255, 85, 85, true, Types.FIRE, null, 65, 95, 57, 100, 85, 93, 167),
+PINSIR: new Race('Pinsir', 'p', 170, 85, 0, true, Types.BUG, null, 65, 125, 100, 55, 70, 85, 200),
+TAUROS: new Race('Tauros', 'T', 170, 85, 0, true, Types.NORMAL, null, 75, 100, 95, 40, 70, 110, 211),
+MAGIKARP: new Race('Magikarp', 'm', 255, 85, 85, false, Types.WATER, null, 20, 10, 55, 15, 20, 80, 20),
+GYARADOS: new Race('Gyarados', 'G', 85, 85, 255, true, Types.WATER, Types.FLYING, 95, 125, 79, 60, 100, 81, 214),
+LAPRAS: new Race('Lapras', 'L', 85, 85, 255, true, Types.WATER, Types.ICE, 130, 85, 80, 85, 95, 60, 219),
+DITTO: new Race('Ditto', 'd', 170, 0, 170, true, Types.NORMAL, null, 48, 48, 48, 48, 48, 48, 61),
+EEVEE: new Race('Eevee', 'e', 170, 85, 0, true, Types.NORMAL, null, 55, 55, 50, 45, 65, 55, 92),
+VAPOREON: new Race('Vaporeon', 'v', 85, 85, 255, true, Types.WATER, null, 130, 65, 60, 110, 95, 65, 196),
+JOLTEON: new Race('Jolteon', 'j', 255, 255, 85, true, Types.ELECTRIC, null, 65, 65, 60, 110, 95, 130, 197),
+FLAREON: new Race('Flareon', 'f', 255, 85, 85, true, Types.FIRE, null, 65, 130, 60, 95, 110, 65, 198),
+PORYGON: new Race('Porygon', 'p', 255, 85, 255, true, Types.NORMAL, null, 65, 60, 70, 85, 75, 40, 130),
+OMANYTE: new Race('Omanyte', 'o', 85, 85, 255, true, Types.ROCK, Types.WATER, 35, 40, 100, 90, 55, 35, 120),
+OMASTAR: new Race('Omastar', 'o', 85, 85, 255, true, Types.ROCK, Types.WATER, 70, 60, 125, 115, 70, 55, 199),
+KABUTO: new Race('Kabuto', 'k', 170, 85, 0, true, Types.ROCK, Types.WATER, 30, 80, 90, 55, 45, 55, 119),
+KABUTOPS: new Race('Kabutops', 'K', 170, 85, 0, true, Types.ROCK, Types.WATER, 60, 115, 105, 65, 70, 80, 201),
+AERODACTYL: new Race('Aerodactyl', 'A', 170, 0, 170, true, Types.ROCK, Types.FLYING, 80, 105, 65, 60, 75, 130, 202),
+SNORLAX: new Race('Snorlax', 'S', 85, 85, 85, false, Types.NORMAL, null, 160, 110, 65, 65, 110, 30, 154),
+ARTICUNO: new Race('Articuno', 'A', 85, 85, 255, true, Types.ICE, Types.FLYING, 90, 85, 100, 95, 125, 85, 215),
+ZAPDOS: new Race('Zapdos', 'Z', 255, 255, 85, true, Types.ELECTRIC, Types.FLYING, 90, 90, 85, 125, 90, 100, 216),
+MOLTRES: new Race('Moltres', 'M', 255, 255, 85, true, Types.FIRE, Types.FLYING, 90, 100, 90, 125, 85, 90, 217),
+DRATINI: new Race('Dratini', 'd', 85, 85, 255, true, Types.DRAGON, null, 41, 64, 45, 50, 50, 50, 67),
+DRAGONAIR: new Race('Dragonair', 'd', 85, 85, 255, true, Types.DRAGON, null, 61, 84, 65, 70, 70, 70, 144),
+DRAGONITE: new Race('Dragonite', 'D', 170, 85, 0, true, Types.DRAGON, Types.FLYING, 91, 134, 95, 100, 100, 80, 218),
+MEWTWO: new Race('Mewtwo', 'M', 170, 0, 170, true, Types.PSYCHIC, null, 106, 110, 90, 154, 90, 130, 220),
+MEW: new Race('Mew', 'm', 255, 85, 255, true, Types.PSYCHIC, null, 100, 100, 100, 100, 100, 100, 64)
 };
 
-Races.BULBASAUR.evolution = {minLevel: 16, race: Races.IVYSAUR}
-Races.IVYSAUR.evolution = {minLevel: 32, race: Races.VENUSAUR}
+Races.BULBASAUR.setMainEvolution(16, Races.IVYSAUR); 
+Races.IVYSAUR.setMainEvolution(32, Races.VENUSAUR); 
 
-Races.CHARMANDER.evolution = {minLevel: 16, race: Races.CHARMELEON}
-Races.CHARMELEON.evolution = {minLevel: 36, race: Races.CHARIZARD}
+Races.CHARMANDER.setMainEvolution(16, Races.CHARMELEON); 
+Races.CHARMELEON.setMainEvolution(36, Races.CHARIZARD); 
 
-Races.SQUIRTLE.evolution = {minLevel: 16, race: Races.WARTORTLE}
-Races.WARTORTLE.evolution = {minLevel: 36, race: Races.BLASTOISE}
+Races.SQUIRTLE.setMainEvolution(16, Races.WARTORTLE); 
+Races.WARTORTLE.setMainEvolution(36, Races.BLASTOISE); 
 
-Races.CATERPIE.evolution = {minLevel: 7, race: Races.METAPOD}
-Races.METAPOD.evolution = {minLevel: 10, race: Races.BUTERFREE}
+Races.CATERPIE.setMainEvolution(7, Races.METAPOD); 
+Races.METAPOD.setMainEvolution(10, Races.BUTERFREE); 
 
-Races.WEEDLE.evolution = {minLevel: 7, race: Races.KAKUNA}
-Races.KAKUNA.evolution = {minLevel: 10, race: Races.BEEDRILL}
+Races.WEEDLE.setMainEvolution(7, Races.KAKUNA); 
+Races.KAKUNA.setMainEvolution(10, Races.BEEDRILL); 
 
-Races.PIDGEY.evolution = {minLevel: 18, race: Races.PIDGEOTTO}
-Races.PIDGEOTTO.evolution = {minLevel: 36, race: Races.PIDGEOT}
+Races.PIDGEY.setMainEvolution(18, Races.PIDGEOTTO); 
+Races.PIDGEOTTO.setMainEvolution(36, Races.PIDGEOT); 
 
-Races.RATTATA.evolution = {minLevel: 20, race: Races.RATICATE}
+Races.RATTATA.setMainEvolution(20, Races.RATICATE); 
 
-Races.SPEAROW.evolution = {minLevel: 20, race: Races.FEAROW}
+Races.SPEAROW.setMainEvolution(20, Races.FEAROW); 
 
-Races.EKANS.evolution = {minLevel: 22, race: Races.ARBOK}
+Races.EKANS.setMainEvolution(22, Races.ARBOK); 
 
 
 
-Races.SANDSHREW.evolution = {minLevel: 22, race: Races.SANDSLASH}
+Races.SANDSHREW.setMainEvolution(22, Races.SANDSLASH); 
 
-Races.NIDORAN_F.evolution = {minLevel: 16, race: Races.NIDORINA}
+Races.NIDORAN_F.setMainEvolution(16, Races.NIDORINA); 
 
 
-Races.NIDORAN_M.evolution = {minLevel: 16, race: Races.NIDORINO}
+Races.NIDORAN_M.setMainEvolution(16, Races.NIDORINO); 
 
 
 
@@ -195,84 +196,84 @@ Races.NIDORAN_M.evolution = {minLevel: 16, race: Races.NIDORINO}
 
 
 
-Races.ZUBAT.evolution = {minLevel: 22, race: Races.GOLBAT}
+Races.ZUBAT.setMainEvolution(22, Races.GOLBAT); 
 
-Races.ODDISH.evolution = {minLevel: 21, race: Races.GLOOM}
+Races.ODDISH.setMainEvolution(21, Races.GLOOM); 
 
 
-Races.PARAS.evolution = {minLevel: 24, race: Races.PARASECT}
+Races.PARAS.setMainEvolution(24, Races.PARASECT); 
 
-Races.VENONAT.evolution = {minLevel: 31, race: Races.VENOMOTH}
+Races.VENONAT.setMainEvolution(31, Races.VENOMOTH); 
 
-Races.DIGLETT.evolution = {minLevel: 26, race: Races.DUGTRIO}
+Races.DIGLETT.setMainEvolution(26, Races.DUGTRIO); 
 
-Races.MEOWTH.evolution = {minLevel: 28, race: Races.PERSIAN}
+Races.MEOWTH.setMainEvolution(28, Races.PERSIAN); 
 
-Races.PSYDUCK.evolution = {minLevel: 33, race: Races.GOLDUCK}
+Races.PSYDUCK.setMainEvolution(33, Races.GOLDUCK); 
 
-Races.MANKEY.evolution = {minLevel: 28, race: Races.PRIMEAPE}
+Races.MANKEY.setMainEvolution(28, Races.PRIMEAPE); 
 
 
 
-Races.POLIWAG.evolution = {minLevel: 25, race: Races.POLIWHIRL}
+Races.POLIWAG.setMainEvolution(25, Races.POLIWHIRL); 
 
 
-Races.ABRA.evolution = {minLevel: 16, race: Races.KADABRA}
+Races.ABRA.setMainEvolution(16, Races.KADABRA); 
 
 
-Races.MACHOP.evolution = {minLevel: 28, race: Races.MACHOKE}
+Races.MACHOP.setMainEvolution(28, Races.MACHOKE); 
 
 
-Races.BELLSPROUT.evolution = {minLevel: 21, race: Races.WEEPINBELL}
+Races.BELLSPROUT.setMainEvolution(21, Races.WEEPINBELL); 
 
 
-Races.TENTACOOL.evolution = {minLevel: 30, race: Races.TENTACRUEL}
+Races.TENTACOOL.setMainEvolution(30, Races.TENTACRUEL); 
 
-Races.GEODUDE.evolution = {minLevel: 25, race: Races.GRAVELER}
+Races.GEODUDE.setMainEvolution(25, Races.GRAVELER); 
 
 
-Races.PONYTA.evolution = {minLevel: 40, race: Races.RAPIDASH}
+Races.PONYTA.setMainEvolution(40, Races.RAPIDASH); 
 
-Races.SLOWPOKE.evolution = {minLevel: 37, race: Races.SLOWBRO}
+Races.SLOWPOKE.setMainEvolution(37, Races.SLOWBRO); 
 
-Races.MAGNEMITE.evolution = {minLevel: 30, race: Races.MAGNETON}
+Races.MAGNEMITE.setMainEvolution(30, Races.MAGNETON); 
 
 
-Races.DODUO.evolution = {minLevel: 31, race: Races.DODRIO}
+Races.DODUO.setMainEvolution(31, Races.DODRIO); 
 
-Races.SEEL.evolution = {minLevel: 34, race: Races.DEWGONG}
+Races.SEEL.setMainEvolution(34, Races.DEWGONG); 
 
-Races.GRIMER.evolution = {minLevel: 38, race: Races.MUK}
+Races.GRIMER.setMainEvolution(38, Races.MUK); 
 
 
 
-Races.GASTLY.evolution = {minLevel: 25, race: Races.HAUNTER}
+Races.GASTLY.setMainEvolution(25, Races.HAUNTER); 
 
 
 
-Races.DROWZEE.evolution = {minLevel: 26, race: Races.HYPNO}
+Races.DROWZEE.setMainEvolution(26, Races.HYPNO); 
 
-Races.KRABBY.evolution = {minLevel: 28, race: Races.KINGLER}
+Races.KRABBY.setMainEvolution(28, Races.KINGLER); 
 
-Races.VOLTORB.evolution = {minLevel: 30, race: Races.ELECTRODE}
+Races.VOLTORB.setMainEvolution(30, Races.ELECTRODE); 
 
 
 
-Races.CUBONE.evolution = {minLevel: 28, race: Races.MAROWAK}
+Races.CUBONE.setMainEvolution(28, Races.MAROWAK); 
 
 
 
 
-Races.KOFFING.evolution = {minLevel: 35, race: Races.WEEZING}
+Races.KOFFING.setMainEvolution(35, Races.WEEZING); 
 
-Races.RHYHORN.evolution = {minLevel: 42, race: Races.RHYDON}
+Races.RHYHORN.setMainEvolution(42, Races.RHYDON); 
 
 
 
 
-Races.HORSEA.evolution = {minLevel: 32, race: Races.SEADRA}
+Races.HORSEA.setMainEvolution(32, Races.SEADRA); 
 
-Races.GOLDEEN.evolution = {minLevel: 33, race: Races.SEAKING}
+Races.GOLDEEN.setMainEvolution(33, Races.SEAKING); 
 
 
 
@@ -283,7 +284,7 @@ Races.GOLDEEN.evolution = {minLevel: 33, race: Races.SEAKING}
 
 
 
-Races.MAGIKARP.evolution = {minLevel: 20, race: Races.GYARADOS}
+Races.MAGIKARP.setMainEvolution(20, Races.GYARADOS); 
 
 
 
@@ -292,17 +293,19 @@ Races.MAGIKARP.evolution = {minLevel: 20, race: Races.GYARADOS}
 
 
 
-Races.OMANYTE.evolution = {minLevel: 40, race: Races.OMASTAR}
+Races.OMANYTE.setMainEvolution(40, Races.OMASTAR); 
 
-Races.KABUTO.evolution = {minLevel: 40, race: Races.KABUTOPS}
+Races.KABUTO.setMainEvolution(40, Races.KABUTOPS); 
 
 
 
 
 
 
-Races.DRATINI.evolution = {minLevel: 30, race: Races.DRAGONAIR}
-Races.DRAGONAIR.evolution = {minLevel: 55, race: Races.DRAGONITE}
+Races.DRATINI.setMainEvolution(30, Races.DRAGONAIR); 
+Races.DRAGONAIR.setMainEvolution(55, Races.DRAGONITE); 
+
+
 
 Races.BULBASAUR.skills.push({skill: Skills.TACKLE, level: 1});
 Races.BULBASAUR.skills.push({skill: Skills.GROWL, level: 1});
