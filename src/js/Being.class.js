@@ -50,7 +50,14 @@ function Being(game, level, race, xpLevel){
 			};
 		});
 		if (race.parentRace){
-			this.skills = this.skills.concat(race.parentRace.skills.filter(function(def){return def.level <= xpLevel;}));
+			var newSkills = race.parentRace.skills.filter(function(def){return def.level <= xpLevel;});
+			newSkills = newSkills.map(function(val){
+				return {
+					skill: val.skill,
+					pp: new Stat(val.skill.pp)
+				};
+			});
+			this.skills = this.skills.concat(newSkills);
 		}
 		while (this.skills.length > 4){
 			Random.from(this.skills, true);
