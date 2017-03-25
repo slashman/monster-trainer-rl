@@ -173,7 +173,10 @@ Being.prototype = {
 			}
 		} else {
 			this.game.display.message("The "+this.race.name+" dies!");
-			this.enemiesList.forEach(this.grantXP.bind(this));
+			if (this.enemiesList){
+				// The monster can die without enemies, for example by suicide
+				this.enemiesList.forEach(this.grantXP.bind(this));
+			}
 		}
 		this.game.world.level.removeBeing(this);
 		if (this.owner){

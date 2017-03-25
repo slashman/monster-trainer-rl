@@ -10,7 +10,7 @@ CONVERSION: {name: 'Conversion', type: Types.NORMAL, power: 0, accuracy: 0, effe
 SUBSTITUTE: {name: 'Substitute', type: Types.NORMAL, power: 0, accuracy: 0, effect: Effects.CREATE_DECOY, pp: 10, damagetype: 'STAT', params: {}},
 BARRAGE: {name: 'Barrage', type: Types.NORMAL, power: 15, accuracy: 85, effect: Effects.DAMAGE, pp: 20, damagetype: 'PHYS', params: {multihit: 5}},
 BIND: {name: 'Bind', type: Types.NORMAL, power: 15, accuracy: 85, effect: Effects.DAMAGE, pp: 20, damagetype: 'PHYS', params: {multihit: 5, trap: true}},
-BITE: {name: 'Bite', type: Types.DARK, power: 60, accuracy: 100, effect: Effects.DAMAGE, pp: 25, damagetype: 'PHYS', params: {flinchChance: 10}},
+BITE: {name: 'Bite', type: Types.NORMAL, power: 60, accuracy: 100, effect: Effects.DAMAGE, pp: 25, damagetype: 'PHYS', params: {flinchChance: 10}},
 BODY_SLAM: {name: 'Body Slam', type: Types.NORMAL, power: 85, accuracy: 100, effect: Effects.DAMAGE, pp: 15, damagetype: 'PHYS', range: 2, params: {assault: true, paralyzeChance: 30}},
 BONE_CLUB: {name: 'Bone Club', type: Types.GROUND, power: 65, accuracy: 85, effect: Effects.DAMAGE, pp: 20, damagetype: 'PHYS', params: {flinchChance: 10}},
 BONEMERANG: {name: 'Bonemerang', type: Types.GROUND, power: 50, accuracy: 90, effect: Effects.DAMAGE, pp: 10, damagetype: 'PHYS', range: 3, params: {multihit: 2}},
