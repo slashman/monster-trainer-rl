@@ -43,7 +43,6 @@ module.exports = {
 				this.remainingCities--;
 			}
 		}
-		this.showSupermap();
 		return this.metadata;
 	},
 	showSupermap: function(){
