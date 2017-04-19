@@ -184,11 +184,17 @@ Being.prototype = {
 			}
 		} else {
 			this.game.display.message("The "+this.race.name+" dies!");
-			if (this.enemiesList){
+			if (this.enemiesList && this.enemiesList.length > 0){
 				// The monster can die without enemies, for example by suicide
-				this.enemiesList.forEach(this.grantXP.bind(this));
+				var xp = Math.floor(this.calculateXPGain() / this.enemiesList.length);
+				this.enemiesList.forEach(function(enemy){
+					if (!enemy.dead){
+						enemy.addXP(xp);
+					}
+				});
 			}
 		}
+		this.dead = true;
 		this.game.world.level.removeBeing(this);
 		if (this.owner){
 			this.owner.monsterDied(this);
@@ -354,9 +360,6 @@ Being.prototype = {
 			this.enemiesList.push(enemy);
 			this.enemiesMap[enemy.randomId] = enemy;
 		}
-	},
-	grantXP: function(enemy){
-		enemy.addXP(this.calculateXPGain());
 	},
 	addXP: function(xp){
 		this.game.display.message(this.race.name+" gets "+xp+" XP");
