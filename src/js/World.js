@@ -11,7 +11,6 @@ module.exports = {
 		this.game = game;
 		this.player = game.player;
 		this.metadata = MetadataGenerator.generateMetadata();
-		console.log(this.metadata);
 		this.loadLevel(this.metadata._startingLevelId);
 	},
 	loadLevel: function(levelId){
