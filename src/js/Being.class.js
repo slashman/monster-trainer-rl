@@ -137,33 +137,37 @@ Being.prototype = {
 		if (!this.basicAttackSkill){
 			return;
 		}
-		if (this.basicAttackSkill.pp.empty()){
+		var selectedSkill = this.basicAttackSkill; 
+		if (Random.chance(50)){
+			selectedSkill = Random.from(this.skills);
+		}
+		if (selectedSkill.pp.empty()){
 			// Try to get another basic attack skill
-			this.basicAttackSkill = this.skills.find(
+			selectedSkill = this.skills.find(
 				function(skill){
 					return skill.skill.effect === Effects.DAMAGE && !skill.pp.empty();
 				}
 			);
-			if (!this.basicAttackSkill){
+			if (!selectedSkill){
 				// Try to use any skill
-				this.basicAttackSkill = this.skills.find(
+				selectedSkill = this.skills.find(
 					function(skill){
 						return !skill.pp.empty();
 					}
 				);
 			}
 
-			if (!this.basicAttackSkill){
+			if (!selectedSkill){
 				// Struggle it is then
 				this.game.display.message("The "+this.race.name+" can't attack!");
 				return;
 			}
 		}
-		if (!this.validateSkill(this.basicAttackSkill)){
+		if (!this.validateSkill(selectedSkill)){
 			return;
 		}
-		this.basicAttackSkill.pp.reduce(1);
-		this.basicAttackSkill.skill.effect(this, this.basicAttackSkill.skill);
+		selectedSkill.pp.reduce(1);
+		selectedSkill.skill.effect(this, selectedSkill.skill);
 	},
 	tacklePlayer: function(){
 		this.game.display.message("The "+this.race.name+" attacks you.");
