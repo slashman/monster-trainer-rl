@@ -5,10 +5,10 @@ module.exports = {
 		ut.initInput(this.onKeyDown.bind(this));
 		this.mode = 'MOVEMENT';
 		this.SKILL_KEYS = {};
-		this.SKILL_KEYS[ut.KEY_Z] = 0;
-		this.SKILL_KEYS[ut.KEY_X] = 1;
-		this.SKILL_KEYS[ut.KEY_C] = 2;
-		this.SKILL_KEYS[ut.KEY_V] = 3;
+		this.SKILL_KEYS[ut.KEY_V] = 0;
+		this.SKILL_KEYS[ut.KEY_B] = 1;
+		this.SKILL_KEYS[ut.KEY_N] = 2;
+		this.SKILL_KEYS[ut.KEY_M] = 3;
 	},
 	movedir: { x: 0, y: 0 },
 	selectAvailableMonsterSlot: function(){
@@ -82,7 +82,7 @@ module.exports = {
 				}
 				return;
 			}
-			if (k === ut.KEY_Z || k === ut.KEY_X || k === ut.KEY_C || k === ut.KEY_V){
+			if (k === ut.KEY_V || k === ut.KEY_B || k === ut.KEY_N || k === ut.KEY_M){
 				var slot = this.game.player.monsterSlots[this.selectedMonsterSlot];
 				if (slot && !slot.onPocket){
 					var index = this.SKILL_KEYS[k];
@@ -94,11 +94,37 @@ module.exports = {
 			// Movement
 			this.movedir.x = 0;
 			this.movedir.y = 0;
-			if (k === ut.KEY_LEFT || k === ut.KEY_H) this.movedir.x = -1;
-			else if (k === ut.KEY_RIGHT || k === ut.KEY_L) this.movedir.x = 1;
-			else if (k === ut.KEY_UP || k === ut.KEY_K) this.movedir.y = -1;
-			else if (k === ut.KEY_DOWN || k === ut.KEY_J) this.movedir.y = 1;
-			else return;
+			if (k === ut.KEY_LEFT || 
+				k === ut.KEY_H || 
+				k === ut.KEY_NUMPAD4 || k === ut.KEY_NUMPAD1 || k === ut.KEY_NUMPAD7 ||
+				k === ut.KEY_Q || k === ut.KEY_A || k === ut.KEY_Z
+				) {
+				this.movedir.x = -1;
+			}
+			if (k === ut.KEY_RIGHT || 
+				k === ut.KEY_L || 
+				k === ut.KEY_NUMPAD6 || k === ut.KEY_NUMPAD9 || k === ut.KEY_NUMPAD3 ||
+				k === ut.KEY_E || k === ut.KEY_D || k === ut.KEY_C
+				) {
+				this.movedir.x = 1;
+			}
+			if (k === ut.KEY_UP || 
+				k === ut.KEY_K || 
+				k === ut.KEY_NUMPAD8 || k === ut.KEY_NUMPAD7 || k === ut.KEY_NUMPAD9 ||
+				k === ut.KEY_Q || k === ut.KEY_W || k === ut.KEY_E
+				) {
+				this.movedir.y = -1;
+			}
+			if (k === ut.KEY_DOWN || 
+				k === ut.KEY_J || 
+				k === ut.KEY_NUMPAD2 || k === ut.KEY_NUMPAD1 || k === ut.KEY_NUMPAD3 ||
+				k === ut.KEY_Z || k === ut.KEY_X || k === ut.KEY_C
+				) {
+				this.movedir.y = 1;
+			}
+			if (this.movedir.x === 0 && this.movedir.y === 0){
+				return;
+			}
 			this.inputEnabled = false;
 			this.game.player.tryMove(this.movedir);
 		} else if (this.mode === 'INVENTORY'){

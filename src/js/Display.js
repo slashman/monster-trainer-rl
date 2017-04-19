@@ -135,16 +135,16 @@ module.exports = {
 	},
 	SKILL_KEYS: [
 		{
-			key: "Z"
-		},
-		{
-			key: "X"
-		},
-		{
-			key: "C"
-		},
-		{
 			key: "V"
+		},
+		{
+			key: "B"
+		},
+		{
+			key: "N"
+		},
+		{
+			key: "M"
 		}
 	],
 	showInventory: function(){
