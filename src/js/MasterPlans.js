@@ -5,14 +5,14 @@ module.exports = {
 	cities: 4,
 	towns: 1,
 	startingMonsters: [
-		Items.CHARMANDER_POKEBALL,
-		Items.BULBASAUR_POKEBALL,
-		Items.SQUIRTLE_POKEBALL,
-		Items.PIKACHU_POKEBALL
+		Items.CHARMANDER_CATCHBALL,
+		Items.BULBASAUR_CATCHBALL,
+		Items.SQUIRTLE_CATCHBALL,
+		Items.PIKACHU_CATCHBALL
 	],
 	items: [
 		{
-			item: Items.POKEBALL,
+			item: Items.CATCHBALL,
 			weight: 100,
 			tier: 1
 		},

@@ -14,7 +14,7 @@ module.exports = {
 		hp: 20,
 		speed: 50,
 		interact: function(player){
-			player.game.display.message("Would you like me to heal your pokemon back to perfect health? [Y/N]");
+			player.game.display.message("Would you like me to heal your monsters back to perfect health? [Y/N]");
 			player.game.input.promptFunction = function(confirm){
 				if (confirm){
 					player.game.display.message("Ok!");
@@ -38,7 +38,7 @@ module.exports = {
 			if (player.pickedStarter){
 				player.game.display.message("Good luck in your quest!");
 			} else {
-				player.game.display.message("Pick one of the starter pokemon.");
+				player.game.display.message("Pick one of the starter monsters.");
 			}
 		}
 	},

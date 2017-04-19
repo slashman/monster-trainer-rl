@@ -77,7 +77,7 @@ module.exports = {
 	selectMonster: function(){
 		// Define what monster to release
 		if (this.being.enemyMonster){
-			// Evaluate all available pokemon to see which one is the best
+			// Evaluate all available monsters to see which one is the best
 			var evals = this.being.monsters.map(function(monster){
 				return this.evaluate(monster);
 			}, this);

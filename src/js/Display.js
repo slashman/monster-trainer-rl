@@ -52,7 +52,7 @@ module.exports = {
 		this.term.putString("HP "+this.game.player.hp.getText(), 2, 3, 255, 255, 255);
 		this.term.putString("$"+this.game.player.money, 2, 4, 255, 255, 255);
 		this.term.putString(this.game.world.level.name, 2, 5, 255, 255, 255);
-		// Pokemon list
+		// Monster list
 		var baseX = 3;
 		var baseY = 7;
 		for (var i = 0; i < this.game.player.monsterSlots.length; i++){
@@ -67,9 +67,9 @@ module.exports = {
 			}
 			this.term.put(slot.being.race.tile, baseX + 2, baseY + i*3);
 			this.term.putString("  Lv"+slot.being.xpLevel+" HP "+slot.being.hp.getText(), baseX, baseY + i*3 + 1, 255, 255, 255);
-			this.term.putString(slot.onPocket ? "  In Pokeball" : "  Released", baseX, baseY + i*3 + 2, 255, 255, 255);
+			this.term.putString(slot.onPocket ? "  On Pocket" : "  Released", baseX, baseY + i*3 + 2, 255, 255, 255);
 		}
-		// Pokemon actions
+		// Monster actions
 		baseX = 60;
 		baseY = 3;
 		var actions = []; //TODO: Cache this
@@ -175,8 +175,8 @@ module.exports = {
 		this.term.render();
 	},
 	SCENES: {
-		WELCOME: "Welcome to PokemonRL! Select your starter Pokemon using ,",
-		VICTORY: "Congratulations, you have become a Pokemon Master!"
+		WELCOME: "Welcome to Monster Trainer RL! Select your starter monster using ,",
+		VICTORY: "Congratulations, you have become a Monster Master!"
 	},
 	showScene: function(id){
 		this.currentScene = id;

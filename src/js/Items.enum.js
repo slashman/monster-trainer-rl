@@ -2,21 +2,21 @@ var ItemType = require('./ItemType.enum');
 var Races = require('./monster/Races.enum');
 
 module.exports = {
-	POKEBALL: {
-		type: ItemType.POKEBALL,
-		name: 'Pokeball',
+	CATCHBALL: {
+		type: ItemType.CATCHBALL,
+		name: 'Catchball',
 		tile: new ut.Tile('*', 255, 0, 0),
 		cost: 100
 	},
 	GREATBALL: {
-		type: ItemType.POKEBALL,
+		type: ItemType.CATCHBALL,
 		name: 'Great Ball',
 		tile: new ut.Tile('*', 0, 255, 0),
 		catchBoost: 10,
 		cost: 200
 	},
 	ULTRABALL: {
-		type: ItemType.POKEBALL,
+		type: ItemType.CATCHBALL,
 		name: 'Ultra Ball',
 		tile: new ut.Tile('*', 0, 255, 0),
 		catchBoost: 20,
@@ -77,27 +77,27 @@ module.exports = {
 		tile: new ut.Tile('O', 255, 255, 255)
 	},
 
-	CHARMANDER_POKEBALL: {
-		type: ItemType.LOADED_POKEBALL,
-		name: 'Charmander Pokeball',
+	CHARMANDER_CATCHBALL: {
+		type: ItemType.LOADED_CATCHBALL,
+		name: 'Charmander',
 		tile: new ut.Tile('*', 255, 0, 0),
 		race: Races.CHARMANDER
 	},
-	BULBASAUR_POKEBALL: {
-		type: ItemType.LOADED_POKEBALL,
-		name: 'Bulbasaur Pokeball',
+	BULBASAUR_CATCHBALL: {
+		type: ItemType.LOADED_CATCHBALL,
+		name: 'Bulbasaur',
 		tile: new ut.Tile('*', 0, 128, 0),
 		race: Races.BULBASAUR
 	},
-	SQUIRTLE_POKEBALL: {
-		type: ItemType.LOADED_POKEBALL,
-		name: 'Squirtle Pokeball',
+	SQUIRTLE_CATCHBALL: {
+		type: ItemType.LOADED_CATCHBALL,
+		name: 'Squirtle',
 		tile: new ut.Tile('*', 83, 255, 255),
 		race: Races.SQUIRTLE
 	},
-	PIKACHU_POKEBALL: {
-		type: ItemType.LOADED_POKEBALL,
-		name: 'Pikachu Pokeball',
+	PIKACHU_CATCHBALL: {
+		type: ItemType.LOADED_CATCHBALL,
+		name: 'Pikachu',
 		tile: new ut.Tile('*', 255, 255, 83),
 		race: Races.PIKACHU
 	}

@@ -5,7 +5,7 @@ var Races = require('../monster/Races.enum')
 var Being = require('../Being.class')
 
 /*
- * Make sure all pokemon can evolve
+ * Make sure all monsters can evolve
  */
 var mockLevel = {
 	game: {

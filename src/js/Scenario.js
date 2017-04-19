@@ -20,8 +20,8 @@ module.exports = {
 		charmander = new Being(game, false, Races.CHARMANDER, 2);
 		game.player.addMonster(charmander);*/
 		
-		game.player.addItem(new Item(Items.POKEBALL));
-		game.player.addItem(new Item(Items.POKEBALL));
+		game.player.addItem(new Item(Items.CATCHBALL));
+		game.player.addItem(new Item(Items.CATCHBALL));
 		game.player.addItem(new Item(Items.GREATBALL));
 		game.player.addItem(new Item(Items.GREATBALL));
 		game.player.addItem(new Item(Items.POTION));

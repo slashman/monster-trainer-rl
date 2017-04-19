@@ -316,11 +316,11 @@ module.exports = {
 	},
 	getMonster: function(race){
 		if (this.getAvailableSlotNumber() === false){
-			this.game.display.message("You don't have any pokeslots available");
+			this.game.display.message("You don't have any monster slots available");
 			return;
 		}
 		if (this.pickedStarter){
-			this.game.display.message("You already picked your starter pokemon.");
+			this.game.display.message("You already picked your starter monsters.");
 			return;	
 		}
 

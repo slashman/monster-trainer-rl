@@ -1,17 +1,17 @@
 var Random = require('./Random');
 
 module.exports = {
-	LOADED_POKEBALL: {
-		name: 'Loaded Pokeball',
+	LOADED_CATCHBALL: {
+		name: 'Loaded Catchball',
 		pickupFunction: function(game, item){
 			game.player.getMonster(item.def.race);
 		}
 	},
-	POKEBALL: {
-		name: 'Pokeball',
+	CATCHBALL: {
+		name: 'Catchball',
 		useFunction: function(game, item, dx, dy){
 			if (game.player.getAvailableSlotNumber() === false){
-				game.display.message("You don't have any pokeslots available");
+				game.display.message("You don't have any monster slots available");
 				return;
 			}
 			game.display.message("You throw the "+item.def.name+"!");
@@ -54,7 +54,7 @@ module.exports = {
 				monster.recoverHP(item.def.points);
 				game.player.endTurn();
 			} else {
-				game.display.message("There's no pokemon there");
+				game.display.message("There's no monster there");
 			}
 		},
 		targetted: true
