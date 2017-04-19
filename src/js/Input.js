@@ -20,6 +20,45 @@ module.exports = {
 			}
 		}
 	},
+	isLeftish: function(k){
+		return k === ut.KEY_LEFT || 
+			k === ut.KEY_H || 
+			k === ut.KEY_NUMPAD4 || k === ut.KEY_NUMPAD1 || k === ut.KEY_NUMPAD7 ||
+			k === ut.KEY_Q || k === ut.KEY_A || k === ut.KEY_Z;
+	},
+	isRightish: function(k){
+		return k === ut.KEY_RIGHT || 
+			k === ut.KEY_L || 
+			k === ut.KEY_NUMPAD6 || k === ut.KEY_NUMPAD9 || k === ut.KEY_NUMPAD3 ||
+			k === ut.KEY_E || k === ut.KEY_D || k === ut.KEY_C;
+				
+	},
+	isUppish: function(k){
+		return k === ut.KEY_UP || 
+			k === ut.KEY_K || 
+			k === ut.KEY_NUMPAD8 || k === ut.KEY_NUMPAD7 || k === ut.KEY_NUMPAD9 ||
+			k === ut.KEY_Q || k === ut.KEY_W || k === ut.KEY_E;
+	},
+	isDownish: function(k){
+		return k === ut.KEY_DOWN || 
+			k === ut.KEY_J || 
+			k === ut.KEY_NUMPAD2 || k === ut.KEY_NUMPAD1 || k === ut.KEY_NUMPAD3 ||
+			k === ut.KEY_Z || k === ut.KEY_X || k === ut.KEY_C;
+	},
+	setMoveDir: function(k){
+		if (this.isLeftish(k)) {
+			this.movedir.x = -1;
+		}
+		if (this.isRightish(k)) {
+			this.movedir.x = 1;
+		}
+		if (this.isUppish(k)) {
+			this.movedir.y = -1;
+		}
+		if (this.isDownish(k)) {
+			this.movedir.y = 1;
+		}
+	},
 	onKeyDown: function(k){
 		if (!this.inputEnabled)
 			return;
@@ -94,34 +133,7 @@ module.exports = {
 			// Movement
 			this.movedir.x = 0;
 			this.movedir.y = 0;
-			if (k === ut.KEY_LEFT || 
-				k === ut.KEY_H || 
-				k === ut.KEY_NUMPAD4 || k === ut.KEY_NUMPAD1 || k === ut.KEY_NUMPAD7 ||
-				k === ut.KEY_Q || k === ut.KEY_A || k === ut.KEY_Z
-				) {
-				this.movedir.x = -1;
-			}
-			if (k === ut.KEY_RIGHT || 
-				k === ut.KEY_L || 
-				k === ut.KEY_NUMPAD6 || k === ut.KEY_NUMPAD9 || k === ut.KEY_NUMPAD3 ||
-				k === ut.KEY_E || k === ut.KEY_D || k === ut.KEY_C
-				) {
-				this.movedir.x = 1;
-			}
-			if (k === ut.KEY_UP || 
-				k === ut.KEY_K || 
-				k === ut.KEY_NUMPAD8 || k === ut.KEY_NUMPAD7 || k === ut.KEY_NUMPAD9 ||
-				k === ut.KEY_Q || k === ut.KEY_W || k === ut.KEY_E
-				) {
-				this.movedir.y = -1;
-			}
-			if (k === ut.KEY_DOWN || 
-				k === ut.KEY_J || 
-				k === ut.KEY_NUMPAD2 || k === ut.KEY_NUMPAD1 || k === ut.KEY_NUMPAD3 ||
-				k === ut.KEY_Z || k === ut.KEY_X || k === ut.KEY_C
-				) {
-				this.movedir.y = 1;
-			}
+			this.setMoveDir(k);
 			if (this.movedir.x === 0 && this.movedir.y === 0){
 				return;
 			}
@@ -131,13 +143,13 @@ module.exports = {
 			if (k === ut.KEY_ESCAPE){
 				this.game.display.hideInventory();
 				this.mode = 'MOVEMENT';
-			} else if (k === ut.KEY_UP || k === ut.KEY_K){
+			} else if (this.isUppish(k)){
 				if (this.selectedItemIndex > 0){
 					this.selectedItemIndex --;
 				}
 				this.selectedItem = this.game.player.items[this.selectedItemIndex];
 				this.game.display.showInventory();
-			} else if (k === ut.KEY_DOWN || k === ut.KEY_J){
+			} else if (this.isDownish(k)){
 				if (this.selectedItemIndex < this.game.player.items.length - 1){
 					this.selectedItemIndex ++;
 				}
@@ -172,11 +184,10 @@ module.exports = {
 			}
 			this.movedir.x = 0;
 			this.movedir.y = 0;
-			if (k === ut.KEY_LEFT || k === ut.KEY_H) this.movedir.x = -1;
-			else if (k === ut.KEY_RIGHT || k === ut.KEY_L) this.movedir.x = 1;
-			else if (k === ut.KEY_UP || k === ut.KEY_K) this.movedir.y = -1;
-			else if (k === ut.KEY_DOWN || k === ut.KEY_J) this.movedir.y = 1;
-			else return;
+			this.setMoveDir(k);
+			if (this.movedir.x === 0 && this.movedir.y === 0){
+				return;
+			}
 			if (this.directionAction === 'USE_ITEM'){
 				this.game.player.tryUse(this.selectedItem, this.movedir.x, this.movedir.y);
 			} else if (this.directionAction === 'RELEASE_MONSTER'){
