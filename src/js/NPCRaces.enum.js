@@ -30,7 +30,7 @@ module.exports = {
 	},
 	PROFFESSOR: {
 		name: "Proffessor",
-		tile: new ut.Tile('@', 255, 255, 255),
+		tile: new ut.Tile('@', 0, 255, 255),
 		hp: 20,
 		speed: 50,
 		trainer: true,
